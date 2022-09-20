@@ -126,18 +126,26 @@ document.addEventListener("DOMContentLoaded", function(){
 
 {block name="body"}
 <form id="searchformdata" action="{url action="listItem"}" method="POST">
-{$smarty.post|@var_export:true}
+{*$smarty.post|@var_export:true*}
 {html_hiddens data=$smarty.post}
 </form>
 <form action="{url action="list"}" method="POST" class="container-fluid row">
 	<div class="col-12">
-		<button class="btn btn-primary" disabled>閲覧</button>
-		<button class="btn btn-success" disabled>編集</button>
-		<button class="btn btn-danger" disabled>削除</button>
+		クライアント名：
+	</div>
+	<div class="col-12">
+		商材名：
 	</div>
 	<div class="col-6" id="mainlist"></div>
-	<div class="col-6" id="previewarea">
+	<div class="col-6">
+		<div id="previewarea">
 		プレビュー
+		</div>
+		<div>
+			<button class="btn btn-primary" disabled>閲覧</button>
+			<button class="btn btn-success" disabled>編集</button>
+			<button class="btn btn-danger" disabled hidden>削除</button>
+		</div>
 	</div>
 </form>
 {/block}

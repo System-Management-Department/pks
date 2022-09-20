@@ -30,7 +30,7 @@ class View implements ArrayAccess, Iterator{
 		$smarty->assign($this->container);
 		
 		if($return){
-			$smarty->fetch($template);
+			return $smarty->fetch($template);
 		}else{
 			$smarty->display($template);
 		}

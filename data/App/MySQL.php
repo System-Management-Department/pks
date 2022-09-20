@@ -36,8 +36,14 @@ class MySQLSelectQuery{
 	public function __invoke(){
 		$q = $this->buildQuery();
 		$stmt = $this->mysqli->prepare($q["prepare"]);
-		foreach($q["bind"] as $bind){
-			$stmt->bind_param($bind["type"], $bind["value"]);
+		$bindVars = [&$types];
+		$types = "";
+		foreach($q["bind"] as &$bind){
+			$types .= $bind["type"];
+			$bindVars[] = &$bind["value"];
+		}
+		if($types != ""){
+			$stmt->bind_param(...$bindVars);
 		}
 		$stmt->execute();
 		$result = $stmt->get_result();

@@ -32,7 +32,10 @@ pdfObject.handleEvent = function(e){
 		const n = e.dataTransfer.files.length;
 		for(let i = 0; i < n; i++){
 			const file = e.dataTransfer.files[i];
-			if(file.type != "application/pdf"){
+			if(file.type == "video/webm"){
+				alert(file.name);
+				continue;
+			}else if(file.type != "application/pdf"){
 				continue;
 			}
 			let iframe = document.createElement("iframe");
@@ -136,6 +139,17 @@ formObject.handleEvent = function(e){
 			</div>
 		</div>
 	</div>
+	
+	
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label"></label>
+	<div class="col-12">
+		<div class="card text-center">
+			<div class="card-body">
+				<a href="https://script.google.com/a/macros/direct-holdings.co.jp/s/AKfycbzF-fRhUug6YhDn074ogU38PeIP3OULYdicd1NDAkgsXQWnrLLCgkwQXEa_uUK2MKVa/exec" target="_blank" class="btn btn-info">撮影</a>
+			</div>
+		</div>
+	</div>
+	
 	
 	<div class="col-12 mt-5 text-center"><button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>検<div class="flex-grow-1"></div>索<div class="flex-grow-1"></div></button></div>
 	

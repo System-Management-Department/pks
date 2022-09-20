@@ -43,6 +43,6 @@ $controllerInstance = new $controllerClassName($requestContext);
 $returnValue = $controllerInstance->$action();
 
 // ビュー
-if($returnValue instanceof \App\View){
+if(($returnValue instanceof \App\View) || ($returnValue instanceof \App\JsonView)){
 	$returnValue($requestContext, false);
 }
