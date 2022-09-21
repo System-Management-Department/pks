@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-class JsonView{
+class JsonView implements IView{
 	private $data;
 	public function __construct($data){
 		$this->data = $data;

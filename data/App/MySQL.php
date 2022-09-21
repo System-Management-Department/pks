@@ -10,8 +10,8 @@ class MySQL{
 	public function __destruct(){
 		$this->mysqli->close();
 	}
-	public function select(){
-		return new MySQLSelectQuery($this->mysqli);
+	public function select($fetchMode = "ALL"){
+		return new MySQLSelectQuery($this->mysqli, $fetchMode);
 	}
 }
 
@@ -19,6 +19,7 @@ class MySQLSelectQuery{
 	private $mysqli;
 	private $prepare;
 	private $bindParam;
+	private $fetchMode;
 	private const SELECT= 0;
 	private const TABLE = 1;
 	private const WHERE = 2;
@@ -28,10 +29,28 @@ class MySQLSelectQuery{
 	private const LIMIT = 6;
 	private const OFFSET = 7;
 	
-	public function __construct($mysqli){
+	private const FETCH_ALL = 0; // すべての行を連想配列の配列で取得
+	private const FETCH_ASSOC = 1; // 1列目をキーとした連想配列で取得
+	private const FETCH_COL = 2; // 最初の1列のみ配列で取得
+	private const FETCH_ONE = 3; // 最初の1行1列のみスカラーで取得
+	private const FETCH_ROW = 4; // 最初の1行のみ連想配列で取得
+	
+	public function __construct($mysqli, $fetchMode){
 		$this->mysqli = $mysqli;
 		$this->prepare = [null, null, null, null, null, null, null, null];
 		$this->bindParam = [[], [], [], [], [], [], [], []];
+		
+		$fetchMode2 = strtoupper($fetchMode);
+		$this->fetchMode = match(true){
+			($fetchMode2 == "ROW") => self::FETCH_ROW,
+			($fetchMode2 == "ONE") => self::FETCH_ONE,
+			($fetchMode2 == "COL") => self::FETCH_COL,
+			($fetchMode2 == "ASSOC") => self::FETCH_ASSOC,
+			default => self::FETCH_ALL,
+		};
+		if(($this->fetchMode == self::FETCH_ROW) || ($this->fetchMode == self::FETCH_ONE)){
+			$this->prepare[self::LIMIT] = 1;
+		}
 	}
 	public function __invoke(){
 		$q = $this->buildQuery();
@@ -47,7 +66,29 @@ class MySQLSelectQuery{
 		}
 		$stmt->execute();
 		$result = $stmt->get_result();
-		return $result->fetch_all(MYSQLI_ASSOC);
+		
+		if($this->fetchMode == self::FETCH_ASSOC){
+			$res = [];
+			for($i = $result->num_rows - 1; $i >= 0; $i--){
+				$currentfield = $result->current_field;
+				$k = $result->fetch_column(0);
+				$result->field_seek($currentfield);
+				$res[$k] = $result->fetch_assoc();
+			}
+			return $res;
+		}else if($this->fetchMode == self::FETCH_COL){
+			$res = [];
+			for($i = $result->num_rows - 1; $i >= 0; $i--){
+				$res[] = $result->fetch_column(0);
+			}
+			return $res;
+		}else if($this->fetchMode == self::FETCH_ONE){
+			return $result->fetch_column(0);
+		}else if($this->fetchMode == self::FETCH_ROW){
+			return $result->fetch_assoc();
+		}else{
+			return $result->fetch_all(MYSQLI_ASSOC);
+		}
 	}
 	public function setField($field, ...$bind){
 		$this->prepare[self::SELECT] = $field;

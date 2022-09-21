@@ -40,9 +40,12 @@ $requestContext->id = $id;
 // アクション
 $controllerClassName = "\\Controller\\{$controller}Controller";
 $controllerInstance = new $controllerClassName($requestContext);
+session_start();
 $returnValue = $controllerInstance->$action();
 
 // ビュー
-if(($returnValue instanceof \App\View) || ($returnValue instanceof \App\JsonView)){
+if($returnValue instanceof \App\IView){
 	$returnValue($requestContext, false);
+}else if($returnValue instanceof \App\IHttpResponse){
+	$returnValue($requestContext);
 }

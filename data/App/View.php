@@ -3,7 +3,7 @@ namespace App;
 use ArrayAccess;
 use Iterator;
 
-class View implements ArrayAccess, Iterator{
+class View implements ArrayAccess, Iterator, IView{
 	private $container;
 	private $controller;
 	private $action;
