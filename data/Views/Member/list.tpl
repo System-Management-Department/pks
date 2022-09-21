@@ -100,9 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				let val = next.style.backgroundImage;
 				if(val != current){
 					current = val;
-					document.querySelector('form .btn-primary').disabled = false;
-					document.querySelector('form .btn-success').disabled = false;
-					document.querySelector('form .btn-danger').disabled = false;
+					Array.prototype.forEach.call(document.querySelectorAll('form .btn[formaction]:disabled'), btn => btn.disabled = false);
 					let previewarea = document.getElementById("previewarea");
 					
 					fetch(next.querySelector('a').getAttribute("href")).then(response => response.blob()).then(blob => {
@@ -120,6 +118,16 @@ document.addEventListener("DOMContentLoaded", function(){
 		}, 0);
 	});
 	
+	
+	
+	const additionalStyle = document.getElementById("additionalStyle");
+	const styleSheet = additionalStyle.sheet;
+	let n = styleSheet.cssRules.length;
+	let previewContainer = document.getElementById("previewContainer");
+	let rect = previewContainer.getBoundingClientRect();
+	styleSheet.insertRule(`#previewarea{
+		height: calc(100vh - ${rect.y + window.pageYOffset + 60}px);
+	}`, n++);
 });
 {/literal}</script>
 {/block}
@@ -137,14 +145,15 @@ document.addEventListener("DOMContentLoaded", function(){
 		商材名：
 	</div>
 	<div class="col-6" id="mainlist"></div>
-	<div class="col-6">
-		<div id="previewarea">
-		プレビュー
-		</div>
-		<div>
-			<button class="btn btn-primary" disabled>閲覧</button>
-			<button class="btn btn-success" disabled>編集</button>
-			<button class="btn btn-danger" disabled hidden>削除</button>
+	<div class="col-6" id="previewContainer">
+		<div class="position-sticky top-0">
+			<div id="previewarea">
+			プレビュー
+			</div>
+			<div class="row">
+				<button type="submit" class="btn btn-outline-success rounded-pill col-6" formaction="{url action="browse"}" disabled>閲覧</button>
+				<button type="submit" class="btn btn-outline-success rounded-pill col-6" formaction="{url action="edit"}" disabled>編集</button>
+			</div>
 		</div>
 	</div>
 </form>

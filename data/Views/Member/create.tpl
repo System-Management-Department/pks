@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/flatpickr/flatpickr.min.css">
 {/block}
 
-{block name="scripts"}
+{block name="scripts" append}
 <script src="/assets/flatpickr/flatpickr.min.js"></script>
 <script type="text/javascript">{literal}
 var pdfObject = {file: null, thumbnail: null};
