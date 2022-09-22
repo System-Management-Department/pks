@@ -4,8 +4,8 @@ use mysqli;
 
 class MySQL{
 	private $mysqli;
-	public function __construct(){
-		$this->mysqli = new mysqli('localhost', 'root', 'root', 'pks');
+	public function __construct($role = "default"){
+		$this->mysqli = new mysqli(...\Config\MySqlConnection::$role());
 	}
 	public function __destruct(){
 		$this->mysqli->close();
@@ -244,12 +244,15 @@ class MySQLSelectQuery{
 		return ["prepare" => $prepare, "bind" => $bind];
 	}
 	private function mergeBindParam(&$bind, $index){
-		foreach($this->bindParam[$index] as $value){
+		foreach($this->bindParam[$index] as $tempVal){
 			$type = "s";
+			$value = $tempVal;
 			if(is_int($value)){
 				$type = "i";
 			}else if(is_float($value)){
 				$type = "d";
+			}else if($value instanceof \DateTimeInterface){
+				$value = $tempVal->format("Y-m-d H:i:s");
 			}
 			$bind[] = ["type" => $type, "value" => $value];
 		}
