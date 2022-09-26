@@ -1,9 +1,9 @@
-{foreach $fileList item="file"}
+{foreach $proposals item="proposal"}
 <label class="d-contents">
 	<input type="radio" name="proposal" />
-	<div class="thumbnail" style="background-image: url('{$file.thumbnail}');">
-	{foreach $file.data item="data"}
-		<a href="{$data}"></a>
+	<div class="thumbnail" style="background-image: url('/file/thumbnail/{$proposal.id}.png');">
+	{foreach "/"|explode:$proposal.files item="data"}
+		<a href="/file/data/{$data}"></a>
 	{/foreach}
 	</div>
 </label>

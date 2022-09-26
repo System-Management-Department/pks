@@ -1,6 +1,8 @@
 <?php
 namespace Config;
 define('CWD', getcwd());
+define('PROPOSAL_THUMBNAIL_DIR', CWD . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . "thumbnail" . DIRECTORY_SEPARATOR);
+define('PROPOSAL_FILE_DIR', CWD . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR);
 define('DATA_DIR', dirname(__FILE__, 2) . DIRECTORY_SEPARATOR);
 spl_autoload_register(function($class){
 	$fileName = DATA_DIR . strtolower(str_replace('\\', '/', $class)) . '.php';
