@@ -59,7 +59,9 @@ document.addEventListener("DOMContentLoaded", function(){
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link text-white" href="{url controller="Member" action="create"}">新規</a>
+                          <a class="nav-link text-white" href="{url controller="Member" action="create"}">
+                            <span class="ml-2"><i class="fas fa-database"></i>提案資料新規登録</span>
+                          </a>
                         </li>
                       </ul>
                 </div>

@@ -69,11 +69,12 @@ class MySQLSelectQuery{
 		
 		if($this->fetchMode == self::FETCH_ASSOC){
 			$res = [];
+			$currentfield = 0;
 			for($i = $result->num_rows - 1; $i >= 0; $i--){
-				$currentfield = $result->current_field;
 				$k = $result->fetch_column(0);
-				$result->field_seek($currentfield);
+				$result->data_seek($currentfield);
 				$res[$k] = $result->fetch_assoc();
+				$currentfield++;
 			}
 			return $res;
 		}else if($this->fetchMode == self::FETCH_COL){
