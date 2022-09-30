@@ -10,23 +10,15 @@
 
 {block name="scripts" append}
 <script src="/assets/flatpickr/flatpickr.min.js"></script>
+<script src="/assets/common/form.js"></script>
 <script type="text/javascript">{literal}
 document.addEventListener("DOMContentLoaded", function(){
 	flatpickr('input[name="modified_date"]');
-	let changeSelectEvent = e => {
-		let select = e.currentTarget;
-		if(select.value == ""){
-			select.value = "";
-		}
-	};
 	let categories = {
 		l: document.querySelector('[data-categories="l"] select'),
 		m: [...document.querySelectorAll('[data-categories="m"] select')],
 		s: [...document.querySelectorAll('[data-categories="s"] select')]
 	};
-	for(let category of document.querySelectorAll('select.form-control')){
-		category.addEventListener("change", changeSelectEvent);
-	}
 	let changeMEvent = e => {
 		let select = e.currentTarget;
 		for(let category of categories.s){
@@ -81,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		</div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアントカテゴリー</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアント　カテゴリー</label>
 	<div class="col-12 col-lg-10">
 		<div class="row">
 			<div class="col-12 col-md-4" data-categories="l">

@@ -13,21 +13,28 @@ class MySQL{
 	public function select($fetchMode = "ALL"){
 		return new MySQLSelectQuery($this->mysqli, $fetchMode);
 	}
+	public function insertSet($table, $assoc, $placeholder){
+		return new MySQLInsertSetQuery($this->mysqli, $table, $assoc, $placeholder);
+	}
+	public function insertSelect($table, $columns){
+		return new MySQLInsertSelectQuery($this->mysqli, $table, $columns);
+	}
 }
 
 class MySQLSelectQuery{
-	private $mysqli;
+	protected $mysqli;
 	private $prepare;
 	private $bindParam;
 	private $fetchMode;
-	private const SELECT= 0;
-	private const TABLE = 1;
-	private const WHERE = 2;
-	private const GROUP_BY = 3;
-	private const HAVING = 4;
-	private const ORDER_BY = 5;
-	private const LIMIT = 6;
-	private const OFFSET = 7;
+	private const WITH= 0;
+	private const SELECT= 1;
+	private const TABLE = 2;
+	private const WHERE = 3;
+	private const GROUP_BY = 4;
+	private const HAVING = 5;
+	private const ORDER_BY = 6;
+	private const LIMIT = 7;
+	private const OFFSET = 8;
 	
 	private const FETCH_ALL = 0; // すべての行を連想配列の配列で取得
 	private const FETCH_ASSOC = 1; // 1列目をキーとした連想配列で取得
@@ -37,8 +44,8 @@ class MySQLSelectQuery{
 	
 	public function __construct($mysqli, $fetchMode){
 		$this->mysqli = $mysqli;
-		$this->prepare = [null, null, null, null, null, null, null, null];
-		$this->bindParam = [[], [], [], [], [], [], [], []];
+		$this->prepare = [null, null, null, null, null, null, null, null, null];
+		$this->bindParam = [[], [], [], [], [], [], [], [], []];
 		
 		$fetchMode2 = strtoupper($fetchMode);
 		$this->fetchMode = match(true){
@@ -91,6 +98,11 @@ class MySQLSelectQuery{
 			return $result->fetch_all(MYSQLI_ASSOC);
 		}
 	}
+	public function setWith($table, ...$bind){
+		$this->prepare[self::WITH] = $table;
+		$this->bindParam[self::WITH] = $bind;
+		return $this;
+	}
 	public function setField($field, ...$bind){
 		$this->prepare[self::SELECT] = $field;
 		$this->bindParam[self::SELECT] = $bind;
@@ -133,6 +145,16 @@ class MySQLSelectQuery{
 	}
 	
 	
+	public function addWith($table, ...$bind){
+		if(is_null($this->prepare[self::WITH])){
+			$this->prepare[self::WITH] = $table;
+			$this->bindParam[self::WITH] = $bind;
+		}else{
+			$this->prepare[self::WITH] .= "," . $table;
+			$this->bindParam[self::WITH] = array_merge($this->bindParam[self::WITH], $bind);
+		}
+		return $this;
+	}
 	public function addField($field, ...$bind){
 		if(is_null($this->prepare[self::SELECT])){
 			$this->prepare[self::SELECT] = $field;
@@ -204,9 +226,14 @@ class MySQLSelectQuery{
 		return $this;
 	}
 	
-	private function buildQuery(){
-		$prepare = "SELECT ";
+	protected function buildQuery(){
+		$prepare = "";
 		$bind = [];
+		if(!is_null($this->prepare[self::WITH])){
+			$prepare .= "WITH " . trim($this->prepare[self::WITH]) . " ";
+			$this->mergeBindParam($bind, self::WITH);
+		}
+		$prepare .= "SELECT ";
 		if(is_null($this->prepare[self::SELECT])){
 			$prepare .= "*";
 		}else{
@@ -257,5 +284,80 @@ class MySQLSelectQuery{
 			}
 			$bind[] = ["type" => $type, "value" => $value];
 		}
+	}
+}
+
+class MySQLInsertSetQuery{
+	private $mysqli;
+	private $table;
+	private $assoc;
+	private $placeholder;
+	public function __construct($mysqli, $table, $assoc, $placeholder){
+		$this->mysqli = $mysqli;
+		$this->table = $table;
+		$this->assoc = $assoc;
+		$this->placeholder = $placeholder;
+	}
+	
+	public function __invoke(&$id = null){
+		$query = sprintf("INSERT INTO `%s` SET ", $this->table );
+		$columns = [];
+		$bindVars = [&$types];
+		$types = "";
+		foreach($this->assoc as $k => $v){
+			$columns[] = sprintf("`%s`=%s", $k, array_key_exists($k, $this->placeholder) ? $this->placeholder[$k] : "?");
+			$type = "s";
+			$value = $v;
+			if(is_int($value)){
+				$type = "i";
+			}else if(is_float($value)){
+				$type = "d";
+			}else if($value instanceof \DateTimeInterface){
+				$value = $v->format("Y-m-d H:i:s");
+			}
+			$types .= $type;
+			$bindVars[] = $v;
+		}
+		foreach($this->placeholder as $k => $v){
+			if(array_key_exists($k, $this->assoc)){
+				continue;
+			}
+			$columns[] = sprintf("`%s`=%s", $k, $v);
+		}
+		$query .= implode(", ", $columns);
+		$stmt = $this->mysqli->prepare($query);
+		if($types != ""){
+			$stmt->bind_param(...$bindVars);
+		}
+		$stmt->execute();
+		if(func_num_args() > 0){
+			$id = $stmt->insert_id;
+		}
+	}
+}
+
+class MySQLInsertSelectQuery extends MySQLSelectQuery{
+	private $table;
+	private $columns;
+	public function __construct($mysqli, $table, $columns){
+		parent::__construct($mysqli, "ALL");
+		$this->table = $table;
+		$this->columns = $columns;
+	}
+	
+	public function __invoke(&$id = null){
+		$query = sprintf("INSERT INTO `%s`(%s) ", $this->table, $this->columns);
+		$q = $this->buildQuery();
+		$stmt = $this->mysqli->prepare($query . $q["prepare"]);
+		$bindVars = [&$types];
+		$types = "";
+		foreach($q["bind"] as &$bind){
+			$types .= $bind["type"];
+			$bindVars[] = &$bind["value"];
+		}
+		if($types != ""){
+			$stmt->bind_param(...$bindVars);
+		}
+		$stmt->execute();
 	}
 }

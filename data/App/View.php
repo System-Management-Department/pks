@@ -86,6 +86,12 @@ class View implements ArrayAccess, Iterator, IView{
 		return !is_null($key);
 	}
     
+    public function assign($assoc){
+    	foreach($assoc as $k => $v){
+    		$this->container[$k] = $v;
+    	}
+    }
+    
     public function setController($controller){
     	$this->controller = $controller;
     	return $this;

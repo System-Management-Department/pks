@@ -7,7 +7,7 @@
 {block name="styles" append}
 <style type="text/css">{literal}
 #mainlist [data-loading]{
-	transition: opacity 0.5s;
+	transition: opacity 0.2s;
 }
 #mainlist [data-loading="0"]{
 	opacity: 0;
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	setTimeout(() => {
 		// 最初-件のデータ読み取り
 		loading.setAttribute("data-loading", "1");
-	}, 500);
+	}, 200);
 	document.getElementById("mainlist").appendChild(loading);
 	
 	document.addEventListener("mouseup", () => {
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					Array.prototype.forEach.call(document.querySelectorAll('form .btn[formaction]:disabled'), btn => btn.disabled = false);
 					let previewarea = document.getElementById("previewarea");
 					
-					fetch(next.querySelector('a').getAttribute("href")).then(response => response.blob()).then(blob => {
+					fetch(next.querySelector('a[data-type^="application/pdf"]').getAttribute("href")).then(response => response.blob()).then(blob => {
 						let iframe = document.createElement("iframe");
 						if(lastBlob != null){
 							URL.revokeObjectURL(lastBlob);
@@ -134,10 +134,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
 {block name="body"}
 <form id="searchformdata" action="{url action="listItem"}" method="POST">
-{*$smarty.post|@var_export:true*}
 {html_hiddens data=$smarty.post}
 </form>
-<form action="{url action="list"}" method="POST" class="container-fluid row">
+<form action="{url action="list"}" method="POST" class="container-fluid row" target="_blank">
 	<div class="col-12">
 		クライアント名：
 	</div>

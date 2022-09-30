@@ -1,10 +1,10 @@
 {foreach $proposals item="proposal"}
 <label class="d-contents">
-	<input type="radio" name="proposal" />
+	<input type="radio" value="{$proposal.id}" name="proposal" />
 	<div class="thumbnail" style="background-image: url('/file/thumbnail/{$proposal.id}.png');">
-	{foreach "/"|explode:$proposal.files item="data"}
-		<a href="/file/data/{$data}"></a>
-	{/foreach}
+	{if not $proposal.filename|is_null}{foreach $proposal.filename|json_decode:true item="data"}
+		<a href="{url controller="Archive" action="proposal" id=$data.filename}" data-type="{$data.type}"></a>
+	{/foreach}{/if}
 	</div>
 </label>
 {/foreach}

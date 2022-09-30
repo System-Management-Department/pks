@@ -5,8 +5,10 @@ use Model\Result;
 
 class Validator implements ArrayAccess{
 	private $container;
+	private $alias;
 	public function __construct(){
 		$this->container = [];
+		$this->alias = [];
 	}
 	
 	/**
@@ -23,7 +25,8 @@ class Validator implements ArrayAccess{
 			$assoc = &$a1;
 		}
 		foreach($this->container as $k => $v){
-			$v($result, array_key_exists($k, $assoc) ? $assoc[$k] : null);
+			$name = array_key_exists($k, $this->alias) ? $this->alias[$k] : $k;
+			$v($result, array_key_exists($k, $assoc) ? $assoc[$k] : null, $name);
 		}
 		return $result;
 	}
@@ -44,28 +47,47 @@ class Validator implements ArrayAccess{
 	
 	#[\ReturnTypeWillChange]
 	public function offsetGet($offset){
-		if(!array_key_exists($offset, $this->container)){
-			$this->container[$offset] = new ValidationItem();
+		$tokens = explode(":", $offset);
+		$offset2 = $tokens[0];
+		if(count($tokens) > 1){
+			$this->alias[$offset2] = $tokens[1];
 		}
-		return $this->container[$offset];
+		if(!array_key_exists($offset2, $this->container)){
+			$this->container[$offset2] = new ValidationItem();
+		}
+		return $this->container[$offset2];
+	}
+	
+	/**
+		配列検証
+	*/
+	public function setArray($offset, $options){
+		$tokens = explode(":", $offset);
+		$offset2 = $tokens[0];
+		if(count($tokens) > 1){
+			$this->alias[$offset2] = $tokens[1];
+		}
+		$this->container[$offset2] = new ValidationArray($options);
 	}
 }
 
 class ValidationItem{
-	private $emptyMessage;
-	private $pattern;
-	private $ranges;
+	protected $emptyMessage;
+	protected $pattern;
+	protected $ranges;
+	protected $length;
 	
 	public function __construct(){
 		$this->emptyMessage = null;
 		$this->pattern = null;
 		$this->ranges = [];
+		$this->length = null;
 	}
 	
 	/**
 		検証
 	*/
-	public function __invoke($result, $value){
+	public function __invoke($result, $value, $name = ""){
 		if(is_null($this->emptyMessage)){
 			if(is_null($value) || $value == ""){
 				return;
@@ -73,7 +95,8 @@ class ValidationItem{
 		}else{
 			// required
 			if(is_null($value) || $value == ""){
-				$result->addMessage($this->emptyMessage, "ERROR");
+				$result->addMessage($this->emptyMessage, "ERROR", $name);
+				return;
 			}
 		}
 		foreach($this->ranges as $k => $v){
@@ -81,31 +104,46 @@ class ValidationItem{
 			if(is_null($v["in"])){
 				// 区間
 				if(!is_null($v["gt"])){
-					$isIn = $isIn && ($v > $v["gt"]);
+					$isIn = $isIn && ($value > $v["gt"]);
 				}
 				if(!is_null($v["ge"])){
-					$isIn = $isIn && ($v >= $v["ge"]);
+					$isIn = $isIn && ($value >= $v["ge"]);
 				}
 				if(!is_null($v["lt"])){
-					$isIn = $isIn && ($v < $v["lt"]);
+					$isIn = $isIn && ($value < $v["lt"]);
 				}
 				if(!is_null($v["le"])){
-					$isIn = $isIn && ($v <= $v["le"]);
+					$isIn = $isIn && ($value <= $v["le"]);
 				}
 			}else{
 				// 集合
-				$isIn = in_array($v, $v["in"]);
+				$isIn = in_array($value, $v["in"]);
 			}
 			if($v["not"]){
 				if($isIn){
-					$result->addMessage($v["message"], "ERROR");
+					$result->addMessage($v["message"], "ERROR", $name);
 					break;
 				}
 			}else{
 				if(!$isIn){
-					$result->addMessage($v["message"], "ERROR");
+					$result->addMessage($v["message"], "ERROR", $name);
 					break;
 				}
+			}
+		}
+		if(!is_null($this->length)){
+			// 文字数
+			$isIn = true;
+			$len = strlen($value);
+			if(!is_null($this->length["min"])){
+				$isIn = $isIn && ($len >= $this->length["min"]);
+			}
+			if(!is_null($this->length["max"])){
+				$isIn = $isIn && ($len <= $this->length["max"]);
+			}
+			if(!$isIn){
+				$result->addMessage($this->length["message"], "ERROR", $name);
+				return;
 			}
 		}
 	}
@@ -148,5 +186,59 @@ class ValidationItem{
 			$this->ranges[] = $rangeItem;
 		}
 		return $this;
+	}
+	
+	/**
+		文字数
+	*/
+	public function length($message, $min = null, $max = null){
+		$this->length = [
+			"message" => $message,
+			"min" => $min,
+			"max" => $max,
+		];
+		return $this;
+	}
+}
+
+class ValidationArray extends ValidationItem{
+	private $options;
+	public function __construct($options){
+		parent::__construct();
+		$this->options = $options;
+	}
+	public function __invoke($result, $value, $name = ""){
+		// 配列の各要素を検証
+		$itemCnt = 0;
+		if(is_null($value) || !is_array($value)){
+			$value = [];
+		}
+		$alias = array_key_exists("alias", $this->options) ? $this->options["alias"] : [];
+		foreach($value as $k => $v){
+			if(array_key_exists("blankFilter", $this->options) && $this->options["blankFilter"] && (is_null($v) || $v == "")){
+				continue;
+			}
+			$resultItem = new Result();
+			if(array_key_exists("format", $this->options)){
+				$resultItem->onAddMessage([$this, "format"], $k);
+			}
+			parent::__invoke($resultItem, $v, array_key_exists($k, $alias) ? $alias[$k] : $name);
+			if($resultItem->hasError()){
+				$result->mergeMessage($resultItem);
+				if(array_key_exists("some", $this->options) && $this->options["some"]){
+					return;
+				}
+			}
+			$itemCnt++;
+		}
+		if(($itemCnt == 0) && array_key_exists("empty", $this->options)){
+			$result->addMessage($this->options["empty"], "ERROR", $name);
+		}
+	}
+	
+	public function format(&$message, &$status, &$name, $k){
+		if(array_key_exists("format", $this->options) && array_key_exists($k, $this->options["format"])){
+			$message = vsprintf($message, $this->options["format"][$k]);
+		}
 	}
 }

@@ -6,7 +6,7 @@ class User{
 	public static function login(){
 		$result = new Result();
 		if(Session::isLogin()){
-			$result->addMessage("すでにログインしています。", "ERROR");
+			$result->addMessage("すでにログインしています。", "ERROR", "");
 			return $result;
 		}
 		
@@ -27,13 +27,13 @@ class User{
 				->andWhere("username=?", $_POST["username"])
 				->andWhere("password=?", $_POST["password"]);
 			if($user = $query()){
-				$result->addMessage("ログインに成功しました。", "INFO");
+				$result->addMessage("ログインに成功しました。", "INFO", "");
 				Session::login($user);
 			}else{
-				$result->addMessage("ログインに失敗しました。", "ERROR");
+				$result->addMessage("ログインに失敗しました。", "ERROR", "");
 			}
 		}catch(Exception $ex){
-			$result->addMessage($ex->getMessage(), "ERROR");
+			$result->addMessage($ex->getMessage(), "ERROR", "");
 		}
 		return $result;
 	}
