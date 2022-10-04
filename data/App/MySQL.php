@@ -19,6 +19,12 @@ class MySQL{
 	public function insertSelect($table, $columns){
 		return new MySQLInsertSelectQuery($this->mysqli, $table, $columns);
 	}
+	public function updateSet($table, $assoc, $placeholder){
+		return new MySQLUpdateSetQuery($this->mysqli, $table, $assoc, $placeholder);
+	}
+	public function delete($table){
+		return new MySQLDeleteQuery($this->mysqli, $table);
+	}
 }
 
 class MySQLSelectQuery{
@@ -26,8 +32,8 @@ class MySQLSelectQuery{
 	private $prepare;
 	private $bindParam;
 	private $fetchMode;
-	private const WITH= 0;
-	private const SELECT= 1;
+	private const WITH = 0;
+	private const SELECT = 1;
 	private const TABLE = 2;
 	private const WHERE = 3;
 	private const GROUP_BY = 4;
@@ -359,5 +365,197 @@ class MySQLInsertSelectQuery extends MySQLSelectQuery{
 			$stmt->bind_param(...$bindVars);
 		}
 		$stmt->execute();
+	}
+}
+
+class MySQLUpdateSetQuery{
+	private $mysqli;
+	private $table;
+	private $assoc;
+	private $placeholder;
+	private $prepare;
+	private $bindParam;
+	
+	private const WHERE = 0;
+	public function __construct($mysqli, $table, $assoc, $placeholder){
+		$this->mysqli = $mysqli;
+		$this->table = $table;
+		$this->assoc = $assoc;
+		$this->placeholder = $placeholder;
+		$this->prepare = [null];
+		$this->bindParam = [[]];
+	}
+	
+	public function __invoke(){
+		$query = sprintf("UPDATE `%s` SET ", $this->table);
+		$columns = [];
+		$bindVars = [&$types];
+		$types = "";
+		foreach($this->assoc as $k => $v){
+			$columns[] = sprintf("`%s`=%s", $k, array_key_exists($k, $this->placeholder) ? $this->placeholder[$k] : "?");
+			$type = "s";
+			$value = $v;
+			if(is_int($value)){
+				$type = "i";
+			}else if(is_float($value)){
+				$type = "d";
+			}else if($value instanceof \DateTimeInterface){
+				$value = $v->format("Y-m-d H:i:s");
+			}
+			$types .= $type;
+			$bindVars[] = $v;
+		}
+		foreach($this->placeholder as $k => $v){
+			if(array_key_exists($k, $this->assoc)){
+				continue;
+			}
+			$columns[] = sprintf("`%s`=%s", $k, $v);
+		}
+		$query .= implode(", ", $columns);
+		$q = $this->buildQuery();
+		$query .= $q["prepare"];
+		foreach($q["bind"] as &$bind){
+			$types .= $bind["type"];
+			$bindVars[] = &$bind["value"];
+		}
+		$stmt = $this->mysqli->prepare($query);
+		if($types != ""){
+			$stmt->bind_param(...$bindVars);
+		}
+		$stmt->execute();
+	}
+	
+	public function setWhere($where, ...$bind){
+		$this->prepare[self::WHERE] = $where;
+		$this->bindParam[self::WHERE] = $bind;
+		return $this;
+	}
+	public function andWhere($where, ...$bind){
+		if(is_null($this->prepare[self::WHERE])){
+			$this->prepare[self::WHERE] = $where;
+			$this->bindParam[self::WHERE] = $bind;
+		}else{
+			$this->prepare[self::WHERE] .= " AND " . $where;
+			$this->bindParam[self::WHERE] = array_merge($this->bindParam[self::WHERE], $bind);
+		}
+		return $this;
+	}
+	public function orWhere($where, ...$bind){
+		if(is_null($this->prepare[self::WHERE])){
+			$this->prepare[self::WHERE] = $where;
+			$this->bindParam[self::WHERE] = $bind;
+		}else{
+			$this->prepare[self::WHERE] .= " OR " . $where;
+			$this->bindParam[self::WHERE] = array_merge($this->bindParam[self::WHERE], $bind);
+		}
+		return $this;
+	}
+	
+	protected function buildQuery(){
+		$prepare = "";
+		$bind = [];
+		if(!is_null($this->prepare[self::WHERE])){
+			$prepare .= " WHERE " . trim($this->prepare[self::WHERE]);
+			$this->mergeBindParam($bind, self::WHERE);
+		}
+		
+		return ["prepare" => $prepare, "bind" => $bind];
+	}
+	private function mergeBindParam(&$bind, $index){
+		foreach($this->bindParam[$index] as $tempVal){
+			$type = "s";
+			$value = $tempVal;
+			if(is_int($value)){
+				$type = "i";
+			}else if(is_float($value)){
+				$type = "d";
+			}else if($value instanceof \DateTimeInterface){
+				$value = $tempVal->format("Y-m-d H:i:s");
+			}
+			$bind[] = ["type" => $type, "value" => $value];
+		}
+	}
+}
+
+class MySQLDeleteQuery{
+	private $mysqli;
+	private $table;
+	private $prepare;
+	private $bindParam;
+	
+	private const WHERE = 0;
+	public function __construct($mysqli, $table){
+		$this->mysqli = $mysqli;
+		$this->table = $table;
+		$this->prepare = [null];
+		$this->bindParam = [[]];
+	}
+	
+	public function __invoke(){
+		$query = sprintf("DELETE FROM `%s`", $this->table);
+		$bindVars = [&$types];
+		$types = "";
+		$q = $this->buildQuery();
+		$query .= $q["prepare"];
+		foreach($q["bind"] as &$bind){
+			$types .= $bind["type"];
+			$bindVars[] = &$bind["value"];
+		}
+		$stmt = $this->mysqli->prepare($query);
+		if($types != ""){
+			$stmt->bind_param(...$bindVars);
+		}
+		$stmt->execute();
+	}
+	
+	public function setWhere($where, ...$bind){
+		$this->prepare[self::WHERE] = $where;
+		$this->bindParam[self::WHERE] = $bind;
+		return $this;
+	}
+	public function andWhere($where, ...$bind){
+		if(is_null($this->prepare[self::WHERE])){
+			$this->prepare[self::WHERE] = $where;
+			$this->bindParam[self::WHERE] = $bind;
+		}else{
+			$this->prepare[self::WHERE] .= " AND " . $where;
+			$this->bindParam[self::WHERE] = array_merge($this->bindParam[self::WHERE], $bind);
+		}
+		return $this;
+	}
+	public function orWhere($where, ...$bind){
+		if(is_null($this->prepare[self::WHERE])){
+			$this->prepare[self::WHERE] = $where;
+			$this->bindParam[self::WHERE] = $bind;
+		}else{
+			$this->prepare[self::WHERE] .= " OR " . $where;
+			$this->bindParam[self::WHERE] = array_merge($this->bindParam[self::WHERE], $bind);
+		}
+		return $this;
+	}
+	
+	protected function buildQuery(){
+		$prepare = "";
+		$bind = [];
+		if(!is_null($this->prepare[self::WHERE])){
+			$prepare .= " WHERE " . trim($this->prepare[self::WHERE]);
+			$this->mergeBindParam($bind, self::WHERE);
+		}
+		
+		return ["prepare" => $prepare, "bind" => $bind];
+	}
+	private function mergeBindParam(&$bind, $index){
+		foreach($this->bindParam[$index] as $tempVal){
+			$type = "s";
+			$value = $tempVal;
+			if(is_int($value)){
+				$type = "i";
+			}else if(is_float($value)){
+				$type = "d";
+			}else if($value instanceof \DateTimeInterface){
+				$value = $tempVal->format("Y-m-d H:i:s");
+			}
+			$bind[] = ["type" => $type, "value" => $value];
+		}
 	}
 }

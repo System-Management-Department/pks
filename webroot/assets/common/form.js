@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			select.value = "";
 		}
 	};
-	for(let input of document.querySelectorAll('select.form-control')){
+	for(let input of document.querySelectorAll('select.form-select')){
 		input.addEventListener("change", changeSelectEvent);
 	}
 

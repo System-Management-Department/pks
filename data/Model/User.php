@@ -1,6 +1,7 @@
 <?php
 namespace Model;
 use App\Validator;
+use App\MySQL as Database;
 
 class User{
 	public static function login(){
@@ -19,11 +20,12 @@ class User{
 		}
 		
 		try{
-			$db = new \App\MySQL();
+			$db = new Database();
 			$query = $db
 				->select("ROW")
 				->setTable("users")
 				->addField("*")
+				->andWhere("disabled=0")
 				->andWhere("username=?", $_POST["username"])
 				->andWhere("password=?", $_POST["password"]);
 			if($user = $query()){

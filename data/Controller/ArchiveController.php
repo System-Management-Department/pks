@@ -19,4 +19,12 @@ class ArchiveController extends ControllerBase{
 		$zip->close();
 		return $v;
 	}
+	public function download(){
+		$db = Session::getDB();
+		/*
+		$query = $db->select("ALL")
+			->addTable("files")
+			->andWhere("filename=?", $_POST["filenames"]);
+		*/
+	}
 }

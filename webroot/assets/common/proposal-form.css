@@ -1,0 +1,85 @@
+#pdf [name="filenames[]"], #vnd [name="filenames[]"]{
+	display: contents;
+}
+#pdf [name="filenames[]"]:checked~.thumbnail, #vnd [name="filenames[]"]:checked~.thumbnail{
+	outline: 4px solid blue;
+	filter: none;
+}
+
+#pdf .thumbnail{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	margin: 3px;
+	border: 1px solid black;
+    background-color: gray;
+	filter: brightness(0.8);
+}
+#pdf [name="pdf"]{
+	display: contents;
+}
+#pdf [name="pdf"]:checked~.thumbnail{
+	outline: 4px solid blue;
+	filter: none;
+}
+#vnd .thumbnail{
+	display: block;
+	width: 100px;
+	height: 100px;
+	margin: 3px;
+	border: 1px solid black;
+	line-height: 100px;
+	text-align: center;
+	font-size: 80px;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+}
+#vnd .thumbnail::before{
+	content: "\f15b";
+}
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.wordprocessingml.document"]::before,
+#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.text"]::before{
+	content: "\f1c2";
+	color: blue;
+}
+#vnd .thumbnail[data-type^="application/vnd.ms-excel"]::before,
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]::before,
+#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.spreadsheet"]::before{
+	content: "\f1c3";
+	color: green;
+}
+#vnd .thumbnail[data-type^="application/vnd.ms-powerpoint"]::before,
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.presentationml.presentation"]::before,
+#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.presentation"]::before{
+	content: "\f1c4";
+	color: red;
+}
+#vnd .thumbnail[data-type^="application/vnd.apple."]::before{
+	content: "\f5d1";
+	/*
+	content: "\f179";
+	font-family: "Font Awesome 6 Brands";
+	*/
+}
+#video video{
+	width: 100%;
+	max-height: 80vh;
+}
+.card-select{
+	height: 120px;
+	width: 120px;
+	justify-content: center;
+	background: #f0f3f5;
+	border: 3px dotted darkgray;
+	color: #14a5ad;
+	font-weight: bold;
+	margin-right: 30px;
+}
+.fileicon{
+	display: flex;
+	flex-direction: column;
+}
+.fileicon[title]::after{
+	content: attr(title);
+}
