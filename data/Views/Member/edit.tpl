@@ -167,7 +167,7 @@
 	</div>
 	
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">検索キーワード （必須）（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード （必須）（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	<div>
 		<div class="row" data-name="keyword">
 			{for $foo=0 to 5}
@@ -177,7 +177,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PDF）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PDF）（必須）</label>
 	<div class="col-12">
 		<div class="d-flex flex-wrap gap-3" id="pdf">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
@@ -185,11 +185,12 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）（必須）</label>
 	<div class="col-12">
 		<div class="d-flex flex-wrap gap-3" id="vnd">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
 		</div>
+		<div class="invalid-feedback"></div>
 	</div>
 	
 	<div class="col-12">

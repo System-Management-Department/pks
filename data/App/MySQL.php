@@ -25,6 +25,16 @@ class MySQL{
 	public function delete($table){
 		return new MySQLDeleteQuery($this->mysqli, $table);
 	}
+	
+	public function beginTransaction(){
+		$this->mysqli->begin_transaction();
+	}
+	public function commit(){
+		$this->mysqli->commit();
+	}
+	public function rollback(){
+		$this->mysqli->rollback();
+	}
 }
 
 class MySQLSelectQuery{

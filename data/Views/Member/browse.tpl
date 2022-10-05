@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	</div>
 	
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	<div>
 		<div class="row">
 			{foreach from=$data.keywords item="keyword"}

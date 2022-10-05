@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	{for $foo=1 to 6}
 	<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" /></div>
 	{/for}

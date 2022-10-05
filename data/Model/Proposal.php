@@ -127,6 +127,18 @@ class Proposal{
 		if(empty($thumbnail)){
 			$result->addMessage("サムネイルが選択されていません。", "ERROR", "thumbnail");
 		}
+		
+		$files = array_key_exists("files", $q) ? $q["files"] : [];
+		$fileCount = [0, 0];
+		foreach($files as $file){
+			$fileCount[strncmp($file["type"], "application/pdf", 15) == 0 ? 0 : 1]++;
+		}
+		if($fileCount[0] == 0){
+			$result->addMessage("メディアライブラリ（PDF）を登録してください。", "ERROR", "pdf");
+		}
+		if($fileCount[1] == 0){
+			$result->addMessage("メディアライブラリ（PDF以外）を登録してください。", "ERROR", "vnd");
+		}
 		return $result;
 	}
 	
@@ -143,6 +155,18 @@ class Proposal{
 		if(empty($thumbnail)){
 			$result->addMessage("サムネイルが選択されていません。", "ERROR", "thumbnail");
 		}
+		
+		$files = array_key_exists("files", $q) ? $q["files"] : [];
+		$fileCount = [0, 0];
+		foreach($files as $file){
+			$fileCount[strncmp($file["type"], "application/pdf", 15) == 0 ? 0 : 1]++;
+		}
+		if($fileCount[0] == 0){
+			$result->addMessage("メディアライブラリ（PDF）を登録してください。", "ERROR", "pdf");
+		}
+		if($fileCount[1] == 0){
+			$result->addMessage("メディアライブラリ（PDF以外）を登録してください。", "ERROR", "vnd");
+		}
 		return $result;
 	}
 	
@@ -150,7 +174,7 @@ class Proposal{
 		登録・更新共通の検証
 	*/
 	public static function validate($check, $masterData, $db, $files){
-		$check["modified_date"]->required("提案年月日を入力してください。");
+		$check["modified_date"]->required("年月日を選択してください。");
 		$check["client"]->required("クライアント名を入力してください。")
 			->range("クライアント名を正しく入力してください。", "in", array_keys($masterData["clients"]));
 		$check["product_name"]->required("商材名を入力してください。")
@@ -165,18 +189,18 @@ class Proposal{
 			"alias" => ["categories0", "categories1", "categories2"],
 			"format" => [["大項目"], ["中項目"], ["小項目"]]
 		]);
-		$check["categories"]->required("クライアント　カテゴリー（%s）を入力してください。")
-			->range("クライアント　カテゴリー（%s）を正しく入力してください。", "in", array_keys($masterData["categories"]));
+		$check["categories"]->required("%sが選択されていません。")
+			->range("%sを正しく入力してください。", "in", array_keys($masterData["categories"]));
 		
 		$check->setArray("keyword", [
 			"blankFilter" => true,
-			"empty" => "検索キーワードを入力してください。"
+			"empty" => "タグ検索キーワードを１つ以上入力してください。"
 		]);
 		
-		$check->setArray("targets", ["empty" => "ターゲットを入力してください。"]);
+		$check->setArray("targets", ["empty" => "ターゲットを選択してください。"]);
 		$check["targets"]->range("ターゲットを正しく入力してください。", "in", array_keys($masterData["targets"]));
 		
-		$check->setArray("medias", ["empty" => "媒体を入力してください。"]);
+		$check->setArray("medias", ["empty" => "媒体を選択してください。"]);
 		$check["medias"]->range("媒体を正しく入力してください。", "in", array_keys($masterData["medias"]));
 		
 		return $query = $db->select("ONE")
@@ -188,6 +212,7 @@ class Proposal{
 	
 	
 	public static function execInsert($db, $q, $context, $result){
+		$db->beginTransaction();
 		try{
 			// データベース挿入
 			$keywords = [];
@@ -240,9 +265,11 @@ class Proposal{
 			if(!empty($video)){
 				file_put_contents(PROPOSAL_VIDEO_DIR . "{$id}.webm", file_get_contents($video[0]['tmp_name']));
 			}
+			$db->commit();
 		}catch(Exception $ex){
 			$result->addMessage("登録に失敗しました。", "ERROR", "");
 			$result->setData($ex);
+			$db->rollback();
 		}
 		if(!$result->hasError()){
 			$result->addMessage("登録が完了しました。", "INFO", "");
@@ -250,6 +277,7 @@ class Proposal{
 	}
 	public static function execUpdate($db, $q, $context, $result){
 		$id = $context->id;
+		$db->beginTransaction();
 		try{
 			// データベース更新
 			$keywords = [];
@@ -265,7 +293,7 @@ class Proposal{
 				"product_name" => $q["product_name"],
 				"categories" => implode(",", $q["categories"]),
 				"keywords" => implode("\t", $keywords),
-				"targets" => implode(",", $q["medias"]),
+				"targets" => implode(",", $q["targets"]),
 				"medias" => implode(",", $q["medias"]),
 				"modified_date" => $q["modified_date"],
 				"sales_staff" => $q["sales_staff"],
@@ -292,6 +320,7 @@ class Proposal{
 			
 			// ファイルアップロード
 			$zip = new ZipArchive();
+			//@unlink(PROPOSAL_FILE_DIR . "{$id}.zip");
 			$zip->open(PROPOSAL_FILE_DIR . "{$id}.zip", ZipArchive::CREATE);
 			$files = $context->getFiles("archive");
 			foreach($files as $file){
@@ -308,9 +337,11 @@ class Proposal{
 			}else{
 				file_put_contents(PROPOSAL_VIDEO_DIR . "{$id}.webm", file_get_contents($video[0]['tmp_name']));
 			}
+			$db->commit();
 		}catch(Exception $ex){
 			$result->addMessage("更新に失敗しました。", "ERROR", "");
 			$result->setData($ex);
+			$db->rollback();
 		}
 		if(!$result->hasError()){
 			$result->addMessage("更新が完了しました。", "INFO", "");
