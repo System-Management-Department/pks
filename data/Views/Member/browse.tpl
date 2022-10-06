@@ -198,8 +198,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		<video autoplay="autoplay" controls="controls" playsinline="playsinline"><source src="/file/video/{$data.id}.webm" type="video/webm" /></video>
 	</div>{/if}
 	
+	{if $data.author eq $smarty.session["User.id"]}
 	<form class="col-12 mt-5 text-center" action="{url action="edit"}" method="POST">
 		<button type="submit" name="proposal" value="{$data.id}" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集<div class="flex-grow-1"></div></button>
 	</form>
+	{/if}
 </div>
 {/block}

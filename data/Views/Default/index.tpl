@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<form action="{url action="login"}" method="POST" class="text-start card mt-5 mx-auto">
 		<div class="card-body row">
 			<label class="col-12">ユーザー名またはメールアドレス</label>
-			<div class="col-12"><input name="username" type="text" class="form-control" /></div>
+			<div class="col-12"><input name="email" type="text" class="form-control" /></div>
 			
 			<label class="col-12 mt-3">パスワード</label>
 			<div class="col-12"><input name="password" type="text" class="form-control" /></div>

@@ -167,6 +167,16 @@ class Proposal{
 		if($fileCount[1] == 0){
 			$result->addMessage("メディアライブラリ（PDF以外）を登録してください。", "ERROR", "vnd");
 		}
+		
+		$query = $db->select("ONE")
+			->addTable("proposals")
+			->addField("count(1)")
+			->andWhere("id=?", $id)
+			->andWhere("author=@user");
+		if($query() == "0"){
+			$result->addMessage("編集権限がありません。", "ERROR", "proposal");
+		}
+		
 		return $result;
 	}
 	
@@ -237,6 +247,7 @@ class Proposal{
 				"designer" => $q["designer"],
 				"content" => $q["content"],
 			],[
+				"author" => "@user",
 				"created" => "now()",
 				"modified" => "now()",
 			]);
@@ -273,6 +284,7 @@ class Proposal{
 		}
 		if(!$result->hasError()){
 			$result->addMessage("登録が完了しました。", "INFO", "");
+			@Logger::record($db, "登録", ["proposal" => $id]);
 		}
 	}
 	public static function execUpdate($db, $q, $context, $result){
@@ -345,6 +357,7 @@ class Proposal{
 		}
 		if(!$result->hasError()){
 			$result->addMessage("更新が完了しました。", "INFO", "");
+			@Logger::record($db, "編集", ["proposal" => intval($id)]);
 		}
 	}
 	

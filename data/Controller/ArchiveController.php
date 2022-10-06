@@ -4,6 +4,7 @@ use ZipArchive;
 use App\ControllerBase;
 use App\StreamView;
 use Model\Session;
+use Model\Logger;
 
 class ArchiveController extends ControllerBase{
 	public function proposal(){
@@ -53,6 +54,7 @@ class ArchiveController extends ControllerBase{
 		$v = new StreamView($fp, "application/zip");
 		fclose($fp);
 		unlink($zipFile);
+		@Logger::record($db, "ダウンロード", ["files" => $_POST["filenames"]]);
 		return $v;
 	}
 }

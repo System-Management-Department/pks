@@ -3,6 +3,7 @@ namespace Controller;
 use App\ControllerBase;
 use App\View;
 use App\JsonView;
+use App\RedirectResponse;
 use Model\Session;
 use Model\Proposal;
 
@@ -72,8 +73,12 @@ class MemberController extends ControllerBase{
 	public function edit(){
 		$db = Session::getDB();
 		$query = Proposal::getRowQuery($db);
-		$query->andWhere("id=?", intval($_POST["proposal"]));
+		$query->andWhere("id=?", intval($_POST["proposal"]))
+			->andWhere("author=@user");
 		$data = $query();
+		if(empty($data)){
+			return new RedirectResponse("Member", "index");
+		}
 		
 		$v = new View();
 		

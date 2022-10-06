@@ -6,6 +6,10 @@
 
 {block name="styles" append}
 <style type="text/css">{literal}
+#mainlist, #previewContainer{
+	overflow: auto;
+	height: 100%;
+}
 #mainlist [data-loading]{
 	transition: opacity 0.2s;
 }
@@ -37,9 +41,35 @@
 #mainlist .thumbnail a{
 	display: none;
 }
+#previewarea{
+	height: calc(100% - 3rem);
+}
 #previewarea iframe{
 	height: 100%;
 	width: 100%;
+}
+#submitBtnArea{
+	justify-content: space-around;
+}
+#submitBtnArea .btn{
+	width: 10em;
+}
+#pager{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	counter-reset: page;
+}
+#pager [name="page"]{
+	counter-increment: page;
+	appearance: none;
+	color: lightgray;
+}
+#pager [name="page"]:checked{
+	color: blue;
+}
+#pager [name="page"]::after{
+	content: counter(page);
 }
 .d-contents{
 	display: contents;
@@ -51,6 +81,7 @@
 <script type="text/javascript">{literal}
 document.addEventListener("DOMContentLoaded", function(){
 	let current = null;
+	let current2 = null;
 	let lastBlob = null;
 	let form = document.getElementById("searchformdata");
 	let loading = document.createElement("span");
@@ -100,10 +131,36 @@ document.addEventListener("DOMContentLoaded", function(){
 				let val = next.style.backgroundImage;
 				if(val != current){
 					current = val;
-					Array.prototype.forEach.call(document.querySelectorAll('form .btn[formaction]:disabled'), btn => btn.disabled = false);
+					document.querySelector('[data-name="client"]').textContent = next.getAttribute("data-client");
+					document.querySelector('[data-name="product_name"]').textContent = next.getAttribute("data-product-name");
+					document.querySelector('[data-name="modified_date"]').textContent = next.getAttribute("data-modified-date");
+					document.querySelector('[data-name="targets"]').textContent = next.getAttribute("data-targets");
+					document.querySelector('[data-name="medias"]').textContent = next.getAttribute("data-medias");
+					document.querySelector('[data-name="keyword"]').textContent = next.getAttribute("data-keyword");
+					try{
+						let pdfFiles = next.querySelectorAll('a[data-type^="application/pdf"]');
+						let files = document.querySelector('[data-name="files"]');
+						files.innerHTML = "";
+						for(let file of pdfFiles){
+							let radio = document.createElement("input");
+							radio.setAttribute("type", "radio");
+							radio.setAttribute("name", "page");
+							radio.setAttribute("value", file.getAttribute("href"));
+							files.appendChild(radio);
+						}
+						document.querySelector('[data-name="files"] input[name="page"]').checked = true;
+					}catch(e){}
+				}
+				
+				
+				val = document.querySelector('[data-name="files"] input[name="page"]:checked').getAttribute("value");
+				if(val != current2){
+					current2 = val;
+					document.querySelector('form .btn[formaction*="browse"]').disabled = false;
+					document.querySelector('form .btn[formaction*="edit"]').disabled = (!next.hasAttribute("data-editable")) || (next.getAttribute("data-editable") != "true");
 					let previewarea = document.getElementById("previewarea");
 					
-					fetch(next.querySelector('a[data-type^="application/pdf"]').getAttribute("href")).then(response => response.blob()).then(blob => {
+					fetch(val).then(response => response.blob()).then(blob => {
 						let iframe = document.createElement("iframe");
 						if(lastBlob != null){
 							URL.revokeObjectURL(lastBlob);
@@ -114,19 +171,35 @@ document.addEventListener("DOMContentLoaded", function(){
 						previewarea.appendChild(iframe);
 					});
 				}
+				
 			}
 		}, 0);
 	});
+	
+	document.querySelector('[data-name="page-prev"]').addEventListener("mousedown", e => {
+		let page = document.querySelector('[data-name="files"] input[name="page"]:checked');
+		if(page.previousElementSibling != null){
+			page.previousElementSibling.checked = true;
+		}
+	});
+	document.querySelector('[data-name="page-next"]').addEventListener("mousedown", e => {
+		let page = document.querySelector('[data-name="files"] input[name="page"]:checked');
+		if(page.nextElementSibling != null){
+			page.nextElementSibling.checked = true;
+		}
+	});
+	
+	
 	
 	
 	
 	const additionalStyle = document.getElementById("additionalStyle");
 	const styleSheet = additionalStyle.sheet;
 	let n = styleSheet.cssRules.length;
-	let previewContainer = document.getElementById("previewContainer");
-	let rect = previewContainer.getBoundingClientRect();
-	styleSheet.insertRule(`#previewarea{
-		height: calc(100vh - ${rect.y + window.pageYOffset + 60}px);
+	let mainContainer = document.getElementById("mainContainer");
+	let rect = mainContainer.getBoundingClientRect();
+	styleSheet.insertRule(`#mainContainer{
+		height: calc(100vh - ${rect.y + window.pageYOffset}px - 1.5rem);
 	}`, n++);
 });
 {/literal}</script>
@@ -137,21 +210,57 @@ document.addEventListener("DOMContentLoaded", function(){
 {html_hiddens data=$smarty.post}
 </form>
 <form action="{url action="list"}" method="POST" class="container-fluid row" target="_blank">
-	<div class="col-12">
+	<div class="col-12 col-md-6 col-lg-2">
 		クライアント名：
 	</div>
-	<div class="col-12">
+	<div class="col-12 col-md-6 col-lg-5">
+		<div class="form-control" data-name="client"><br /></div>
+	</div>
+	<div></div>
+	<div class="col-12 col-md-6 col-lg-2">
 		商材名：
 	</div>
-	<div class="col-6" id="mainlist"></div>
-	<div class="col-6" id="previewContainer">
-		<div class="position-sticky top-0">
-			<div id="previewarea">
-			プレビュー
-			</div>
-			<div class="row">
-				<button type="submit" class="btn btn-outline-success rounded-pill col-6" formaction="{url action="browse"}" disabled>閲覧</button>
-				<button type="submit" class="btn btn-outline-success rounded-pill col-6" formaction="{url action="edit"}" disabled>編集</button>
+	<div class="col-12 col-md-6 col-lg-5">
+		<div class="form-control" data-name="product_name"><br /></div>
+	</div>
+	<div class="col-12">
+		<div id="mainContainer" class="row">
+			<div class="col-6" id="mainlist"></div>
+			<div class="col-6" id="previewContainer">
+				<div id="previewarea">
+				プレビュー
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div id="pager">
+							<button type="button" class="btn btn-info fa-solid fa-arrow-left" data-name="page-prev"></button>
+							<div class="d-contents" data-name="files">
+								<input type="radio" name="page" checked />
+							</div>
+							<button type="button" class="btn btn-info fa-solid fa-arrow-right" data-name="page-next"></button>
+						</div>
+					</div>
+					<label class="col-12 form-label mt-4">提案年月日</label>
+					<div class="col-12">
+						<div class="form-control" data-name="modified_date"><br /></div>
+					</div>
+					<label class="col-12 form-label mt-4">ターゲット</label>
+					<div class="col-12">
+						<div class="form-control" data-name="targets"><br /></div>
+					</div>
+					<label class="col-12 form-label mt-4">媒体</label>
+					<div class="col-12">
+						<div class="form-control" data-name="medias"><br /></div>
+					</div>
+					<label class="col-12 form-label mt-4">タグ検索キーワード</label>
+					<div class="col-12 mb-2">
+						<div class="form-control" data-name="keyword"><br /></div>
+					</div>
+				</div>
+				<div id="submitBtnArea" class="row">
+					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
+					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled>編集</button>
+				</div>
 			</div>
 		</div>
 	</div>

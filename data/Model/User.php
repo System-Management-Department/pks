@@ -1,5 +1,6 @@
 <?php
 namespace Model;
+use stdClass;
 use App\Validator;
 use App\MySQL as Database;
 
@@ -12,7 +13,7 @@ class User{
 		}
 		
 		$check = new Validator();
-		$check["username"]->required("ユーザー名またはメールアドレスを入力してください。");
+		$check["email"]->required("ユーザー名またはメールアドレスを入力してください。");
 		$check["password"]->required("パスワードを入力してください。");
 		$check($result, $_POST);
 		if($result->hasError()){
@@ -26,11 +27,12 @@ class User{
 				->setTable("users")
 				->addField("*")
 				->andWhere("disabled=0")
-				->andWhere("username=?", $_POST["username"])
+				->andWhere("email=?", $_POST["email"])
 				->andWhere("password=?", $_POST["password"]);
 			if($user = $query()){
 				$result->addMessage("ログインに成功しました。", "INFO", "");
-				Session::login($user);
+				Session::login($db, $user);
+				Logger::record($db, "ログイン", new stdClass());
 			}else{
 				$result->addMessage("ログインに失敗しました。", "ERROR", "");
 			}
@@ -38,5 +40,13 @@ class User{
 			$result->addMessage($ex->getMessage(), "ERROR", "");
 		}
 		return $result;
+	}
+	
+	public static function setDBVariables($db, $assoc){
+		$query = $db
+			->select("ROW")
+			->addField("@user:=?", $assoc["id"] ?? 0)
+			->addField("@username:=?", $assoc["username"] ?? "");
+		$query();
 	}
 }
