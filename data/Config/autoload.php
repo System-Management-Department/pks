@@ -43,6 +43,9 @@ $requestContext->id = $id;
 // アクション
 $controllerClassName = "\\Controller\\{$controller}Controller";
 $controllerInstance = new $controllerClassName($requestContext);
+session_name("PHPSESSID");
+session_cache_expire(1440);
+session_set_cookie_params(86400, "/");
 session_start();
 $returnValue = $controllerInstance->$action();
 

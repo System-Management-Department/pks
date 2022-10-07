@@ -317,6 +317,7 @@ class Proposal{
 				"modified" => "now()",
 			]);
 			$updateQuery->andWhere("id=?", $id);
+			$updateQuery->andWhere("author=@user");
 			$updateQuery();
 			
 			$deleteQuery = $db->delete("files");
@@ -359,6 +360,33 @@ class Proposal{
 			$result->addMessage("更新が完了しました。", "INFO", "");
 			@Logger::record($db, "編集", ["proposal" => intval($id)]);
 		}
+	}
+	
+	public static function execDelete($db, $context){
+		$result = new Result();
+		$id = $context->id;
+		$db->beginTransaction();
+		try{
+			$deleteQuery = $db->delete("proposals");
+			$deleteQuery->andWhere("id=?", $id);
+			$deleteQuery->andWhere("author=@user");
+			$deleteQuery();
+			
+			$deleteQuery = $db->delete("files");
+			$deleteQuery->andWhere("proposal=?", $id);
+			$deleteQuery();
+			
+			@unlink(PROPOSAL_THUMBNAIL_DIR . "{$id}.png");
+			@unlink(PROPOSAL_FILE_DIR . "{$id}.zip");
+			@unlink(PROPOSAL_VIDEO_DIR . "{$id}.webm");
+			$db->commit();
+		}catch(Exception $ex){
+			$result->addMessage("削除に失敗しました。", "ERROR", "");
+			$result->setData($ex);
+			$db->rollback();
+		}
+		
+		return $result;
 	}
 	
 }

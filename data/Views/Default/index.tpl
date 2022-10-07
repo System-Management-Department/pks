@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function(){
 			<label class="text-center col-12 mt-3"><input type="checkbox">ログイン状態を保持する</label>
 			<div class="text-center col-12 mt-3 mb-3"><button type="submit" class="btn btn-success">ログイン</button></div>
 			<div class="text-center col-12">パスワードを忘れた方はこちら</div>
-			<div class="text-center col-12 mt-3 mb-3"><a href="{url controller="Member" action="index"}">ログイン</a></div>
 		</div>
 	</form>
 </main>

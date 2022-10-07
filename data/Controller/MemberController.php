@@ -106,7 +106,11 @@ class MemberController extends ControllerBase{
 		}
 		return new JsonView($result);
 	}
-	
+	public function delete(){
+		$db = Session::getDB();
+		$result = Proposal::execDelete($db, $this->requestContext);
+		return new JsonView($result);
+	}
 	
 	private function getMasterData($db, $tree = true){
 		$data = [];

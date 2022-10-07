@@ -209,7 +209,7 @@
 	<div class="col-12 mt-5 text-center">
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>キャンセル<div class="flex-grow-1"></div></button>
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集保存<div class="flex-grow-1"></div></button>
-		<button type="button" class="btn btn-danger rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>案件削除<div class="flex-grow-1"></div></button>
+		<button type="button" class="btn btn-danger rounded-pill w-25 d-inline-flex" data-bs-toggle="modal" data-bs-target="#deleteModal"><div class="flex-grow-1"></div>案件削除<div class="flex-grow-1"></div></button>
 	</div>
 </form>
 <div class="modal fade" id="recModal" tabindex="-1">
@@ -225,6 +225,22 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary btn-rec2"{if $data.videoExists} style="display:none;"{/if}>録画</button>
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header flex-row-reverse">
+				<i class="bi bi-x" data-bs-dismiss="modal"></i>
+			</div>
+			<div class="modal-body">
+				<div class="text-center text-danger">本当に削除しますか？</div>
+			</div>
+			<div class="modal-footer justify-content-evenly">
+				<button type="button" class="btn btn-success rounded-pill w-25 d-inline-flex" data-action="{url action="delete" id=$data.id}"><div class="flex-grow-1"></div>はい<div class="flex-grow-1"></div></button>
+				<button type="button" class="btn btn-outline-success rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>いいえ<div class="flex-grow-1"></div></button>
 			</div>
 		</div>
 	</div>

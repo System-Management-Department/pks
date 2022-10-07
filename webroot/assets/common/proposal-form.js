@@ -3,6 +3,7 @@ let fileGridMap = new Map();
 let pdfObject = {};
 let formObject = {};
 let videoObject = {};
+let deleteBtn;
 document.addEventListener('DOMContentLoaded', pdfObject);
 document.addEventListener('dragover', pdfObject);
 document.addEventListener('drop', pdfObject);
@@ -73,6 +74,11 @@ pdfObject.handleEvent = function(e){
 		if(source != null){
 			fetch(source.getAttribute("src")).then(response => response.blob()).then(blob => {videoObject.blob = new Blob([blob], {type: source.getAttribute("type")});});
 		}
+		
+		deleteBtn = document.querySelector('#deleteModal [data-action]');
+		if(deleteBtn != null){
+			deleteBtn.addEventListener("click", this);
+		}
 	}else if(e.type == "dragover"){
 	    e.preventDefault();
 	    e.dataTransfer.dropEffect = 'copy';
@@ -141,6 +147,20 @@ pdfObject.handleEvent = function(e){
 				fileGridMap.set(icon, grid);
 			}
 		};
+	}else if(e.currentTarget == deleteBtn){
+		fetch(deleteBtn.getAttribute("data-action")).then(res => res.json()).then(json => {
+			if(json.success){
+				location.href = url;
+			}else{
+				let messages = json.messages.reduce((a, message) => {
+					if(message[1] == 2){
+						a.push(message[0]);
+					}
+					return a;
+				}, []);
+				alert(messages.join("\n"));
+			}
+		});
 	}else if(fileGridMap.has(e.currentTarget)){
 		let grid = fileGridMap.get(e.currentTarget);
 		let canvas = grid.querySelector('.thumbnail');
