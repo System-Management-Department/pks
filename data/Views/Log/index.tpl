@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	let loading = document.createElement("div");
 	let observer = new IntersectionObserver(() => {
 		// 画面内に入ったら更新
-	console.log(1)
 		loading.setAttribute("data-loading", loading.getAttribute("data-loading") == "0" ? "1" : "0");
 	}, {root: document.getElementById("mainlist")});
 	loading.setAttribute("data-loading", "0");

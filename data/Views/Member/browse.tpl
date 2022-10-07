@@ -91,13 +91,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	</div>
 	
 	<form class="row" action="{url controller="Archive" action="download"}" method="POST" target="_blank">
-		<div class="col-12 mt-5 form-label">メディアライブラリ（PDF）<button type="submit" class="float-end">ダウンロード<i class="fas fa-download"></i></button></div>
+		<div class="col-12 mt-5 form-label">メディアライブラリ（PDF）<button type="submit" class="float-end">ダウンロード<i class="bi bi-download"></i></button></div>
 		<div class="col-12">
 			<div class="d-flex flex-wrap gap-3" id="pdf"></div>
 		</div>
 	</form>
 	<form class="row" action="{url controller="Archive" action="download"}" method="POST" target="_blank">
-		<div for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）<button type="submit" class="float-end">ダウンロード<i class="fas fa-download"></i></button></div>
+		<div for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）<button type="submit" class="float-end">ダウンロード<i class="bi bi-download"></i></button></div>
 		<div class="col-12">
 			<div class="d-flex flex-wrap gap-3" id="vnd"></div>
 		</div>

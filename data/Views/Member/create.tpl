@@ -200,7 +200,7 @@
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">説明録画（任意）</label>
 	<div class="col-12">
-		<button type="button" class="btn btn-outline-danger btn-rec"><i class="fas fa-video"></i>Rec</button>
+		<button type="button" class="btn btn-outline-danger btn-rec"><i class="bi bi-camera-video-fill"></i>Rec</button>
 		<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
 	</div>
 	

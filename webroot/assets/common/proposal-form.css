@@ -32,35 +32,46 @@
 	line-height: 100px;
 	text-align: center;
 	font-size: 80px;
-	font-family: "Font Awesome 6 Free";
-	font-weight: 900;
+	font-family: bootstrap-icons;
+	font-weight: normal;
 }
 #vnd .thumbnail::before{
-	content: "\f15b";
+	content: "\f38b";
 }
-#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.wordprocessingml.document"]::before,
-#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.text"]::before{
-	content: "\f1c2";
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.wordprocessingml.document"]::before{
+	content: "\f745";
 	color: blue;
 }
-#vnd .thumbnail[data-type^="application/vnd.ms-excel"]::before,
-#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]::before,
-#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.spreadsheet"]::before{
-	content: "\f1c3";
+#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.text"]::before{
+	content: "\f38d";
+	color: blue;
+}
+#vnd .thumbnail[data-type^="application/vnd.ms-excel"]::before{
+	content: "\f76a";
 	color: green;
 }
-#vnd .thumbnail[data-type^="application/vnd.ms-powerpoint"]::before,
-#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.presentationml.presentation"]::before,
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]::before{
+	content: "\f793";
+	color: green;
+}
+#vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.spreadsheet"]::before{
+	content: "\f38f";
+	color: green;
+}
+#vnd .thumbnail[data-type^="application/vnd.ms-powerpoint"]::before{
+	content: "\f75a";
+	color: red;
+}
+#vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.presentationml.presentation"]::before{
+	content: "\f792";
+	color: red;
+}
 #vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.presentation"]::before{
-	content: "\f1c4";
+	content: "\f381";
 	color: red;
 }
 #vnd .thumbnail[data-type^="application/vnd.apple."]::before{
-	content: "\f5d1";
-	/*
-	content: "\f179";
-	font-family: "Font Awesome 6 Brands";
-	*/
+	content: "\f65b";
 }
 #video video{
 	width: 100%;

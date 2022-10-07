@@ -233,11 +233,11 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div class="row">
 					<div class="col-12">
 						<div id="pager">
-							<button type="button" class="btn btn-info fa-solid fa-arrow-left" data-name="page-prev"></button>
+							<button type="button" class="btn btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
 							<div class="d-contents" data-name="files">
 								<input type="radio" name="page" checked />
 							</div>
-							<button type="button" class="btn btn-info fa-solid fa-arrow-right" data-name="page-next"></button>
+							<button type="button" class="btn btn-info bi bi-arrow-right-short" data-name="page-next"></button>
 						</div>
 					</div>
 					<label class="col-12 form-label mt-4">提案年月日</label>

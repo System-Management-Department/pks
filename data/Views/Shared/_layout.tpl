@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 {block name="styles"}
 <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/fontawesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap/font/bootstrap-icons.css" />
 <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/solid.min.css" />
 <style id="additionalStyle"></style>
 {/block}
@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", function(){
 <body>
     <nav class="navbar navbar-light position-sticky top-0 bg-dark text-white py-1">
         <div class="d-flex col-3 col-lg-2 flex-wrap flex-md-nowrap justify-content-end px-3">
-            <i class="fa-solid fa-bars"></i>
+            <i class="bi bi-list"></i>
         </div>
         <div class="d-flex col-9 col-lg-10 align-items-center justify-content-end px-3">
-            <a href="{url controller="Default" action="logout"}" class="text-white">Logout<i class="fa-solid fa-right-to-bracket"></i></a>
+            <a href="{url controller="Default" action="logout"}" class="text-white">Logout<i class="bi bi-box-arrow-right"></i></a>
         </div>
     </nav>
     <div class="container-fluid">
@@ -50,17 +50,17 @@ document.addEventListener("DOMContentLoaded", function(){
                     <ul class="nav flex-column">
                         <li class="nav-item">
                           <a class="nav-link text-white active" href="{url controller="Member" action="index"}">
-                            <span class="ml-2"><i class="fas fa-house"></i>ホーム</span>
+                            <span class="ml-2"><i class="bi bi-house-door"></i>ホーム</span>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link text-white" href="{url controller="Member" action="index"}">
-                            <span class="ml-2"><i class="fas fa-magnifying-glass"></i>過去事例検索画面</span>
+                            <span class="ml-2"><i class="bi bi-search"></i>過去事例検索画面</span>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link text-white" href="{url controller="Member" action="create"}">
-                            <span class="ml-2"><i class="fas fa-database"></i>提案資料新規登録</span>
+                            <span class="ml-2"><i class="bi bi-pencil-square"></i>提案資料新規登録</span>
                           </a>
                         </li>
                       </ul>

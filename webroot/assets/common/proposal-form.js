@@ -98,7 +98,7 @@ pdfObject.handleEvent = function(e){
 				radio.setAttribute("type", "radio");
 				radio.setAttribute("name", "pdf");
 				canvas.setAttribute("class", "thumbnail");
-				icon.setAttribute("class", "fas fa-trash");
+				icon.setAttribute("class", "bi bi-trash3-fill");
 				icon.addEventListener("click", this);
 				label.appendChild(radio);
 				label.appendChild(canvas);
@@ -132,7 +132,7 @@ pdfObject.handleEvent = function(e){
 				grid.setAttribute("title", file.name);
 				canvas.setAttribute("class", "thumbnail");
 				canvas.setAttribute("data-type", file.type);
-				icon.setAttribute("class", "fas fa-trash");
+				icon.setAttribute("class", "bi bi-trash3-fill");
 				icon.addEventListener("click", this);
 				grid.appendChild(canvas);
 				grid.appendChild(icon);
