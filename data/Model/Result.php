@@ -58,10 +58,14 @@ class Result implements JsonSerializable{
 	
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
-		return [
+		$res = [
 			"success" => $this->success,
 			"messages" => $this->messages,
 			"data" => $this->data
 		];
+		if(!empty(Error::$data)){
+			$res["error"] = Error::$data;
+		}
+		return $res;
 	}
 }

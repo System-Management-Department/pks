@@ -74,5 +74,6 @@ document.addEventListener("DOMContentLoaded", function(){
             </main>
         </div>
     </div>
+    {block name="dialogs"}{javascript_notice}{/block}
 </body>
 </html>

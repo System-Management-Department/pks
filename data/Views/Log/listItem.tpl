@@ -8,4 +8,4 @@
 	<div class="griddata">{$log.username}</div>
 </div>
 {/foreach}
-<input type="hidden" name="lastdata" value="{$lastdata}" />
+<input type="hidden" name="lastdata" value="{$lastdata}" />{javascript_notice}

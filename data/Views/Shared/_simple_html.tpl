@@ -11,5 +11,6 @@
 </head>
 <body>
 {block name="body"}{/block}
+{block name="dialogs"}{javascript_notice}{/block}
 </body>
 </html>

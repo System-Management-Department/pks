@@ -209,6 +209,9 @@
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集保存<div class="flex-grow-1"></div></button>
 	</div>
 </form>
+{/block}
+
+{block name="dialogs" append}
 <div class="modal fade" id="recModal" tabindex="-1">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">

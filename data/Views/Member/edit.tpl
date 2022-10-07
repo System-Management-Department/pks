@@ -212,6 +212,9 @@
 		<button type="button" class="btn btn-danger rounded-pill w-25 d-inline-flex" data-bs-toggle="modal" data-bs-target="#deleteModal"><div class="flex-grow-1"></div>案件削除<div class="flex-grow-1"></div></button>
 	</div>
 </form>
+{/block}
+
+{block name="dialogs" append}
 <div class="modal fade" id="recModal" tabindex="-1">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">

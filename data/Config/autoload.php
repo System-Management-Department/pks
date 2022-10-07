@@ -11,6 +11,7 @@ spl_autoload_register(function($class){
 		include $fileName;
 	}
 });
+set_error_handler('\\Model\\Error::pushData');
 
 // リクエスト
 $url = parse_url(urldecode($_SERVER['REQUEST_URI']));

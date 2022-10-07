@@ -1,5 +1,6 @@
 <?php
 namespace Model;
+use Exception;
 use ZipArchive;
 use App\Validator;
 

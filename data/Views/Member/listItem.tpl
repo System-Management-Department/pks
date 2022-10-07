@@ -16,4 +16,4 @@
 	</div>
 </label>
 {/foreach}
-<input type="hidden" name="lastdata" value="{$lastdata}" />
+<input type="hidden" name="lastdata" value="{$lastdata}" />{javascript_notice}
