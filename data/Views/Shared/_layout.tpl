@@ -11,7 +11,112 @@
 {block name="scripts"}
 <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">{literal}
+class Storage{
+	static getToast(){
+		return new Promise((resolve, reject) => {
+			let openRequest = indexedDB.open("Storage", 1);
+			let onSuccess = e => {
+				let result = e.currentTarget.result;
+				if(result == null){
+					reject(null);
+				}else{
+					resolve(result);
+				}
+			};
+			openRequest.addEventListener("error", reject);
+			openRequest.addEventListener("upgradeneeded", e => {
+				Storage.init(openRequest.result);
+			});
+			openRequest.addEventListener("success", e => {
+				let db = openRequest.result;
+				let transaction = db.transaction("map", "readonly");
+				let map = transaction.objectStore("map");
+				let request = map.get("Toast");
+				request.addEventListener("success", onSuccess);
+			});
+			
+		});
+	}
+	static pushToast(header, value){
+		return new Promise((resolve, reject) => {
+			let openRequest = indexedDB.open("Storage", 1);
+			let onSuccess = e => {
+				resolve(null);
+			};
+			openRequest.addEventListener("error", reject);
+			openRequest.addEventListener("upgradeneeded", e => {
+				Storage.init(openRequest.result);
+			});
+			openRequest.addEventListener("success", e => {
+				let db = openRequest.result;
+				let transaction = db.transaction("map", "readwrite");
+				let map = transaction.objectStore("map");
+				let request = map.put({key: "Toast", header: header, value: value});
+				request.addEventListener("success", onSuccess);
+			});
+			
+		});
+	}
+	static removeToast(){
+		return new Promise((resolve, reject) => {
+			let openRequest = indexedDB.open("Storage", 1);
+			let onSuccess = e => {
+				resolve(null);
+			};
+			openRequest.addEventListener("error", reject);
+			openRequest.addEventListener("upgradeneeded", e => {
+				Storage.init(openRequest.result);
+			});
+			openRequest.addEventListener("success", e => {
+				let db = openRequest.result;
+				let transaction = db.transaction("map", "readwrite");
+				let map = transaction.objectStore("map");
+				let request = map.delete("Toast");
+				request.addEventListener("success", onSuccess);
+			});
+			
+		});
+	}
+	static init(db){
+		if(!db.objectStoreNames.contains("map")){
+			db.createObjectStore("map", {keyPath: "key"});
+		}
+	}
+}
 document.addEventListener("DOMContentLoaded", function(){
+	Storage.getToast().then(messages => {
+		let container = document.querySelector('#mainContents .toast-container');
+		let option = {
+			animation: true,
+			autohide: false,
+			delay: 1000
+		};
+		for(let message of messages.value){
+			let bg = "bg-success";
+			let toast = document.createElement("div");
+			let header = document.createElement("div");
+			let body = document.createElement("div");
+			let title = document.createElement("strong");
+			if(message[1] == 1){
+				bg = "bg-warning";
+			}else if(message[1] == 2){
+				bg = "bg-danger";
+			}
+			toast.setAttribute("class", `toast show ${bg}`);
+			header.setAttribute("class", "toast-header");
+			body.setAttribute("class", "toast-body");
+			title.setAttribute("class", "me-auto");
+			body.textContent = message[0];
+			title.textContent = messages.header;
+			header.appendChild(title);
+			header.insertAdjacentHTML("beforeend", '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>');
+			toast.appendChild(header);
+			toast.appendChild(body);
+			container.appendChild(toast);
+			new bootstrap.Toast(toast, option);
+		}
+		Storage.removeToast();
+	}).catch(() => {});
 	const additionalStyle = document.getElementById("additionalStyle");
 	const styleSheet = additionalStyle.sheet;
 	let n = styleSheet.cssRules.length;
@@ -27,6 +132,10 @@ document.addEventListener("DOMContentLoaded", function(){
 		--main-top: ${rect.y + window.pageYOffset}px;
 	}`, n++);
 	styleSheet.insertRule(`#sidebar>.position-sticky{
+		z-index: 1000;
+	}`, n++);
+	
+	styleSheet.insertRule(`#mainContents .toast-container{
 		z-index: 1000;
 	}`, n++);
 });
@@ -66,7 +175,8 @@ document.addEventListener("DOMContentLoaded", function(){
                       </ul>
                 </div>
             </nav>
-            <main id="mainContents" class="col-md-9 ml-sm-auto col-lg-10 px-0">
+            <main id="mainContents" class="col-md-9 ml-sm-auto col-lg-10 px-0 position-relative">
+				<div class="toast-container position-absolute top-0 end-0 p-3"></div>
             	{block name="title"}{/block}
 				<div class="px-md-4 py-4">
 					{block name="body"}{/block}

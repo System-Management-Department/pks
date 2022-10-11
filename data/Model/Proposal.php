@@ -279,12 +279,12 @@ class Proposal{
 			}
 			$db->commit();
 		}catch(Exception $ex){
-			$result->addMessage("登録に失敗しました。", "ERROR", "");
+			$result->addMessage("編集保存に失敗しました。", "ERROR", "");
 			$result->setData($ex);
 			$db->rollback();
 		}
 		if(!$result->hasError()){
-			$result->addMessage("登録が完了しました。", "INFO", "");
+			$result->addMessage("編集保存が完了しました。", "INFO", "");
 			@Logger::record($db, "登録", ["proposal" => $id]);
 		}
 	}
@@ -353,12 +353,12 @@ class Proposal{
 			}
 			$db->commit();
 		}catch(Exception $ex){
-			$result->addMessage("更新に失敗しました。", "ERROR", "");
+			$result->addMessage("編集保存に失敗しました。", "ERROR", "");
 			$result->setData($ex);
 			$db->rollback();
 		}
 		if(!$result->hasError()){
-			$result->addMessage("更新が完了しました。", "INFO", "");
+			$result->addMessage("編集保存が完了しました。", "INFO", "");
 			@Logger::record($db, "編集", ["proposal" => intval($id)]);
 		}
 	}
@@ -382,7 +382,7 @@ class Proposal{
 			@unlink(PROPOSAL_VIDEO_DIR . "{$id}.webm");
 			$db->commit();
 		}catch(Exception $ex){
-			$result->addMessage("削除に失敗しました。", "ERROR", "");
+			$result->addMessage("案件削除に失敗しました。", "ERROR", "");
 			$result->setData($ex);
 			$db->rollback();
 		}

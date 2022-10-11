@@ -150,6 +150,7 @@ pdfObject.handleEvent = function(e){
 	}else if(e.currentTarget == deleteBtn){
 		fetch(deleteBtn.getAttribute("data-action")).then(res => res.json()).then(json => {
 			if(json.success){
+				Storage.pushToast("過去事例", json.messages);
 				location.href = url;
 			}else{
 				let messages = json.messages.reduce((a, message) => {
@@ -257,6 +258,7 @@ formObject.handleEvent = function(e){
 			body: formData
 		}).then(res => res.json()).then(json => {
 			if(json.success){
+				Storage.pushToast("過去事例", json.messages);
 				location.href = url;
 			}else{
 				let messages = json.messages.reduce((a, message) => {
