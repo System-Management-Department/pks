@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="mt-5 row">
 		<div class="col-12 col-md-6 col-lg-5">
 			<label for="e{counter skip=0}" class="col-12">クライアント名</label>
-			<select name="client" id="e{counter skip=1}" class="form-control">
+			<select name="client" id="e{counter skip=1}" class="form-select">
 				<option value="" selected hidden>クライアントを選択</option>
 				<option value=""></option>
 				{foreach from=$clients key="code" item="data"}
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="col-12 col-lg-10">
 		<div class="row">
 			<div class="col-12 col-md-4" data-categories="l">
-				<select name="categories[]" class="form-control" id="e{counter skip=1}">
+				<select name="categories[]" class="form-select" id="e{counter skip=1}">
 					<option value="" selected hidden>大項目</option>
 					<option value=""></option>
 					{foreach from=$categoriesL key="code" item="data"}
@@ -86,13 +86,13 @@ document.addEventListener("DOMContentLoaded", function(){
 				</select>
 			</div>
 			<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="m">
-				<select name="categories[]" class="form-control" data-parent="">
+				<select name="categories[]" class="form-select" data-parent="">
 					<option value="" selected hidden>中項目</option>
 					<option value=""></option>
 				</select>
 				<fieldset disabled hidden>
 					{foreach from=$categoriesM key="parent" item="categories"}
-					<select name="categories[]" class="form-control" data-parent="{$parent}">
+					<select name="categories[]" class="form-select" data-parent="{$parent}">
 						<option value="" selected hidden>中項目</option>
 						<option value=""></option>
 						{foreach from=$categories key="code" item="data"}
@@ -103,13 +103,13 @@ document.addEventListener("DOMContentLoaded", function(){
 				</fieldset>
 			</div>
 			<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="s">
-				<select name="categories[]" class="form-control" data-parent="">
+				<select name="categories[]" class="form-select" data-parent="">
 					<option value="" selected hidden>小項目</option>
 					<option value=""></option>
 				</select>
 				<fieldset disabled hidden>
 					{foreach from=$categoriesS key="parent" item="categories"}
-					<select name="categories[]" class="form-control" data-parent="{$parent}">
+					<select name="categories[]" class="form-select" data-parent="{$parent}">
 						<option value="" selected hidden>小項目</option>
 						<option value=""></option>
 						{foreach from=$categories key="code" item="data"}

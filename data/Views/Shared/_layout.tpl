@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			}
 			toast.setAttribute("class", `toast show ${bg}`);
 			header.setAttribute("class", "toast-header");
-			body.setAttribute("class", "toast-body");
+			body.setAttribute("class", "toast-body text-white");
 			title.setAttribute("class", "me-auto");
 			body.textContent = message[0];
 			title.textContent = messages.header;
@@ -143,47 +143,64 @@ document.addEventListener("DOMContentLoaded", function(){
 {/block}
 </head>
 <body>
-    <nav class="navbar navbar-light position-sticky top-0 bg-dark text-white py-1">
-        <div class="d-flex col-3 col-lg-2 flex-wrap flex-md-nowrap justify-content-end px-3">
-            <i class="bi bi-list"></i>
-        </div>
-        <div class="d-flex col-9 col-lg-10 align-items-center justify-content-end px-3">
-            <a href="{url controller="Default" action="logout"}" class="text-white">Logout<i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div id="mainRow" class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
-                <div class="position-sticky top-0">
-                    提案書管理システム
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                          <a class="nav-link text-white active" href="{url controller="Member" action="index"}">
-                            <span class="ml-2"><i class="bi bi-house-door"></i>ホーム</span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link text-white" href="{url controller="Member" action="index"}">
-                            <span class="ml-2"><i class="bi bi-search"></i>過去事例検索画面</span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link text-white" href="{url controller="Member" action="create"}">
-                            <span class="ml-2"><i class="bi bi-pencil-square"></i>提案資料新規登録</span>
-                          </a>
-                        </li>
-                      </ul>
-                </div>
-            </nav>
-            <main id="mainContents" class="col-md-9 ml-sm-auto col-lg-10 px-0 position-relative">
+	<nav class="navbar navbar-light position-sticky top-0 bg-dark text-white py-1">
+		<div class="d-flex col-3 col-lg-2 flex-wrap flex-md-nowrap justify-content-end px-3">
+			<i class="bi bi-list"></i>
+		</div>
+		<div class="d-flex col-9 col-lg-10 align-items-center justify-content-end px-3">
+			<a href="{url controller="Default" action="logout"}" class="text-white">Logout<i class="bi bi-box-arrow-right"></i></a>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div id="mainRow" class="row">
+			<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
+				<div class="position-sticky top-0">
+					提案書管理システム
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link text-white active" href="{url controller="Member" action="index"}">
+								<span class="ml-2"><i class="bi bi-house-door"></i>ホーム</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="{url controller="Member" action="index"}">
+								<span class="ml-2"><i class="bi bi-search"></i>過去事例検索画面</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="{url controller="Member" action="create"}">
+								<span class="ml-2"><i class="bi bi-pencil-square"></i>提案資料新規登録</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="true" aria-current="true"><i class="bi bi-gear-wide"></i>マスタ管理</span>
+							<div class="collapse show" id="components-collapse">
+								<ul class="ms-3 list-unstyled small">
+									<li><a class="nav-link text-white py-1" href="{url controller="UserMaster" action="index"}">ユーザー</a></li>
+									<li><a class="nav-link text-white py-1" href="{url controller="ClientMaster" action="index"}">クライアントマスター</a></li>
+									<li><a class="nav-link text-white py-1" href="{url controller="CategoryMaster" action="index"}">カテゴリマスター</a></li>
+									<li><a class="nav-link text-white py-1" href="{url controller="TargetMaster" action="index"}">ターゲットマスター</a></li>
+									<li><a class="nav-link text-white py-1" href="{url controller="MediaMaster" action="index"}">媒体マスター</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="{url controller="Log" action="index"}">
+								<span class="ml-2"><i class="bi bi-hourglass"></i>操作履歴</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<main id="mainContents" class="col-md-9 ml-sm-auto col-lg-10 px-0 position-relative">
 				<div class="toast-container position-absolute top-0 end-0 p-3"></div>
-            	{block name="title"}{/block}
+				{block name="title"}{/block}
 				<div class="px-md-4 py-4">
 					{block name="body"}{/block}
 				</div>
-            </main>
-        </div>
-    </div>
-    {block name="dialogs"}{javascript_notice}{/block}
+			</main>
+		</div>
+	</div>
+	{block name="dialogs"}{javascript_notice}{/block}
 </body>
 </html>
