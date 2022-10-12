@@ -14,7 +14,7 @@
 }
 #headergrid,#datagrid{
 	display: grid;
-	grid-template-columns: auto 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 80px 80px;
 	grid-auto-rows: auto;
 }
 #headergrid{
@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", function(){
 {block name="body"}
 <form id="search" action="{url}" method="POST" class="container-fluid row justify-content-between">
 	<div class="col-12 col-md-6 col-lg-4">
-		<select class="form-select">
-			<option hidden selected>一括操作選択</option>
-		</select>
 	</div>
 	<div class="col-12 col-md-6 col-lg-4">
 		<input id="filter" class="form-control" placeholder="ユーザー名・メールアドレス" />
@@ -98,20 +95,22 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="pt-5">
 	<div id="mainlist">
 		<div id="headergrid">
-			<div><input type="checkbox" /></div>
 			<div>ユーザー名</div>
 			<div>メールアドレス</div>
 			<div>所属部署名</div>
 			<div>権限グループ</div>
+			<div></div>
+			<div></div>
 		</div>
 		<div id="datagrid">
 		{foreach from=$users item="user" name="loop"}
 			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$user.username}&#0;{$user.email}">
-				<div class="griddata"><input type="checkbox" /></div>
 				<div class="griddata">{$user.username}</div>
 				<div class="griddata">{$user.email}</div>
 				<div class="griddata">{$user.department}</div>
 				<div class="griddata">{role code=$user.role}</div>
+				<div class="griddata"><button type="submit" class="btn btn-info">編集</button></div>
+				<div class="griddata"><span class="btn btn-danger">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

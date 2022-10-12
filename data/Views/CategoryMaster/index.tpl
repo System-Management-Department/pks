@@ -14,7 +14,7 @@
 }
 #headergrid,#datagrid{
 	display: grid;
-	grid-template-columns: auto 1fr 3fr 3fr 3fr;
+	grid-template-columns: 1fr 3fr 3fr 3fr 80px 80px;
 	grid-auto-rows: auto;
 }
 #headergrid{
@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", function(){
 {block name="body"}
 <form id="search" action="{url}" method="POST" class="container-fluid row justify-content-between">
 	<div class="col-12 col-md-6 col-lg-4">
-		<select class="form-select">
-			<option hidden selected>一括操作選択</option>
-		</select>
 	</div>
 	<div class="col-12 col-md-6 col-lg-4">
 		<input id="filter" class="form-control" placeholder="カテゴリコード、カテゴリ名称" />
@@ -98,20 +95,22 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="pt-5">
 	<div id="mainlist">
 		<div id="headergrid">
-			<div><input type="checkbox" /></div>
 			<div>No</div>
 			<div>大分類</div>
 			<div>中分類</div>
 			<div>小分類</div>
+			<div></div>
+			<div></div>
 		</div>
 		<div id="datagrid">
 		{foreach from=$categories item="category" name="loop"}
 			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$category.id}&#0;{$categoryName[$category.large_id].name}&#0;{$categoryName[$category.middle_id].name}&#0;{$category.name}">
-				<div class="griddata"><input type="checkbox" /></div>
 				<div class="griddata">{$category.id}</div>
 				<div class="griddata">{$categoryName[$category.large_id].name}</div>
 				<div class="griddata">{$categoryName[$category.middle_id].name}</div>
 				<div class="griddata">{$category.name}</div>
+				<div class="griddata"><button type="submit" class="btn btn-info">編集</button></div>
+				<div class="griddata"><span class="btn btn-danger">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

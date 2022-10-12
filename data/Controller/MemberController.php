@@ -118,25 +118,29 @@ class MemberController extends ControllerBase{
 		// 顧客
 		$query = $db->select("ASSOC")
 			->addTable("clients")
-			->addField("id,name");
+			->addField("id,name")
+			->andWhere("delete_flag=0");
 		$data["clients"] = $query();
 		
 		// ターゲット
 		$query = $db->select("ASSOC")
 			->addTable("targets")
-			->addField("id,name");
+			->addField("id,name")
+			->andWhere("delete_flag=0");
 		$data["targets"] = $query();
 		
 		// 媒体
 		$query = $db->select("ASSOC")
 			->addTable("medias")
-			->addField("id,name");
+			->addField("id,name")
+			->andWhere("delete_flag=0");
 		$data["medias"] = $query();
 		
 		// カテゴリ
 		$query = $db->select("ASSOC")
 			->addTable("categories")
-			->addField("id,name,large_id,middle_id");
+			->addField("id,name,large_id,middle_id")
+			->andWhere("delete_flag=0");
 		$categories = $query();
 		if($tree){
 			$categoriesL = [];

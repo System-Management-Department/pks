@@ -76,12 +76,14 @@ class ValidationItem{
 	protected $pattern;
 	protected $ranges;
 	protected $length;
+	protected $type;
 	
 	public function __construct(){
 		$this->emptyMessage = null;
 		$this->pattern = null;
 		$this->ranges = [];
 		$this->length = null;
+		$this->type = null;
 	}
 	
 	/**
@@ -146,6 +148,42 @@ class ValidationItem{
 				return;
 			}
 		}
+		if(is_null($this->type)){
+		}else if($this->type["pattern"] == "password"){
+			// 連続する文字のチェック
+			$len = strlen($value);
+			if($len < 2){
+				$result->addMessage($this->type["message"], "ERROR", $name);
+				return;
+			}
+			$alert = true;
+			$prev = ord(substr($value, 1));
+			$step = ord(substr($value, 0)) - $prev;
+			for($pos = 2; $pos < $len; $pos++){
+				$ch = ord(substr($value, $pos));
+				if($prev - $ch == $step){
+					$prev = $ch;
+				}else{
+					$alert = false;
+				}
+			}
+			if($alert){
+				$result->addMessage($this->type["message"], "ERROR", $name);
+				return;
+			}
+		}else{
+			// 形式
+			$isMatch = match($this->type["pattern"]){
+				"mail" => preg_match("/^[a-z0-9._+^~-]+@[a-z0-9.-]+\$/i", $value),
+				"tel" => preg_match("/^0[0-9]{1,4}-[0-9]{1,4}-[0-9]{3,4}\$/", $value),
+				"zip" => preg_match("/^[0-9]{3}-[0-9]{4}\$/", $value),
+				default => false
+			};
+			if(!$isMatch){
+				$result->addMessage($this->type["message"], "ERROR", $name);
+				return;
+			}
+		}
 	}
 	
 	/**
@@ -196,6 +234,50 @@ class ValidationItem{
 			"message" => $message,
 			"min" => $min,
 			"max" => $max,
+		];
+		return $this;
+	}
+	
+	/**
+		メールアドレス
+	*/
+	public function mail($message){
+		$this->type = [
+			"message" => $message,
+			"pattern" => "mail",
+		];
+		return $this;
+	}
+	
+	/**
+		電話番号
+	*/
+	public function tel($message){
+		$this->type = [
+			"message" => $message,
+			"pattern" => "tel",
+		];
+		return $this;
+	}
+	
+	/**
+		郵便番号
+	*/
+	public function zip($message){
+		$this->type = [
+			"message" => $message,
+			"pattern" => "zip",
+		];
+		return $this;
+	}
+	
+	/**
+		パスワード
+	*/
+	public function password($message){
+		$this->type = [
+			"message" => $message,
+			"pattern" => "password",
 		];
 		return $this;
 	}

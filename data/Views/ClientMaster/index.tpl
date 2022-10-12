@@ -14,7 +14,7 @@
 }
 #headergrid,#datagrid{
 	display: grid;
-	grid-template-columns: auto 1fr 3fr 2fr 2fr 3fr 3fr;
+	grid-template-columns: 1fr 3fr 2fr 2fr 3fr 3fr 80px 80px;
 	grid-auto-rows: auto;
 }
 #headergrid{
@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", function(){
 {block name="body"}
 <form id="search" action="{url}" method="POST" class="container-fluid row justify-content-between">
 	<div class="col-12 col-md-6 col-lg-4">
-		<select class="form-select">
-			<option hidden selected>一括操作選択</option>
-		</select>
 	</div>
 	<div class="col-12 col-md-6 col-lg-4">
 		<input id="filter" class="form-control" placeholder="クライアントコード、クライアント名称" />
@@ -98,24 +95,26 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="pt-5">
 	<div id="mainlist">
 		<div id="headergrid">
-			<div><input type="checkbox" /></div>
 			<div>No</div>
 			<div>クライアント名称</div>
 			<div>郵便番号</div>
 			<div>都道府県</div>
 			<div>市区町村・番地</div>
 			<div>建物名・号室</div>
+			<div></div>
+			<div></div>
 		</div>
 		<div id="datagrid">
 		{foreach from=$clients item="client" name="loop"}
 			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$client.id}&#0;{$client.name}">
-				<div class="griddata"><input type="checkbox" /></div>
 				<div class="griddata">{$client.id}</div>
 				<div class="griddata">{$client.name}</div>
 				<div class="griddata">{$client.zip}</div>
 				<div class="griddata">{$client.address1}</div>
 				<div class="griddata">{$client.address2}</div>
 				<div class="griddata">{$client.address2}</div>
+				<div class="griddata"><button type="submit" class="btn btn-info">編集</button></div>
+				<div class="griddata"><span class="btn btn-danger">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

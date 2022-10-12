@@ -4,6 +4,7 @@ use App\ControllerBase;
 use App\View;
 use App\JsonView;
 use App\RedirectResponse;
+use App\Validator;
 use Model\Session;
 
 class TargetMasterController extends ControllerBase{
@@ -12,13 +13,21 @@ class TargetMasterController extends ControllerBase{
 		$v = new View();
 		
 		$query = $db->select("ALL")
-			->addTable("targets");
+			->addTable("targets")
+			->andWhere("delete_flag=0");
 		$v["targets"] = $query();
 		
 		return $v;
 	}
 	public function regist(){
 		$db = Session::getDB();
+		
+		// 検証
+		$check = new Validator();
+		$check["name"]->required("ターゲット名称を入力してください。")
+			->length("ターゲット名称は60文字以下で入力してください。", null, 255);
+		$result = $check($_POST);
+		
 		return new JsonView($result);
 	}
 	public function edit(){
@@ -27,6 +36,13 @@ class TargetMasterController extends ControllerBase{
 	}
 	public function update(){
 		$db = Session::getDB();
+		
+		// 検証
+		$check = new Validator();
+		$check["name"]->required("ターゲット名称を入力してください。")
+			->length("ターゲット名称は60文字以下で入力してください。", null, 255);
+		$result = $check($_POST);
+		
 		return new JsonView($result);
 	}
 	public function delete(){
