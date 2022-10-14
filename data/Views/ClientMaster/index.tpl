@@ -39,15 +39,15 @@
 		</div>
 		<div id="datagrid">
 		{foreach from=$clients item="client" name="loop"}
-			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$client.id}&#0;{$client.name}">
-				<div class="griddata">{$client.id}</div>
-				<div class="griddata">{$client.name}</div>
-				<div class="griddata">{$client.zip}</div>
-				<div class="griddata">{$client.address1}</div>
-				<div class="griddata">{$client.address2}</div>
-				<div class="griddata">{$client.address3}</div>
+			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$client.id|escape:"html"}&#0;{$client.name|escape:"html"}">
+				<div class="griddata">{$client.id|escape:"html"}</div>
+				<div class="griddata">{$client.name|escape:"html"}</div>
+				<div class="griddata">{$client.zip|escape:"html"}</div>
+				<div class="griddata">{$client.address1|escape:"html"}</div>
+				<div class="griddata">{$client.address2|escape:"html"}</div>
+				<div class="griddata">{$client.address3|escape:"html"}</div>
 				<div class="griddata"><a href="{url action="edit" id=$client.id}" class="btn btn-success">編集</a></div>
-				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$client.id}">削除</span></div>
+				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$client.id|escape:"html"}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

@@ -37,13 +37,13 @@
 		</div>
 		<div id="datagrid">
 		{foreach from=$categories item="category" name="loop"}
-			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$category.id}&#0;{$categoryName[$category.large_id].name}&#0;{$categoryName[$category.middle_id].name}&#0;{$category.name}">
-				<div class="griddata">{$category.id}</div>
-				<div class="griddata">{$categoryName[$category.large_id].name}</div>
-				<div class="griddata">{$categoryName[$category.middle_id].name}</div>
-				<div class="griddata">{$category.name}</div>
+			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$category.id|escape:"html"}&#0;{$categoryName[$category.large_id|escape:"html"].name}&#0;{$categoryName[$category.middle_id].name|escape:"html"}&#0;{$category.name|escape:"html"}">
+				<div class="griddata">{$category.id|escape:"html"}</div>
+				<div class="griddata">{$categoryName[$category.large_id].name|escape:"html"}</div>
+				<div class="griddata">{$categoryName[$category.middle_id].name|escape:"html"}</div>
+				<div class="griddata">{$category.name|escape:"html"}</div>
 				<div class="griddata"><a href="{url action="edit" id=$category.id}" class="btn btn-success">編集</a></div>
-				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$category.id}">削除</span></div>
+				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$category.id|escape:"html"}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

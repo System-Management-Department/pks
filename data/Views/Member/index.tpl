@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				<option value="" selected hidden>クライアントを選択</option>
 				<option value=""></option>
 				{foreach from=$clients key="code" item="data"}
-				<option value="{$code}">{$data.name}</option>
+				<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 				{/foreach}
 			</select>
 		</div>
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					<option value="" selected hidden>大項目</option>
 					<option value=""></option>
 					{foreach from=$categoriesL key="code" item="data"}
-						<option value="{$code}">{$data.name}</option>
+						<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 					{/foreach}
 				</select>
 			</div>
@@ -92,11 +92,11 @@ document.addEventListener("DOMContentLoaded", function(){
 				</select>
 				<fieldset disabled hidden>
 					{foreach from=$categoriesM key="parent" item="categories"}
-					<select name="categories[]" class="form-select" data-parent="{$parent}">
+					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
 						<option value="" selected hidden>中項目</option>
 						<option value=""></option>
 						{foreach from=$categories key="code" item="data"}
-							<option value="{$code}">{$data.name}</option>
+							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 						{/foreach}
 					</select>
 					{/foreach}
@@ -109,11 +109,11 @@ document.addEventListener("DOMContentLoaded", function(){
 				</select>
 				<fieldset disabled hidden>
 					{foreach from=$categoriesS key="parent" item="categories"}
-					<select name="categories[]" class="form-select" data-parent="{$parent}">
+					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
 						<option value="" selected hidden>小項目</option>
 						<option value=""></option>
 						{foreach from=$categories key="code" item="data"}
-							<option value="{$code}">{$data.name}</option>
+							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 						{/foreach}
 					</select>
 					{/foreach}
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="col-12">
 		{foreach from=$targets key="code" item="data"}
 		<div class="form-check form-check-inline">
-			<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name}</label>
+			<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
 		</div>
 		{/foreach}
 	</div>
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="col-12">
 		{foreach from=$medias key="code" item="data"}
 		<div class="form-check form-check-inline">
-			<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name}</label>
+			<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
 		</div>
 		{/foreach}
 	</div>

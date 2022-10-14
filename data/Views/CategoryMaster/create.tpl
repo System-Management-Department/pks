@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function(){
 <form action="{url action="regist"}" method="POST" class="container-fluid row" data-master="カテゴリーマスター">
 	<datalist id="d">
 	{foreach from=$categoriesL item="category1"}
-		<option value="{$category1.name}"></option>
+		<option value="{$category1.name|escape:"html"}"></option>
 	{/foreach}
 	</datalist>
 	{foreach from=$categoriesL item="category1"}
-	<datalist id="d{$category1.name}">
+	<datalist id="d{$category1.name|escape:"html"}">
 		{foreach from=$categoriesM[$category1.id] item="category2"}
-		<option value="{$category2.name}"></option>
+		<option value="{$category2.name|escape:"html"}"></option>
 		{/foreach}
 	</datalist>
 	{/foreach}

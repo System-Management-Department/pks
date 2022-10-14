@@ -15,7 +15,7 @@
 	<label class="col-12 form-label">大分類</label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
 		<div class="input-group">
-			<div class="form-select">{$categoryName[$data.large_id].name}</div>
+			<div class="form-select">{$categoryName[$data.large_id].name|escape:"html"}</div>
 			<a href="{url id=$data.large_id}" class="btn btn-success">編集</a>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 	<label class="mt-5 col-12 form-label">中分類</label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
 		<div class="input-group">
-			<div class="form-select">{$categoryName[$data.middle_id].name}</div>
+			<div class="form-select">{$categoryName[$data.middle_id].name|escape:"html"}</div>
 			<a href="{url id=$data.middle_id}" class="btn btn-success">編集</a>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 	
 	<label for="e{counter skip=0}" class="{if !($data.large_id|is_null)}mt-5 {/if}col-12 form-label">{if $data.large_id|is_null}大{elseif $data.middle_id|is_null}中{else}小{/if}分類（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
-		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.name}" />
+		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.name|escape:"html"}" />
 		<div class="invalid-feedback"></div>
 	</div>
 	

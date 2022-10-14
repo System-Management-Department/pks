@@ -195,12 +195,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">説明録画</label>
 	{if $data.videoExists}<div class="col-12">
-		<video autoplay="autoplay" controls="controls" playsinline="playsinline"><source src="/file/video/{$data.id}.webm" type="video/webm" /></video>
+		<video autoplay="autoplay" controls="controls" playsinline="playsinline"><source src="/file/video/{$data.id|escape:"html"}.webm" type="video/webm" /></video>
 	</div>{/if}
 	
 	{if $data.author eq $smarty.session["User.id"]}
 	<form class="col-12 mt-5 text-center" action="{url action="edit"}" method="POST">
-		<button type="submit" name="proposal" value="{$data.id}" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集<div class="flex-grow-1"></div></button>
+		<button type="submit" name="proposal" value="{$data.id|escape:"html"}" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集<div class="flex-grow-1"></div></button>
 	</form>
 	{/if}
 </div>

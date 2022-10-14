@@ -36,13 +36,13 @@
 		</div>
 		<div id="datagrid">
 		{foreach from=$users item="user" name="loop"}
-			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$user.username}&#0;{$user.email}">
-				<div class="griddata">{$user.username}</div>
-				<div class="griddata">{$user.email}</div>
-				<div class="griddata">{$user.department}</div>
+			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$user.username|escape:"html"}&#0;{$user.email|escape:"html"}">
+				<div class="griddata">{$user.username|escape:"html"}</div>
+				<div class="griddata">{$user.email|escape:"html"}</div>
+				<div class="griddata">{$user.department|escape:"html"}</div>
 				<div class="griddata">{role code=$user.role}</div>
 				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<a href="{url action="edit" id=$user.id}" class="btn btn-success">編集</a>{/if}</div>
-				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$user.id}">削除</span>{/if}</div>
+				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$user.id|escape:"html"}">削除</span>{/if}</div>
 			</div>
 		{/foreach}
 		</div>

@@ -128,11 +128,11 @@ document.addEventListener("DOMContentLoaded", function(){
 {block name="body"}
 <form id="searchformdata" action="{url action="listItem"}" method="POST">
 <input type="hidden" name="lastdata" value="" />
-<input type="hidden" name="date" value="{$curdate}" />
+<input type="hidden" name="date" value="{$curdate|escape:"html"}" />
 </form>
 <form id="search" action="{url}" method="POST" class="container-fluid row">
 	<div class="col-12 col-md-6 col-lg-4">
-		<input type="text" name="date" value="{$curdate}" class="form-control bg-white" placeholder="日付を選択してください" />
+		<input type="text" name="date" value="{$curdate|escape:"html"}" class="form-control bg-white" placeholder="日付を選択してください" />
 	</div>
 </form>
 <div class="pt-5">

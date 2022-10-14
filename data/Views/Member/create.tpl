@@ -33,7 +33,7 @@
 					<option value="" selected hidden>クライアントを選択</option>
 					<option value=""></option>
 					{foreach from=$clients key="code" item="client"}
-					<option value="{$code}">{$client.name}</option>
+					<option value="{$code|escape:"html"}">{$client.name|escape:"html"}</option>
 					{/foreach}
 				</select>
 				<div class="invalid-feedback"></div>
@@ -57,7 +57,7 @@
 					<option value="" selected hidden>大項目</option>
 					<option value=""></option>
 					{foreach from=$categoriesL key="code" item="category"}
-						<option value="{$code}">{$category.name}</option>
+						<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
 					{/foreach}
 				</select>
 				<div class="invalid-feedback"></div>
@@ -70,11 +70,11 @@
 					</select>
 					<fieldset disabled hidden>
 						{foreach from=$categoriesM key="parent" item="categories"}
-						<select name="categories[]" class="form-select" data-parent="{$parent}">
+						<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
 							<option value="" selected hidden>中項目</option>
 							<option value=""></option>
 							{foreach from=$categories key="code" item="category"}
-								<option value="{$code}">{$category.name}</option>
+								<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
 							{/foreach}
 						</select>
 						{/foreach}
@@ -90,11 +90,11 @@
 					</select>
 					<fieldset disabled hidden>
 						{foreach from=$categoriesS key="parent" item="categories"}
-						<select name="categories[]" class="form-select" data-parent="{$parent}">
+						<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
 							<option value="" selected hidden>小項目</option>
 							<option value=""></option>
 							{foreach from=$categories key="code" item="category"}
-								<option value="{$code}">{$category.name}</option>
+								<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
 							{/foreach}
 						</select>
 						{/foreach}
@@ -110,7 +110,7 @@
 		<div data-name="targets">
 			{foreach from=$targets key="code" item="target"}
 			<div class="form-check form-check-inline">
-				<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$target.name}</label>
+				<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$target.name|escape:"html"}</label>
 			</div>
 			{/foreach}
 		</div>
@@ -122,7 +122,7 @@
 		<div data-name="medias">
 			{foreach from=$medias key="code" item="media"}
 			<div class="form-check form-check-inline">
-				<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$media.name}</label>
+				<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$media.name|escape:"html"}</label>
 			</div>
 			{/foreach}
 		</div>
