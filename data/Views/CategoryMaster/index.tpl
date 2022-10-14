@@ -7,81 +7,14 @@
 </nav>
 {/block}
 
+{include file="../Shared/_function_master_style.tpl"}
 {block name="styles" append}
-<style type="text/css">{literal}
-#mainlist{
-	overflow-y: auto;
-}
-#headergrid,#datagrid{
-	display: grid;
-	grid-template-columns: 1fr 3fr 3fr 3fr 80px 80px;
-	grid-auto-rows: auto;
-}
-#headergrid{
-	position: sticky;
-	top: 0;
-	background: white;
-	border: 1px solid darkgray;
-}
-#headergrid *{
-	padding: 10px;
-}
-#datagrid{
-	border-left: 1px solid darkgray;
-	border-right: 1px solid darkgray;
-	border-bottom: 1px solid darkgray;
-}
-#datagrid .gridrow{
-	display: none;
-}
-#datagrid .gridrow.odd{
-	--row-color: lightgray;
-}
-#datagrid .gridrow.even{
-	--row-color: white;
-}
-#datagrid .gridrow:hover{
-	--row-color: yellow;
-}
-#datagrid .griddata{
-	background: var(--row-color);
-	padding: 10px;
-}
-#datagrid .griddata:first-child{
-	grid-column: 1;
-}
-{/literal}</style>
+{call name="shared_masterStyle" columns="1fr 3fr 3fr 3fr 80px 80px"}
 {/block}
 
+
 {block name="scripts" append}
-<script type="text/javascript">{literal}
-document.addEventListener("DOMContentLoaded", function(){
-	const additionalStyle = document.getElementById("additionalStyle");
-	const styleSheet = additionalStyle.sheet;
-	let n = styleSheet.cssRules.length;
-	let mainlist = document.getElementById("mainlist");
-	let rect = mainlist.getBoundingClientRect();
-	styleSheet.insertRule(`#mainlist{
-		height: calc(100vh - ${rect.y + window.pageYOffset}px - 1.5rem);
-	}`, n++);
-	
-	let filter = n;
-	styleSheet.insertRule(`#datagrid .gridrow[data-filter]{
-		display: contents;
-	}`, n++);
-	document.getElementById("filter").addEventListener("input", e => {
-		let value = CSS.escape(e.currentTarget.value);
-		let attr = (value == "") ? "data-filter" : `data-filter*="${value}"`;
-		let selector = `#datagrid .gridrow[${attr}]`;
-		styleSheet.cssRules[filter].selectorText = selector;
-		Array.prototype.forEach.call(document.querySelectorAll(selector), (e, i) => {
-			let odd = (i % 2) == 0;
-			e.classList.add(odd ? "odd" : "even");
-			e.classList.remove(odd ? "even" : "odd");
-		});
-	});
-});
-{/literal}</script>
+<script type="text/javascript" src="/assets/common/master-list.js"></script>
 {/block}
 
 {block name="body"}
@@ -109,11 +42,16 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div class="griddata">{$categoryName[$category.large_id].name}</div>
 				<div class="griddata">{$categoryName[$category.middle_id].name}</div>
 				<div class="griddata">{$category.name}</div>
-				<div class="griddata"><button type="submit" class="btn btn-info">編集</button></div>
-				<div class="griddata"><span class="btn btn-danger">削除</span></div>
+				<div class="griddata"><a href="{url action="edit" id=$category.id}" class="btn btn-success">編集</a></div>
+				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$category.id}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>
 	</div>
 </div>
+{/block}
+
+{include file="../Shared/_function_delete_modal.tpl"}
+{block name="dialogs" append}
+{call name="shared_deleteModal" title="カテゴリマスター"}
 {/block}

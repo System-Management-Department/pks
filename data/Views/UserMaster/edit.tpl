@@ -12,39 +12,39 @@
 
 
 {block name="body"}
-<form action="{url action="regist"}" method="POST" class="container-fluid row" data-master="ユーザー">
+<form action="{url action="update" id=$data.id}" method="POST" class="container-fluid row" data-master="ユーザー">
 	<label for="e{counter skip=0}" class="col-12 form-label">ユーザー名（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5">
-		<input type="text" name="username" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input type="text" name="username" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.username}" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メールアドレス（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5">
-		<input type="mail" name="email" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input type="mail" name="email" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.email}" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">パスワード（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5">
-		<input type="text" name="password" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input type="text" name="password" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.password}" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">所属部署名（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5">
-		<input type="text" name="department" id="e{counter skip=1}" class="form-select" placeholder="選択" />
+		<input type="text" name="department" id="e{counter skip=1}" class="form-select" placeholder="選択" value="{$data.department}" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">権限グループ（必須）</label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<select name="role" id="e{counter skip=1}" class="form-select">
-			<option value="" selected hidden>選択</option>
+			<option value="" hidden>選択</option>
 			<option value=""></option>
-			<option value="admin">{role code="admin"}</option>
-			<option value="entry">{role code="entry"}</option>
-			<option value="browse">{role code="browse"}</option>
+			<option value="admin"{if $data.role eq "admin"} selected{/if}>{role code="admin"}</option>
+			<option value="entry"{if $data.role eq "entry"} selected{/if}>{role code="entry"}</option>
+			<option value="browse"{if $data.role eq "browse"} selected{/if}>{role code="browse"}</option>
 		</select>
 		<div class="invalid-feedback"></div>
 	</div>
