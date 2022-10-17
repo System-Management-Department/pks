@@ -48,7 +48,24 @@ session_name("PHPSESSID");
 session_cache_expire(1440);
 session_set_cookie_params(86400, "/");
 session_start();
-$returnValue = $controllerInstance->$action();
+$accept = null;
+$ref = new \ReflectionClass($controllerInstance);
+if($ref->hasMethod($action)){
+	$ref = new \ReflectionMethod($controllerInstance, $action);
+	foreach($ref->getAttributes() as $refAttr){
+		$attr = $refAttr->newInstance();
+		if($attr instanceof \Attribute\AcceptRole){
+			$accept = $attr;
+		}
+	}
+}else{
+	$accept = new \Attribute\AcceptRole("admin", "entry", "browse");
+}
+if(is_null($accept) || $accept->check()){
+	$returnValue = $controllerInstance->$action();
+}else{
+	$returnValue = new \App\RedirectResponse("", "index");
+}
 
 // ビュー
 if($returnValue instanceof \App\IView){

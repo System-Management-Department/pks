@@ -15,6 +15,7 @@
 			</div>
 		</div>
 	</div>
+	{if $smarty.session["User.role"]|in_array:["admin", "entry"]}
 	<div class="col-12 col-md-6 col-lg-5 mt-5 mt-md-0">
 		<div class="card h-100">
 			<div class="card-header"><i class="bi bi-pencil-square"></i>提案資料新規登録</div>
@@ -24,6 +25,8 @@
 			</div>
 		</div>
 	</div>
+	{/if}
+	{if $smarty.session["User.role"] eq "admin"}
 	<div class="col-12 col-md-6 col-lg-5 mt-5">
 		<div class="card h-100">
 			<div class="card-header"><i class="bi bi-gear-wide"></i>マスタ管理</div>
@@ -33,5 +36,6 @@
 			</div>
 		</div>
 	</div>
+	{/if}
 </div>
 {/block}

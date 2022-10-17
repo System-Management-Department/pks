@@ -7,6 +7,7 @@ use Model\Session;
 use Model\Logger;
 
 class ArchiveController extends ControllerBase{
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function proposal(){
 		$db = Session::getDB();
 		$query = $db->select("ROW")
@@ -21,6 +22,8 @@ class ArchiveController extends ControllerBase{
 		$zip->close();
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function download(){
 		if(!array_key_exists("filenames", $_POST)){
 			return null;

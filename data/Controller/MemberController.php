@@ -8,6 +8,7 @@ use Model\Session;
 use Model\Proposal;
 
 class MemberController extends ControllerBase{
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function index(){
 		$db = Session::getDB();
 		$v = new View();
@@ -17,6 +18,8 @@ class MemberController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function listItem(){
 		$db = Session::getDB();
 		$query = Proposal::getSearchQuery($db, $_POST);
@@ -29,6 +32,8 @@ class MemberController extends ControllerBase{
 		$v["lastdata"] = $lastdata;
 		return $v->setLayout(null);
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function browse(){
 		$db = Session::getDB();
 		$query = Proposal::getRowQuery($db);
@@ -49,6 +54,8 @@ class MemberController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry")]
 	public function create(){
 		$db = Session::getDB();
 		$v = new View();
@@ -58,6 +65,8 @@ class MemberController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry")]
 	public function regist(){
 		$db = Session::getDB();
 		$masterData = $this->getMasterData($db, false);
@@ -70,6 +79,8 @@ class MemberController extends ControllerBase{
 		}
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry")]
 	public function edit(){
 		$db = Session::getDB();
 		$query = Proposal::getRowQuery($db);
@@ -94,6 +105,8 @@ class MemberController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry")]
 	public function update(){
 		$db = Session::getDB();
 		$masterData = $this->getMasterData($db, false);
@@ -106,6 +119,8 @@ class MemberController extends ControllerBase{
 		}
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin", "entry")]
 	public function delete(){
 		$db = Session::getDB();
 		$result = Proposal::execDelete($db, $this->requestContext);

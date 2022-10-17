@@ -11,6 +11,7 @@ use Model\Logger;
 use Model\Result;
 
 class CategoryMasterController extends ControllerBase{
+	#[\Attribute\AcceptRole("admin")]
 	public function index(){
 		$db = Session::getDB();
 		$v = new View();
@@ -29,12 +30,16 @@ class CategoryMasterController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function create(){
 		$db = Session::getDB();
 		$v = new View();
 		$v->assign($this->getCategories($db));
 		return $v ;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function regist(){
 		$db = Session::getDB();
 		
@@ -112,6 +117,8 @@ class CategoryMasterController extends ControllerBase{
 		
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function edit(){
 		$db = Session::getDB();
 		$v = new View();
@@ -130,6 +137,8 @@ class CategoryMasterController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function update(){
 		$db = Session::getDB();
 		$id = $this->requestContext->id;
@@ -195,6 +204,8 @@ class CategoryMasterController extends ControllerBase{
 		
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function delete(){
 		$db = Session::getDB();
 		$id = $_POST["id"];
@@ -226,6 +237,7 @@ class CategoryMasterController extends ControllerBase{
 		
 		return new JsonView($result);
 	}
+	
 	private function getCategories($db){
 		$data = [];
 		$query = $db->select("ASSOC")

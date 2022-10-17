@@ -11,6 +11,7 @@ use Model\Logger;
 use Model\Result;
 
 class UserMasterController extends ControllerBase{
+	#[\Attribute\AcceptRole("admin")]
 	public function index(){
 		$db = Session::getDB();
 		$v = new View();
@@ -22,6 +23,8 @@ class UserMasterController extends ControllerBase{
 		
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function regist(){
 		$db = Session::getDB();
 		
@@ -79,6 +82,8 @@ class UserMasterController extends ControllerBase{
 		
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function edit(){
 		$db = Session::getDB();
 		$v = new View();
@@ -90,6 +95,8 @@ class UserMasterController extends ControllerBase{
 		$v["data"] = $query();
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function update(){
 		$db = Session::getDB();
 		$id = $this->requestContext->id;
@@ -152,6 +159,8 @@ class UserMasterController extends ControllerBase{
 		}
 		return new JsonView($result);
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function delete(){
 		$db = Session::getDB();
 		$id = $_POST["id"];

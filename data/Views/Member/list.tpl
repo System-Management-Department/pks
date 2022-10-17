@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				</div>
 				<div id="submitBtnArea" class="row">
 					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
-					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled>編集</button>
+					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} hidden{/if}>編集</button>
 				</div>
 			</div>
 		</div>

@@ -8,6 +8,7 @@ use Model\Session;
 use Model\Logger;
 
 class LogController extends ControllerBase{
+	#[\Attribute\AcceptRole("admin")]
 	public function index(){
 		$curdate = null;
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -24,6 +25,8 @@ class LogController extends ControllerBase{
 		$v["curdate"] = $curdate->format("Y-m-d");
 		return $v;
 	}
+	
+	#[\Attribute\AcceptRole("admin")]
 	public function listItem(){
 		$db = Session::getDB();
 		$query = Logger::getSearchQuery($db, $_POST);

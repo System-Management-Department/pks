@@ -167,11 +167,14 @@ document.addEventListener("DOMContentLoaded", function(){
 								<span class="ml-2"><i class="bi bi-search"></i>過去事例検索画面</span>
 							</a>
 						</li>
+						{if $smarty.session["User.role"]|in_array:["admin", "entry"]}
 						<li class="nav-item">
 							<a class="nav-link text-white" href="{url controller="Member" action="create"}">
 								<span class="ml-2"><i class="bi bi-pencil-square"></i>提案資料新規登録</span>
 							</a>
 						</li>
+						{/if}
+						{if $smarty.session["User.role"] eq "admin"}
 						<li class="nav-item">
 							<span class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="true" aria-current="true"><i class="bi bi-gear-wide"></i>マスタ管理</span>
 							<div class="collapse show" id="components-collapse">
@@ -189,6 +192,7 @@ document.addEventListener("DOMContentLoaded", function(){
 								<span class="ml-2"><i class="bi bi-hourglass"></i>操作履歴</span>
 							</a>
 						</li>
+						{/if}
 					</ul>
 				</div>
 			</nav>
