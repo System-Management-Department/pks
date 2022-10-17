@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					提案書管理システム
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link text-white active" href="{url controller="Member" action="index"}">
+							<a class="nav-link text-white active" href="{url controller="Home" action="index"}">
 								<span class="ml-2"><i class="bi bi-house-door"></i>ホーム</span>
 							</a>
 						</li>

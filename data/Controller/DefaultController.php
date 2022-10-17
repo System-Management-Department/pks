@@ -11,7 +11,7 @@ class DefaultController extends ControllerBase{
 	public function index(){
 		if(Session::isLogin()){
 			// ログインされていればリダイレクト
-			return new RedirectResponse("Member", "index");
+			return new RedirectResponse("Home", "index");
 		}else{
 			// ログインされていなければフォームを表示
 			$v = new View();
