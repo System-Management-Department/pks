@@ -18,7 +18,15 @@ document.addEventListener("DOMContentLoaded", function(){
 		e.stopPropagation();
 		e.preventDefault();
 		let formData = new FormData(form);
+		let expires = new Date();
 		
+		if(document.querySelector('form input[type="checkbox"]:checked') == null){
+			expires.setFullYear(expires.getFullYear() - 1);
+			document.cookie = `session=0;expires=${expires.toUTCString()}`;
+		}else{
+			expires.setFullYear(expires.getFullYear() + 1);
+			document.cookie = `session=1;expires=${expires.toUTCString()}`;
+		}
 		fetch(form.getAttribute("action"), {
 			method: form.getAttribute("method"),
 			body: formData,

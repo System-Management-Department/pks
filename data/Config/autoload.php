@@ -44,9 +44,15 @@ $requestContext->id = $id;
 // アクション
 $controllerClassName = "\\Controller\\{$controller}Controller";
 $controllerInstance = new $controllerClassName($requestContext);
-session_name("PHPSESSID");
-session_cache_expire(1440);
-session_set_cookie_params(86400, "/");
+if(isset($_COOKIE["session"])){
+	session_name("PHPSESSID2");
+	session_cache_expire(525600);
+	session_set_cookie_params(31536000, "/");
+}else{
+	session_name("PHPSESSID");
+	session_cache_expire(1440);
+	session_set_cookie_params(0, "/");
+}
 session_start();
 $accept = null;
 $ref = new \ReflectionClass($controllerInstance);
