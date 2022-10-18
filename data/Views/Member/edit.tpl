@@ -207,7 +207,7 @@
 	</div>
 	
 	<div class="col-12 mt-5 text-center">
-		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>キャンセル<div class="flex-grow-1"></div></button>
+		<a href="{url controller="Home" action="index"}" class="btn btn-secondary rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>キャンセル<div class="flex-grow-1"></div></a>
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集保存<div class="flex-grow-1"></div></button>
 		<button type="button" class="btn btn-danger rounded-pill w-25 d-inline-flex" data-bs-toggle="modal" data-bs-target="#deleteModal"><div class="flex-grow-1"></div>案件削除<div class="flex-grow-1"></div></button>
 	</div>
