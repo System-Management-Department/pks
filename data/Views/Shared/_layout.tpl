@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	}`, n++);
 	
 	styleSheet.insertRule(`#mainContents .toast-container{
+		top: var(--main-top);
 		z-index: 1000;
 	}`, n++);
 });
@@ -197,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				</div>
 			</nav>
 			<main id="mainContents" class="col-md-9 ml-sm-auto col-lg-10 px-0 position-relative">
-				<div class="toast-container position-absolute top-0 end-0 p-3"></div>
+				<div class="toast-container position-fixed end-0 p-3"></div>
 				{block name="title"}{/block}
 				<div class="px-md-4 py-4">
 					{block name="body"}{/block}
