@@ -31,12 +31,13 @@ document.addEventListener("DOMContentLoaded", function(){
 			method: form.getAttribute("method"),
 			body: formData,
 		}).then(res => res.json()).then(json => {
-			alert(json.messages.reduce((a, msg) => {
-				a.push(msg[0]);
-				return a;
-			}, []).join("\n"));
 			if(json.success){
 				location.reload();
+			}else{
+				alert(json.messages.reduce((a, msg) => {
+					a.push(msg[0]);
+					return a;
+				}, []).join("\n"));
 			}
 		});
 	});
