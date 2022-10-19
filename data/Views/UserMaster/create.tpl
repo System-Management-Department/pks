@@ -13,31 +13,31 @@
 
 {block name="body"}
 <form action="{url action="regist"}" method="POST" class="container-fluid row" data-master="ユーザー">
-	<label for="e{counter skip=0}" class="col-12 form-label">ユーザー名（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 form-label">ユーザー名<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<input type="text" name="username" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メールアドレス（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メールアドレス<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<input type="mail" name="email" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">パスワード（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">パスワード<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<input type="text" name="password" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">所属部署名（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">所属部署名<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<input type="text" name="department" id="e{counter skip=1}" class="form-select" placeholder="選択" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">権限グループ（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">権限グループ<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<select name="role" id="e{counter skip=1}" class="form-select">
 			<option value="" selected hidden>選択</option>

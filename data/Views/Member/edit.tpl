@@ -19,7 +19,7 @@
 
 {block name="body"}
 <form action="{url action="update" id=$data.id}" method="POST" class="container-fluid row">
-	<label for="e{counter skip=0}" class="col-12 form-label">提案年月日（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 form-label">提案年月日<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
 		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" value="{$data.modified_date|escape:"html"}" />
 		<div class="invalid-feedback"></div>
@@ -27,7 +27,7 @@
 	
 	<div class="mt-5 row">
 		<div class="col-12 col-md-6 col-lg-5">
-			<label for="e{counter skip=0}" class="col-12">クライアント名（必須）</label>
+			<label for="e{counter skip=0}" class="col-12">クライアント名<span class="badge bg-danger">必須</span></label>
 			<div>
 				<select name="client" id="e{counter skip=1}" class="form-select">
 					<option value="" hidden>クライアントを選択</option>
@@ -41,7 +41,7 @@
 		</div>
 		
 		<div class="col-12 col-md-6 col-lg-5 mt-5 mt-md-0">
-			<label for="e{counter skip=0}" class="col-12">商材名（必須）</label>
+			<label for="e{counter skip=0}" class="col-12">商材名<span class="badge bg-danger">必須</span></label>
 			<div>
 				<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.product_name|escape:"html"}" />
 				<div class="invalid-feedback"></div>
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアント　カテゴリー（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアント　カテゴリー<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-lg-10">
 		<div class="row">
 			<div class="col-12 col-md-4" data-categories="l">
@@ -105,7 +105,7 @@
 		</div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">ターゲット（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">ターゲット<span class="badge bg-danger">必須</span></label>
 	<div class="col-12">
 		<div data-name="targets">
 			{foreach from=$targets key="code" item="target"}
@@ -117,7 +117,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">媒体（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">媒体<span class="badge bg-danger">必須</span></label>
 	<div class="col-12">
 		<div data-name="medias">
 			{foreach from=$medias key="code" item="media"}
@@ -129,7 +129,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label class="col-12 mt-5 form-label">関係者スタッフ名（任意）</label>
+	<label class="col-12 mt-5 form-label">関係者スタッフ名<span class="badge bg-secondary">任意</span></label>
 	<div class="row">
 		<div class="col-12 col-md-6 col-lg-5">
 			<label for="e{counter skip=0}" class="col-12">営業担当者名</label>
@@ -160,14 +160,14 @@
 		</div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">提案内容／ポイント（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">提案内容／ポイント<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-lg-10">
 		<textarea name="content" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください">{$data.content|escape:"html"}</textarea>
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード （必須）（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード <span class="badge bg-danger">必須</span>（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	<div>
 		<div class="row" data-name="keyword">
 			{for $foo=0 to 5}
@@ -177,7 +177,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PDF）（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PDF）<span class="badge bg-danger">必須</span></label>
 	<div class="col-12">
 		<div class="d-flex flex-wrap gap-3" id="pdf">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
@@ -185,7 +185,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
 	<div class="col-12">
 		<div class="d-flex flex-wrap gap-3" id="vnd">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
@@ -200,7 +200,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">説明録画（任意）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">説明録画<span class="badge bg-secondary">任意</span></label>
 	<div class="col-12">
 		<button type="button" class="btn btn-outline-danger btn-rec"><i class="bi bi-camera-video-fill"></i>Rec</button>
 		<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>

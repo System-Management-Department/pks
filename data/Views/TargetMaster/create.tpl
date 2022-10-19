@@ -13,7 +13,7 @@
 
 {block name="body"}
 <form action="{url action="regist"}" method="POST" class="container-fluid row" data-master="ターゲットマスター">
-	<label for="e{counter skip=0}" class="col-12 form-label">ターゲット名称（必須）</label>
+	<label for="e{counter skip=0}" class="col-12 form-label">ターゲット名称<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
 		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
 		<div class="invalid-feedback"></div>
