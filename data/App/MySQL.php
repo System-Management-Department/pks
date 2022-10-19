@@ -2,6 +2,7 @@
 namespace App;
 use mysqli;
 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 class MySQL{
 	private $mysqli;
 	public function __construct($role = "default"){
@@ -24,6 +25,23 @@ class MySQL{
 	}
 	public function delete($table){
 		return new MySQLDeleteQuery($this->mysqli, $table);
+	}
+	public function getJsonTableColumns($table, ...$fields){
+		$result = $this->mysqli->query("SHOW FULL COLUMNS FROM `{$table}`");
+		$res = [];
+		$i = 0;
+		while($column = $result->fetch_array(MYSQLI_ASSOC)){
+			if(!empty($fields) && !in_array($column["Field"], $fields)){
+				continue;
+			}
+			if(is_null($column["Collation"])){
+				$res[] = "`{$column["Field"]}` {$column["Type"]} PATH '\$[{$i}]'";
+			}else{
+				$res[] = "`{$column["Field"]}` {$column["Type"]} COLLATE {$column["Collation"]} PATH '\$[{$i}]'";
+			}
+			$i++;
+		}
+		return "COLUMNS(" . implode(",", $res) . ")";
 	}
 	
 	public function beginTransaction(){
@@ -362,7 +380,7 @@ class MySQLInsertSelectQuery extends MySQLSelectQuery{
 	}
 	
 	public function __invoke(&$id = null){
-		$query = sprintf("INSERT INTO `%s`(%s) ", $this->table, $this->columns);
+		$query = ($this->columns == "*") ? sprintf("INSERT INTO `%s` ", $this->table) : sprintf("INSERT INTO `%s`(%s) ", $this->table, $this->columns);
 		$q = $this->buildQuery();
 		$stmt = $this->mysqli->prepare($query . $q["prepare"]);
 		$bindVars = [&$types];
