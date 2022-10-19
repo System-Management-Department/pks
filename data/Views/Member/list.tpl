@@ -6,9 +6,17 @@
 
 {block name="styles" append}
 <style type="text/css">{literal}
-#mainlist, #previewContainer{
+#mainlist{
 	overflow: auto;
 	height: 100%;
+}
+#previewContainer{
+	overflow: auto;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	font-size: 0.7em;
+	line-height: 1em;
 }
 #mainlist [data-loading]{
 	transition: opacity 0.2s;
@@ -43,6 +51,7 @@
 }
 #previewarea{
 	height: calc(100% - 3rem);
+	flex-shrink: 1;
 }
 #previewarea iframe{
 	height: 100%;
@@ -146,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function(){
 							radio.setAttribute("type", "radio");
 							radio.setAttribute("name", "page");
 							radio.setAttribute("value", file.getAttribute("href"));
+							radio.setAttribute("class", "btn btn-sm btn-light");
 							files.appendChild(radio);
 						}
 						document.querySelector('[data-name="files"] input[name="page"]').checked = true;
@@ -214,14 +224,14 @@ document.addEventListener("DOMContentLoaded", function(){
 		クライアント名：
 	</div>
 	<div class="col-12 col-md-6 col-lg-5">
-		<div class="form-control" data-name="client"><br /></div>
+		<div data-name="client"><br /></div>
 	</div>
 	<div></div>
 	<div class="col-12 col-md-6 col-lg-2">
 		商材名：
 	</div>
 	<div class="col-12 col-md-6 col-lg-5">
-		<div class="form-control" data-name="product_name"><br /></div>
+		<div data-name="product_name"><br /></div>
 	</div>
 	<div class="col-12">
 		<div id="mainContainer" class="row">
@@ -233,28 +243,28 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div class="row">
 					<div class="col-12">
 						<div id="pager">
-							<button type="button" class="btn btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
+							<button type="button" class="btn btn-sm btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
 							<div class="d-contents" data-name="files">
-								<input type="radio" name="page" checked />
+								<input type="radio" class="btn btn-sm btn-light" name="page" checked />
 							</div>
-							<button type="button" class="btn btn-info bi bi-arrow-right-short" data-name="page-next"></button>
+							<button type="button" class="btn btn-sm btn-info bi bi-arrow-right-short" data-name="page-next"></button>
 						</div>
 					</div>
 					<label class="col-12 form-label mt-4">提案年月日</label>
 					<div class="col-12">
-						<div class="form-control" data-name="modified_date"><br /></div>
+						<div data-name="modified_date"><br /></div>
 					</div>
 					<label class="col-12 form-label mt-4">ターゲット</label>
 					<div class="col-12">
-						<div class="form-control" data-name="targets"><br /></div>
+						<div data-name="targets"><br /></div>
 					</div>
 					<label class="col-12 form-label mt-4">媒体</label>
 					<div class="col-12">
-						<div class="form-control" data-name="medias"><br /></div>
+						<div data-name="medias"><br /></div>
 					</div>
 					<label class="col-12 form-label mt-4">タグ検索キーワード</label>
 					<div class="col-12 mb-2">
-						<div class="form-control" data-name="keyword"><br /></div>
+						<div data-name="keyword"><br /></div>
 					</div>
 				</div>
 				<div id="submitBtnArea" class="row">
