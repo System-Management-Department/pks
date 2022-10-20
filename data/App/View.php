@@ -65,46 +65,46 @@ class View implements ArrayAccess, Iterator, IView{
 		\reset($this->container);
 	}
 	
-    #[\ReturnTypeWillChange]
-    public function current(){
-        return \current($this->container);
-    }
-    
-    #[\ReturnTypeWillChange]
-    public function key(){
-        return \key($this->container);
-    }
-    
-    #[\ReturnTypeWillChange]
+	#[\ReturnTypeWillChange]
+	public function current(){
+		return \current($this->container);
+	}
+	
+	#[\ReturnTypeWillChange]
+	public function key(){
+		return \key($this->container);
+	}
+	
+	#[\ReturnTypeWillChange]
 	public function next(){
 		 \next($this->container);
 	}
-    
-    #[\ReturnTypeWillChange]
+	
+	#[\ReturnTypeWillChange]
 	public function valid(){
 		$key = \key($this->container);
 		return !is_null($key);
 	}
-    
-    public function assign($assoc){
-    	foreach($assoc as $k => $v){
-    		$this->container[$k] = $v;
-    	}
-    }
-    
-    public function setController($controller){
-    	$this->controller = $controller;
-    	return $this;
-    }
-    
-    public function setAction($action){
-    	$this->action = $action;
-    	return $this;
-    }
-    
-    public function setLayout($layout){
-    	$this->layout = $layout;
-    	return $this;
-    }
-    
+	
+	public function assign($assoc){
+		foreach($assoc as $k => $v){
+			$this->container[$k] = $v;
+		}
+	}
+	
+	public function setController($controller){
+		$this->controller = $controller;
+		return $this;
+	}
+	
+	public function setAction($action){
+		$this->action = $action;
+		return $this;
+	}
+	
+	public function setLayout($layout){
+		$this->layout = $layout;
+		return $this;
+	}
+	
 }

@@ -18,6 +18,10 @@
 	font-size: 0.7em;
 	line-height: 1em;
 }
+#previewContainer .row{
+	flex-shrink: 1;
+	overflow: auto;
+}
 #mainlist [data-loading]{
 	transition: opacity 0.2s;
 }
@@ -50,14 +54,14 @@
 	display: none;
 }
 #previewarea{
-	height: calc(100% - 3rem);
-	flex-shrink: 1;
+	height: calc(70% + 3rem);
 }
 #previewarea iframe{
 	height: 100%;
 	width: 100%;
 }
-#submitBtnArea{
+#previewContainer #submitBtnArea{
+	flex-shrink: 0;
 	justify-content: space-around;
 }
 #submitBtnArea .btn{
@@ -240,16 +244,16 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div id="previewarea">
 				プレビュー
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<div id="pager">
-							<button type="button" class="btn btn-sm btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
-							<div class="d-contents" data-name="files">
-								<input type="radio" class="btn btn-sm btn-light" name="page" checked />
-							</div>
-							<button type="button" class="btn btn-sm btn-info bi bi-arrow-right-short" data-name="page-next"></button>
+				<div>
+					<div id="pager">
+						<button type="button" class="btn btn-sm btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
+						<div class="d-contents" data-name="files">
+							<input type="radio" class="btn btn-sm btn-light" name="page" checked />
 						</div>
+						<button type="button" class="btn btn-sm btn-info bi bi-arrow-right-short" data-name="page-next"></button>
 					</div>
+				</div>
+				<div class="row mx-0">
 					<label class="col-12 form-label mt-4">提案年月日</label>
 					<div class="col-12">
 						<div data-name="modified_date"><br /></div>

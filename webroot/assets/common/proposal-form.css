@@ -13,7 +13,7 @@
 	object-fit: contain;
 	margin: 3px;
 	border: 1px solid black;
-    background-color: gray;
+	background-color: gray;
 	filter: brightness(0.8);
 }
 #pdf [name="pdf"]{
