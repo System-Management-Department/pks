@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function(){
 <main class="text-center pt-5">
 	<h1>提案書管理システム</h1>
 	
-	<form action="{url action="login"}" method="POST" class="text-start card mt-5 mx-auto">
-		<div class="card-body row">
+	<div class="text-start card mt-5 mx-auto">
+		<form action="{url action="login"}" method="POST" class="card-body row pb-0">
 			<label class="col-12">ユーザー名またはメールアドレス</label>
 			<div class="col-12"><input name="email" type="text" class="form-control" /></div>
 			
@@ -59,8 +59,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			
 			<label class="text-center col-12 mt-3"><input type="checkbox">ログイン状態を保持する</label>
 			<div class="text-center col-12 mt-3 mb-3"><button type="submit" class="btn btn-success">ログイン</button></div>
-			<div class="text-center col-12">パスワードを忘れた方はこちら</div>
-		</div>
-	</form>
+		</form>
+		<form action="mailto:admin@direct-holdings.co.jp" method="GET" target="_blank" class="card-body row pt-0">
+			<input type="hidden" name="subject" value="ここにタイトルを入力" />
+			<input type="hidden" name="body" value="ここに本文を入力" />
+			<div class="col-12 text-center">
+				<button type="submit" class="btn">パスワードを忘れた方はこちら</button>
+			</div>
+		</form>
+	</div>
 </main>
 {/block}
