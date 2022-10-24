@@ -6,7 +6,13 @@
 <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/assets/bootstrap/font/bootstrap-icons.css" />
 <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/solid.min.css" />
-<style id="additionalStyle"></style>
+<style id="additionalStyle">
+	#sidebar .bi::before,.card-header .bi::before{
+		width: 26px;
+		font-size: 18px;
+	}
+	
+</style>
 {/block}
 {block name="scripts"}
 <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -149,14 +155,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			<i class="bi bi-list"></i>
 		</div>
 		<div class="d-flex col-9 col-lg-10 align-items-center justify-content-end px-3">
-			<a href="{url controller="Default" action="logout"}" class="text-white">Logout<i class="bi bi-box-arrow-right"></i></a>
+			<a href="{url controller="Default" action="logout"}" class="text-white">Logout&ensp;<i class="bi bi-box-arrow-right"></i></a>
 		</div>
 	</nav>
 	<div class="container-fluid">
 		<div id="mainRow" class="row">
 			<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
 				<div class="position-sticky top-0">
-					提案書管理システム
+					<div class="py-2">提案書管理システム</div>
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class="nav-link text-white active" href="{url controller="Home" action="index"}">

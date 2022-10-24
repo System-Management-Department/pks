@@ -60,10 +60,10 @@
 }
 
 .link-dark {
-  color: #212529;
+  color: #3b4043;
 }
 .link-dark:hover, .link-dark:focus {
-  color: #1a1e21;
+  color: #2f3336;
 }
 
 .ratio {
@@ -449,7 +449,7 @@
 }
 
 .border-dark {
-  border-color: #212529 !important;
+  border-color: #3b4043 !important;
 }
 
 .border-white {
@@ -1135,7 +1135,7 @@
 }
 
 .fs-2 {
-  font-size: calc(1.325rem + 0.9vw) !important;
+  font-size: 1.2rem !important;
 }
 
 .fs-3 {
@@ -1278,7 +1278,7 @@
 }
 
 .text-dark {
-  color: #212529 !important;
+  color: #3b4043 !important;
 }
 
 .text-white {
@@ -1334,7 +1334,7 @@
 }
 
 .bg-dark {
-  background-color: #212529 !important;
+  background-color: #3b4043 !important;
 }
 
 .bg-body {
@@ -4693,10 +4693,6 @@
 @media (min-width: 1200px) {
   .fs-1 {
     font-size: 2.5rem !important;
-  }
-
-  .fs-2 {
-    font-size: 2rem !important;
   }
 
   .fs-3 {
