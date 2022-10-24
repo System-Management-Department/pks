@@ -25,10 +25,10 @@
 }
 
 .link-success {
-  color: #198754;
+  color: #009ea7;
 }
 .link-success:hover, .link-success:focus {
-  color: #146c43;
+  color: #007e86;
 }
 
 .link-info {
@@ -429,7 +429,7 @@
 }
 
 .border-success {
-  border-color: #198754 !important;
+  border-color: #009ea7 !important;
 }
 
 .border-info {
@@ -1258,7 +1258,7 @@
 }
 
 .text-success {
-  color: #198754 !important;
+  color: #009ea7 !important;
 }
 
 .text-info {
@@ -1286,7 +1286,7 @@
 }
 
 .text-body {
-  color: #212529 !important;
+  color: #707f89 !important;
 }
 
 .text-muted {
@@ -1314,7 +1314,7 @@
 }
 
 .bg-success {
-  background-color: #198754 !important;
+  background-color: #009ea7 !important;
 }
 
 .bg-info {

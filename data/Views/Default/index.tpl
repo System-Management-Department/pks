@@ -5,12 +5,13 @@ body{
 	background: var(--bs-light, white);
 }
 .card{
-	width: 420px;
+	width: 320px;
 }
 {/literal}</style>
 {/block}
 
 {block name="scripts" append}
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">{literal}
 document.addEventListener("DOMContentLoaded", function(){
 	const form = document.querySelector('form');
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			}
 		});
 	});
+	new bootstrap.Tooltip(document.querySelector('[data-bs-toggle="tooltip"]'));
 });
 {/literal}</script>
 {/block}
@@ -49,22 +51,27 @@ document.addEventListener("DOMContentLoaded", function(){
 <main class="text-center pt-5">
 	<h1>提案書管理システム</h1>
 	
-	<div class="text-start card mt-5 mx-auto">
+	<div class="text-start card mt-5 mx-auto py-3 px-3">
 		<form action="{url action="login"}" method="POST" class="card-body row pb-0">
-			<label class="col-12">ユーザー名またはメールアドレス</label>
+			<label class="col-12">メールアドレス</label>
 			<div class="col-12"><input name="email" type="text" class="form-control" /></div>
 			
 			<label class="col-12 mt-3">パスワード</label>
 			<div class="col-12"><input name="password" type="text" class="form-control" /></div>
 			
-			<label class="text-center col-12 mt-3"><input type="checkbox">ログイン状態を保持する</label>
-			<div class="text-center col-12 mt-3 mb-3"><button type="submit" class="btn btn-success">ログイン</button></div>
+			<div class="col-12 mt-3 text-center">
+				<div class="form-check d-inline-block">
+					<input class="form-check-input" type="checkbox" id="checkbox">
+					<label class="form-check-label" for="checkbox">ログイン状態を保持する</label>
+				</div>
+			</div>
+			<div class="text-center col-12 my-3"><button type="submit" class="btn btn-success">ログイン</button></div>
 		</form>
 		<form action="mailto:admin@direct-holdings.co.jp" method="GET" target="_blank" class="card-body row pt-0">
 			<input type="hidden" name="subject" value="ここにタイトルを入力" />
 			<input type="hidden" name="body" value="ここに本文を入力" />
 			<div class="col-12 text-center">
-				<button type="submit" class="btn">パスワードを忘れた方はこちら</button>
+				<button type="submit" class="btn text-decoration-underline" title="こちらをクリックすると、管理者にメールが送信されます。" data-bs-toggle="tooltip" data-bs-placement="top">パスワードを忘れた方はこちら</button>
 			</div>
 		</form>
 	</div>

@@ -69,7 +69,7 @@ $colors: (
 // scss-docs-start theme-color-variables
 $primary:       $blue !default;
 $secondary:     $gray-600 !default;
-$success:       $green !default;
+$success:       #009ea7 !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
@@ -277,7 +277,7 @@ $position-values: (
 // Settings for the `<body>` element.
 
 $body-bg:                   $white !default;
-$body-color:                $gray-900 !default;
+$body-color:                #707f89 !default;
 $body-text-align:           null !default;
 
 
