@@ -50,127 +50,126 @@ document.addEventListener("DOMContentLoaded", function(){
 
 {block name="body"}
 <form action="{url action="list"}" method="POST" class="container-fluid row">
-	<label for="e{counter skip=0}" class="col-12 form-label">提案年月日</label>
 	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}" class="form-label">提案年月日</label>
 		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" />
 	</div>
 	
-	<div class="mt-5 row">
-		<div class="col-12 col-md-6 col-lg-5">
-			<label for="e{counter skip=0}" class="col-12">クライアント名</label>
-			<select name="client" id="e{counter skip=1}" class="form-select">
-				<option value="" selected hidden>クライアントを選択</option>
-				<option value=""></option>
-				{foreach from=$clients key="code" item="data"}
+	<div class="mt-4"></div>
+	
+	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}" class="col-12">クライアント名</label>
+		<select name="client" id="e{counter skip=1}" class="form-select">
+			<option value="" selected hidden>クライアントを選択</option>
+			<option value=""></option>
+			{foreach from=$clients key="code" item="data"}
+			<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+			{/foreach}
+		</select>
+	</div>
+	
+	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
+		<label for="e{counter skip=0}" class="col-12">商材名</label>
+		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+	</div>
+	
+	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">クライアント　カテゴリー</label>
+
+	<div class="col-12 col-md-4" data-categories="l">
+		<select name="categories[]" class="form-select" id="e{counter skip=1}">
+			<option value="" selected hidden>大項目</option>
+			<option value=""></option>
+			{foreach from=$categoriesL key="code" item="data"}
 				<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+			{/foreach}
+		</select>
+	</div>
+	<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="m">
+		<select name="categories[]" class="form-select" data-parent="">
+			<option value="" selected hidden>中項目</option>
+			<option value=""></option>
+		</select>
+		<fieldset disabled hidden>
+			{foreach from=$categoriesM key="parent" item="categories"}
+			<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+				<option value="" selected hidden>中項目</option>
+				<option value=""></option>
+				{foreach from=$categories key="code" item="data"}
+					<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 				{/foreach}
 			</select>
-		</div>
-		
-		<div class="col-12 col-md-6 col-lg-5 mt-5 mt-md-0">
-			<label for="e{counter skip=0}" class="col-12">商材名</label>
-			<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-		</div>
+			{/foreach}
+		</fieldset>
+	</div>
+	<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="s">
+		<select name="categories[]" class="form-select" data-parent="">
+			<option value="" selected hidden>小項目</option>
+			<option value=""></option>
+		</select>
+		<fieldset disabled hidden>
+			{foreach from=$categoriesS key="parent" item="categories"}
+			<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+				<option value="" selected hidden>小項目</option>
+				<option value=""></option>
+				{foreach from=$categories key="code" item="data"}
+					<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+				{/foreach}
+			</select>
+			{/foreach}
+		</fieldset>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアント　カテゴリー</label>
-	<div class="col-12 col-lg-10">
-		<div class="row">
-			<div class="col-12 col-md-4" data-categories="l">
-				<select name="categories[]" class="form-select" id="e{counter skip=1}">
-					<option value="" selected hidden>大項目</option>
-					<option value=""></option>
-					{foreach from=$categoriesL key="code" item="data"}
-						<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-					{/foreach}
-				</select>
+	<div class="col-12 mt-4">
+		<label class="form-label">ターゲット</label>
+		<div>
+			{foreach from=$targets key="code" item="data"}
+			<div class="form-check form-check-inline">
+				<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
 			</div>
-			<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="m">
-				<select name="categories[]" class="form-select" data-parent="">
-					<option value="" selected hidden>中項目</option>
-					<option value=""></option>
-				</select>
-				<fieldset disabled hidden>
-					{foreach from=$categoriesM key="parent" item="categories"}
-					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-						<option value="" selected hidden>中項目</option>
-						<option value=""></option>
-						{foreach from=$categories key="code" item="data"}
-							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-						{/foreach}
-					</select>
-					{/foreach}
-				</fieldset>
+			{/foreach}
+		</div>
+	</div>
+	
+	<div class="col-12 mt-4">
+		<label class="form-label">媒体</label>
+		<div>
+			{foreach from=$medias key="code" item="data"}
+			<div class="form-check form-check-inline">
+				<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
 			</div>
-			<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="s">
-				<select name="categories[]" class="form-select" data-parent="">
-					<option value="" selected hidden>小項目</option>
-					<option value=""></option>
-				</select>
-				<fieldset disabled hidden>
-					{foreach from=$categoriesS key="parent" item="categories"}
-					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-						<option value="" selected hidden>小項目</option>
-						<option value=""></option>
-						{foreach from=$categories key="code" item="data"}
-							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-						{/foreach}
-					</select>
-					{/foreach}
-				</fieldset>
-			</div>
+			{/foreach}
 		</div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">ターゲット</label>
-	<div class="col-12">
-		{foreach from=$targets key="code" item="data"}
-		<div class="form-check form-check-inline">
-			<input type="checkbox" name="targets[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
-		</div>
-		{/foreach}
+	<label class="col-12 mt-4 form-label">関係者スタッフ名</label>
+	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}">営業担当者名</label>
+		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
+		<label for="e{counter skip=0}">プランナー</label>
+		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3">
+		<label for="e{counter skip=0}">コピーライター</label>
+		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3">
+		<label for="e{counter skip=0}">デザイナー</label>
+		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">媒体</label>
-	<div class="col-12">
-		{foreach from=$medias key="code" item="data"}
-		<div class="form-check form-check-inline">
-			<input type="checkbox" name="medias[]" id="e{counter skip=0}" value="{$code|escape:"html"}" class="form-check-input" /><label for="e{counter skip=1}" class="form-check-label">{$data.name|escape:"html"}</label>
-		</div>
-		{/foreach}
+	<div class="col-12 col-lg-10 mt-4">
+		<label for="e{counter skip=0}" class="form-label">提案内容／ポイント</label>
+		<textarea name="content" id="e{counter skip=1}" class="form-control" rows="3" placeholder="入力してください"></textarea>
 	</div>
 	
-	<label class="col-12 mt-5 form-label">関係者スタッフ名</label>
-	<div class="row">
-		<div class="col-12 col-md-6 col-lg-5">
-			<label for="e{counter skip=0}" class="col-12">営業担当者名</label>
-			<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-			
-			<label for="e{counter skip=0}" class="col-12 mt-3">コピーライター</label>
-			<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-		</div>
-		
-		<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
-			<label for="e{counter skip=0}" class="col-12">プランナー</label>
-			<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-			
-			<label for="e{counter skip=0}" class="col-12 mt-3">デザイナー</label>
-			<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-		</div>
-	</div>
-	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">提案内容／ポイント</label>
-	<div class="col-12 col-lg-10">
-		<input name="content" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-	</div>
-	
-	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	{for $foo=1 to 6}
 	<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" /></div>
 	{/for}
 	
 	<input type="hidden" name="lastdata" value="" />
-	<div class="col-12 mt-5 text-center"><button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>検<div class="flex-grow-1"></div>索<div class="flex-grow-1"></div></button></div>
+	<div class="col-12 mt-4 text-center"><button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>検<div class="flex-grow-1"></div>索<div class="flex-grow-1"></div></button></div>
 </form>
 {/block}

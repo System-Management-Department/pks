@@ -19,94 +19,87 @@
 
 {block name="body"}
 <form action="{url action="regist"}" method="POST" class="container-fluid row">
-	<label for="e{counter skip=0}" class="col-12 form-label">提案年月日<span class="badge bg-danger">必須</span></label>
-	<div class="col-12 col-md-6 col-lg-5 mb-1">
+	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}" class="form-label">提案年月日<span class="badge bg-danger">必須</span></label>
 		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<div class="mt-5 row">
-		<div class="col-12 col-md-6 col-lg-5">
-			<label for="e{counter skip=0}" class="col-12">クライアント名<span class="badge bg-danger">必須</span></label>
-			<div>
-				<select name="client" id="e{counter skip=1}" class="form-select">
-					<option value="" selected hidden>クライアントを選択</option>
-					<option value=""></option>
-					{foreach from=$clients key="code" item="client"}
-					<option value="{$code|escape:"html"}">{$client.name|escape:"html"}</option>
-					{/foreach}
-				</select>
-				<div class="invalid-feedback"></div>
-			</div>
-		</div>
-		
-		<div class="col-12 col-md-6 col-lg-5 mt-5 mt-md-0">
-			<label for="e{counter skip=0}" class="col-12">商材名<span class="badge bg-danger">必須</span></label>
-			<div>
-				<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-				<div class="invalid-feedback"></div>
-			</div>
-		</div>
+	<div class="mt-4"></div>
+	
+	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}" class="form-label">クライアント名<span class="badge bg-danger">必須</span></label>
+		<select name="client" id="e{counter skip=1}" class="form-select">
+			<option value="" selected hidden>クライアントを選択</option>
+			<option value=""></option>
+			{foreach from=$clients key="code" item="client"}
+			<option value="{$code|escape:"html"}">{$client.name|escape:"html"}</option>
+			{/foreach}
+		</select>
+		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">クライアント　カテゴリー<span class="badge bg-danger">必須</span></label>
-	<div class="col-12 col-lg-10">
-		<div class="row">
-			<div class="col-12 col-md-4" data-categories="l">
-				<select name="categories[]" class="form-select" id="e{counter skip=1}">
-					<option value="" selected hidden>大項目</option>
+	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
+		<label for="e{counter skip=0}" class="form-label">商材名<span class="badge bg-danger">必須</span></label>
+		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<div class="invalid-feedback"></div>
+	</div>
+	
+	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">クライアント　カテゴリー<span class="badge bg-danger">必須</span></label>
+
+	<div class="col-12 col-md-4" data-categories="l">
+		<select name="categories[]" class="form-select" id="e{counter skip=1}">
+			<option value="" selected hidden>大項目</option>
+			<option value=""></option>
+			{foreach from=$categoriesL key="code" item="category"}
+				<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
+			{/foreach}
+		</select>
+		<div class="invalid-feedback"></div>
+	</div>
+	<div class="col-12 col-md-4 mt-1 mt-md-0">
+		<div data-categories="m">
+			<select name="categories[]" class="form-select" data-parent="">
+				<option value="" selected hidden>中項目</option>
+				<option value=""></option>
+			</select>
+			<fieldset disabled hidden>
+				{foreach from=$categoriesM key="parent" item="categories"}
+				<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+					<option value="" selected hidden>中項目</option>
 					<option value=""></option>
-					{foreach from=$categoriesL key="code" item="category"}
+					{foreach from=$categories key="code" item="category"}
 						<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
 					{/foreach}
 				</select>
-				<div class="invalid-feedback"></div>
-			</div>
-			<div class="col-12 col-md-4 mt-1 mt-md-0">
-				<div data-categories="m">
-					<select name="categories[]" class="form-select" data-parent="">
-						<option value="" selected hidden>中項目</option>
-						<option value=""></option>
-					</select>
-					<fieldset disabled hidden>
-						{foreach from=$categoriesM key="parent" item="categories"}
-						<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-							<option value="" selected hidden>中項目</option>
-							<option value=""></option>
-							{foreach from=$categories key="code" item="category"}
-								<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
-							{/foreach}
-						</select>
-						{/foreach}
-					</fieldset>
-				</div>
-				<div class="invalid-feedback"></div>
-			</div>
-			<div class="col-12 col-md-4 mt-1 mt-md-0">
-				<div data-categories="s">
-					<select name="categories[]" class="form-select" data-parent="">
-						<option value="" selected hidden>小項目</option>
-						<option value=""></option>
-					</select>
-					<fieldset disabled hidden>
-						{foreach from=$categoriesS key="parent" item="categories"}
-						<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-							<option value="" selected hidden>小項目</option>
-							<option value=""></option>
-							{foreach from=$categories key="code" item="category"}
-								<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
-							{/foreach}
-						</select>
-						{/foreach}
-					</fieldset>
-				</div>
-				<div class="invalid-feedback"></div>
-			</div>
+				{/foreach}
+			</fieldset>
 		</div>
+		<div class="invalid-feedback"></div>
+	</div>
+	<div class="col-12 col-md-4 mt-1 mt-md-0">
+		<div data-categories="s">
+			<select name="categories[]" class="form-select" data-parent="">
+				<option value="" selected hidden>小項目</option>
+				<option value=""></option>
+			</select>
+			<fieldset disabled hidden>
+				{foreach from=$categoriesS key="parent" item="categories"}
+				<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+					<option value="" selected hidden>小項目</option>
+					<option value=""></option>
+					{foreach from=$categories key="code" item="category"}
+						<option value="{$code|escape:"html"}">{$category.name|escape:"html"}</option>
+					{/foreach}
+				</select>
+				{/foreach}
+			</fieldset>
+		</div>
+		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">ターゲット<span class="badge bg-danger">必須</span></label>
-	<div class="col-12">
+	<div class="col-12 mt-4">
+		<label class="form-label">ターゲット<span class="badge bg-danger">必須</span></label>
 		<div data-name="targets">
 			{foreach from=$targets key="code" item="target"}
 			<div class="form-check form-check-inline">
@@ -117,8 +110,8 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">媒体<span class="badge bg-danger">必須</span></label>
-	<div class="col-12">
+	<div class="col-12 mt-4">
+		<label for="e{counter skip=0}" class="form-label">媒体<span class="badge bg-danger">必須</span></label>
 		<div data-name="medias">
 			{foreach from=$medias key="code" item="media"}
 			<div class="form-check form-check-inline">
@@ -129,45 +122,36 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label class="col-12 mt-5 form-label">関係者スタッフ名<span class="badge bg-secondary">任意</span></label>
-	<div class="row">
-		<div class="col-12 col-md-6 col-lg-5">
-			<label for="e{counter skip=0}" class="col-12">営業担当者名</label>
-			<div>
-				<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-				<div class="invalid-feedback"></div>
-			</div>
-			
-			<label for="e{counter skip=0}" class="col-12 mt-3">コピーライター</label>
-			<div>
-				<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-				<div class="invalid-feedback"></div>
-			</div>
-		</div>
-		
-		<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
-			<label for="e{counter skip=0}" class="col-12">プランナー</label>
-			<div>
-				<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-				<div class="invalid-feedback"></div>
-			</div>
-			
-			<label for="e{counter skip=0}" class="col-12 mt-3">デザイナー</label>
-			<div>
-				<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
-				<div class="invalid-feedback"></div>
-			</div>
-		</div>
+	<label class="col-12 mt-4 form-label">関係者スタッフ名<span class="badge bg-secondary">任意</span></label>
+	<div class="col-12 col-md-6 col-lg-5">
+		<label for="e{counter skip=0}">営業担当者名</label>
+		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<div class="invalid-feedback"></div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
+		<label for="e{counter skip=0}">プランナー</label>
+		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<div class="invalid-feedback"></div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3">
+		<label for="e{counter skip=0}">コピーライター</label>
+		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<div class="invalid-feedback"></div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-5 mt-3">
+		<label for="e{counter skip=0}">デザイナー</label>
+		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">提案内容／ポイント<span class="badge bg-danger">必須</span></label>
-	<div class="col-12 col-lg-10">
-		<textarea name="content" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください"></textarea>
+	<div class="col-12 col-lg-10 mt-4">
+		<label for="e{counter skip=0}" class="form-label">提案内容／ポイント<span class="badge bg-danger">必須</span></label>
+		<textarea name="content" id="e{counter skip=1}" class="form-control" rows="3" placeholder="入力してください"></textarea>
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">タグ検索キーワード <span class="badge bg-danger">必須</span>（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">タグ検索キーワード <span class="badge bg-danger">必須</span>（成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	<div>
 		<div class="row" data-name="keyword">
 			{for $foo=0 to 5}
@@ -177,16 +161,16 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PDF）<span class="badge bg-danger">必須</span></label>
-	<div class="col-12">
+	<div class="col-12 mt-4">
+		<label for="e{counter skip=0}" class="form-label">メディアライブラリ（PDF）<span class="badge bg-danger">必須</span></label>
 		<div class="d-flex flex-wrap gap-3" id="pdf">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
 		</div>
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
-	<div class="col-12">
+	<div class="col-12 mt-4">
+		<label for="e{counter skip=0}" class="form-label">メディアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
 		<div class="d-flex flex-wrap gap-3" id="vnd">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
 		</div>
@@ -198,13 +182,15 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	
-	<label for="e{counter skip=0}" class="col-12 mt-5 form-label">説明録画<span class="badge bg-secondary">任意</span></label>
-	<div class="col-12">
-		<button type="button" class="btn btn-outline-danger btn-rec"><i class="bi bi-camera-video-fill"></i>Rec</button>
-		<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
+	<div class="col-12 mt-4">
+		<label for="e{counter skip=0}" class="form-label">説明録画<span class="badge bg-secondary">任意</span></label>
+		<div>
+			<button type="button" class="btn btn-outline-danger btn-rec"><i class="bi bi-camera-video-fill"></i>Rec</button>
+			<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
+		</div>
 	</div>
 	
-	<div class="col-12 mt-5 text-center">
+	<div class="col-12 mt-4 text-center">
 		<a href="{url controller="Home" action="index"}" class="btn btn-secondary rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>キャンセル<div class="flex-grow-1"></div></a>
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集保存<div class="flex-grow-1"></div></button>
 	</div>
