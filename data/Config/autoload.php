@@ -6,7 +6,7 @@ define('PROPOSAL_FILE_DIR', CWD . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPAR
 define('PROPOSAL_VIDEO_DIR', CWD . DIRECTORY_SEPARATOR . "file" . DIRECTORY_SEPARATOR . "video" . DIRECTORY_SEPARATOR);
 define('DATA_DIR', dirname(__FILE__, 2) . DIRECTORY_SEPARATOR);
 spl_autoload_register(function($class){
-	$fileName = DATA_DIR . strtolower(str_replace('\\', '/', $class)) . '.php';
+	$fileName = DATA_DIR . str_replace('\\', '/', $class) . '.php';
 	if(file_exists($fileName)){
 		include $fileName;
 	}
@@ -43,6 +43,10 @@ $requestContext->id = $id;
 
 // アクション
 $controllerClassName = "\\Controller\\{$controller}Controller";
+$controllerExists = class_exists($controllerClassName);
+if(!$controllerExists){
+	$controllerClassName = "\\Controller\\EmptyController";
+}
 $controllerInstance = new $controllerClassName($requestContext);
 if(isset($_COOKIE["session"])){
 	session_name("PHPSESSID2");

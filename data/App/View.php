@@ -24,15 +24,21 @@ class View implements ArrayAccess, Iterator, IView{
 		$template = DATA_DIR . 'Views' . DIRECTORY_SEPARATOR .
 			str_replace("\\", DIRECTORY_SEPARATOR, is_null($this->controller) ? $requestContext->controller : $this->controller) . DIRECTORY_SEPARATOR .
 			(is_null($this->action) ? $requestContext->action : $this->action) . ".tpl";
+		$fileExists = file_exists($template);
 		if(!is_null($this->layout)){
 			$template = "extends:" . DATA_DIR . "Views" . DIRECTORY_SEPARATOR . "{$this->layout}|{$template}";
 		}
 		$smarty->assign($this->container);
 		
 		if($return){
-			return $smarty->fetch($template);
+			return $fileExists ? $smarty->fetch : "";
 		}else{
-			$smarty->display($template);
+			if($fileExists){
+				$smarty->display($template);
+			}else{
+				header("HTTP/1.1 404 Not Found");
+				echo "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\" />\n<title>アクセスしようとしたページは見つかりませんでした。</title></head><body>アクセスしようとしたページは見つかりませんでした。</body></html>";
+			}
 		}
 	}
 	
