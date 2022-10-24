@@ -12,31 +12,31 @@
 	position: sticky;
 	top: 0;
 	background: white;
-	border: 1px solid darkgray;
+	border: 1px solid #c7d0d7;
 }
 #headergrid *{
-	padding: 10px;
+	padding: 6px;
 }
 #datagrid{
-	border-left: 1px solid darkgray;
-	border-right: 1px solid darkgray;
-	border-bottom: 1px solid darkgray;
+	border-left: 1px solid #c7d0d7;
+	border-right: 1px solid #c7d0d7;
+	border-bottom: 1px solid #c7d0d7;
 }
 #datagrid .gridrow{
 	display: none;
 }
 #datagrid .gridrow.odd{
-	--row-color: lightgray;
+	--row-color: #f0f3f5;
 }
 #datagrid .gridrow.even{
 	--row-color: white;
 }
 #datagrid .gridrow:hover{
-	--row-color: yellow;
+	--row-color: #fffcd6;
 }
 #datagrid .griddata{
 	background: var(--row-color);
-	padding: 10px;
+	padding: 6px;
 }
 #datagrid .griddata:first-child{
 	grid-column: 1;

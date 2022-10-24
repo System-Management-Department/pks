@@ -19,15 +19,15 @@
 	position: sticky;
 	top: 0;
 	background: white;
-	border: 1px solid darkgray;
+	border: 1px solid #c7d0d7;
 }
 #headergrid *{
-	padding: 10px;
+	padding: 6px;
 }
 #datagrid{
-	border-left: 1px solid darkgray;
-	border-right: 1px solid darkgray;
-	border-bottom: 1px solid darkgray;
+	border-left: 1px solid #c7d0d7;
+	border-right: 1px solid #c7d0d7;
+	border-bottom: 1px solid #c7d0d7;
 }
 #datagrid [data-loading]{
 	transition: opacity 0.2s;
@@ -44,17 +44,17 @@
 	display: contents;
 }
 #datagrid .gridrow:nth-child(odd){
-	--row-color: lightgray;
+	--row-color: #f0f3f5;
 }
 #datagrid .gridrow:nth-child(even){
 	--row-color: white;
 }
 #datagrid .gridrow:hover{
-	--row-color: yellow;
+	--row-color: #fffcd6;
 }
 #datagrid .griddata{
 	background: var(--row-color);
-	padding: 10px;
+	padding: 6px;
 }
 #datagrid .griddata:first-child{
 	grid-column: 1;
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <input type="hidden" name="lastdata" value="" />
 <input type="hidden" name="date" value="{$curdate|escape:"html"}" />
 </form>
-<form id="search" action="{url}" method="POST" class="container-fluid row">
+<form id="search" action="{url}" method="POST" class="container-fluid row px-0">
 	<div class="col-12 col-md-6 col-lg-4">
 		<input type="text" name="date" value="{$curdate|escape:"html"}" class="form-control bg-white" placeholder="日付を選択してください" />
 	</div>
