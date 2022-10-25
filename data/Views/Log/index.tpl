@@ -55,6 +55,7 @@
 #datagrid .griddata{
 	background: var(--row-color);
 	padding: 6px;
+	word-break: break-all;
 }
 #datagrid .griddata:first-child{
 	grid-column: 1;
@@ -138,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <div class="pt-5">
 	<div id="mainlist">
 		<div id="headergrid">
-			<div class="text-center">操作日時</div>
+			<div>操作日時</div>
 			<div>操作</div>
 			<div>ファイル名</div>
 			<div>ユーザー名</div>

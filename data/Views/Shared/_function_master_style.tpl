@@ -37,6 +37,7 @@
 #datagrid .griddata{
 	background: var(--row-color);
 	padding: 6px;
+	word-break: break-all;
 }
 #datagrid .griddata:first-child{
 	grid-column: 1;
