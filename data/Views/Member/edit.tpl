@@ -21,7 +21,7 @@
 <form action="{url action="update" id=$data.id}" method="POST" class="container-fluid row">
 	<div class="col-12 col-md-6 col-lg-5">
 		<label for="e{counter skip=0}" class="form-label">提案年月日<span class="badge bg-danger">必須</span></label>
-		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" value="{$data.modified_date|escape:"html"}" />
+		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" value="{$data.modified_date|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
@@ -41,7 +41,7 @@
 	
 	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
 		<label for="e{counter skip=0}" class="form-label">商材名<span class="badge bg-danger">必須</span></label>
-		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.product_name|escape:"html"}" />
+		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.product_name|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
@@ -125,22 +125,22 @@
 	<label class="col-12 mt-4 form-label">関係者スタッフ名<span class="badge bg-secondary">任意</span></label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<label for="e{counter skip=0}">営業担当者名</label>
-		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.sales_staff|escape:"html"}" />
+		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.sales_staff|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
 		<label for="e{counter skip=0}">プランナー</label>
-		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.planner|escape:"html"}" />
+		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.planner|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3">
 		<label for="e{counter skip=0}">コピーライター</label>
-		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.copywriter|escape:"html"}" />
+		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.copywriter|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3">
 		<label for="e{counter skip=0}">デザイナー</label>
-		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.designer|escape:"html"}" />
+		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.designer|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
@@ -155,7 +155,7 @@
 	<div>
 		<div class="row" data-name="keyword">
 			{for $foo=0 to 5}
-			<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください"{if $foo|array_key_exists:$data.keywords} value="{$data.keywords[$foo]|escape:"html"}"{/if} /></div>
+			<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください"{if $foo|array_key_exists:$data.keywords} value="{$data.keywords[$foo]|escape:"html"}"{/if} autocomplete="off" /></div>
 			{/for}
 		</div>
 		<div class="invalid-feedback"></div>

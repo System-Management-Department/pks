@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <form action="{url action="list"}" method="POST" class="container-fluid row">
 	<div class="col-12 col-md-6 col-lg-5">
 		<label for="e{counter skip=0}" class="form-label">提案年月日</label>
-		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" />
+		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" autocomplete="off" />
 	</div>
 	
 	<div class="mt-4"></div>
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
 		<label for="e{counter skip=0}" class="col-12">商材名</label>
-		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	
 	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">クライアント　カテゴリー</label>
@@ -144,19 +144,19 @@ document.addEventListener("DOMContentLoaded", function(){
 	<label class="col-12 mt-4 form-label">関係者スタッフ名</label>
 	<div class="col-12 col-md-6 col-lg-5">
 		<label for="e{counter skip=0}">営業担当者名</label>
-		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
 		<label for="e{counter skip=0}">プランナー</label>
-		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3">
 		<label for="e{counter skip=0}">コピーライター</label>
-		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-3">
 		<label for="e{counter skip=0}">デザイナー</label>
-		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	
 	<div class="col-12 col-lg-10 mt-4">
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
 	{for $foo=1 to 6}
-	<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" /></div>
+	<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" /></div>
 	{/for}
 	
 	<input type="hidden" name="lastdata" value="" />

@@ -33,7 +33,7 @@
 	
 	<label for="e{counter skip=0}" class="{if !($data.large_id|is_null)}mt-5 {/if}col-12 form-label">{if $data.large_id|is_null}大{elseif $data.middle_id|is_null}中{else}小{/if}分類<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
-		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.name|escape:"html"}" />
+		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" value="{$data.name|escape:"html"}" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	

@@ -21,7 +21,7 @@
 	<div class="col-12 col-md-6 col-lg-4">
 	</div>
 	<div class="col-12 col-md-6 col-lg-4">
-		<input id="filter" class="form-control" placeholder="ターゲットコード、ターゲット名称" />
+		<input id="filter" class="form-control" placeholder="ターゲットコード、ターゲット名称" autocomplete="off" />
 	</div>
 </form>
 <div class="pt-5">

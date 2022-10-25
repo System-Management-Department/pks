@@ -36,19 +36,19 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	<label for="e{counter skip=0}" class="col-12 form-label">大分類<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
-		<input type="text" name="l" id="e{counter skip=1}" class="form-select" placeholder="入力してください" list="d" />
+		<input type="text" name="l" id="e{counter skip=1}" class="form-select" placeholder="入力してください" list="d" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="mt-5 col-12 form-label">中分類<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
-		<input type="text" name="m" id="e{counter skip=1}" class="form-select" placeholder="入力してください" />
+		<input type="text" name="m" id="e{counter skip=1}" class="form-select" placeholder="入力してください" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
 	<label for="e{counter skip=0}" class="mt-5 col-12 form-label">小分類<span class="badge bg-danger">必須</span></label>
 	<div class="col-12 col-md-6 col-lg-5 mb-1">
-		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" />
+		<input type="text" name="name" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
