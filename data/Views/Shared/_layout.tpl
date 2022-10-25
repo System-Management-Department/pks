@@ -5,7 +5,6 @@
 {block name="styles"}
 <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/assets/bootstrap/font/bootstrap-icons.css" />
-<link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/solid.min.css" />
 <style id="additionalStyle">
 	#sidebar .bi::before,.card-header .bi::before{
 		width: 26px;

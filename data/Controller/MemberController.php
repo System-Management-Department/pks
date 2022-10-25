@@ -30,6 +30,9 @@ class MemberController extends ControllerBase{
 		$v->assign($this->getMasterData($db, false));
 		$v["proposals"] = $proposals;
 		$v["lastdata"] = $lastdata;
+		if(count($proposals) == 0){
+			$v->setAction("_emptyList");
+		}
 		return $v->setLayout(null);
 	}
 	
