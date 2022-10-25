@@ -46,8 +46,8 @@
 				<div class="griddata">{$client.address1|escape:"html"}</div>
 				<div class="griddata">{$client.address2|escape:"html"}</div>
 				<div class="griddata">{$client.address3|escape:"html"}</div>
-				<div class="griddata"><a href="{url action="edit" id=$client.id}" class="btn btn-success">編集</a></div>
-				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$client.id|escape:"html"}">削除</span></div>
+				<div class="griddata"><a href="{url action="edit" id=$client.id}" class="fst-normal text-decoration-none text-primary">編集</a></div>
+				<div class="griddata"><span class="fst-normal text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$client.id|escape:"html"}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

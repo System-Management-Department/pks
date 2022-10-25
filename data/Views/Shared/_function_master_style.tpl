@@ -42,5 +42,8 @@
 #datagrid .griddata:first-child{
 	grid-column: 1;
 }
+#datagrid .griddata [data-bs-toggle="modal"][data-bs-target]{
+	cursor: pointer;
+}
 {/literal}</style>
 {/function}

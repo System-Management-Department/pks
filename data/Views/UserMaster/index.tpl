@@ -41,8 +41,8 @@
 				<div class="griddata">{$user.email|escape:"html"}</div>
 				<div class="griddata">{$user.department|escape:"html"}</div>
 				<div class="griddata">{role code=$user.role}</div>
-				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<a href="{url action="edit" id=$user.id}" class="btn btn-success">編集</a>{/if}</div>
-				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$user.id|escape:"html"}">削除</span>{/if}</div>
+				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<a href="{url action="edit" id=$user.id}" class="fst-normal text-decoration-none text-primary">編集</a>{/if}</div>
+				<div class="griddata">{if $smarty.session["User.id"] ne $user.id}<span class="fst-normal text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$user.id|escape:"html"}">削除</span>{/if}</div>
 			</div>
 		{/foreach}
 		</div>

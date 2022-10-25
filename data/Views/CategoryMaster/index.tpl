@@ -42,8 +42,8 @@
 				<div class="griddata">{$categoryName[$category.large_id].name|escape:"html"}</div>
 				<div class="griddata">{$categoryName[$category.middle_id].name|escape:"html"}</div>
 				<div class="griddata">{$category.name|escape:"html"}</div>
-				<div class="griddata"><a href="{url action="edit" id=$category.id}" class="btn btn-success">編集</a></div>
-				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$category.id|escape:"html"}">削除</span></div>
+				<div class="griddata"><a href="{url action="edit" id=$category.id}" class="fst-normal text-decoration-none text-primary">編集</a></div>
+				<div class="griddata"><span class="fst-normal text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$category.id|escape:"html"}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>

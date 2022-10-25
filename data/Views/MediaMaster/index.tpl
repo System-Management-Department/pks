@@ -38,8 +38,8 @@
 			<div class="gridrow {if ($smarty.foreach.loop.index % 2) eq 0}odd{else}even{/if}" data-filter="{$media.id|escape:"html"}&#0;{$media.name|escape:"html"}">
 				<div class="griddata">{$media.id|escape:"html"}</div>
 				<div class="griddata">{$media.name|escape:"html"}</div>
-				<div class="griddata"><a href="{url action="edit" id=$media.id}" class="btn btn-success">編集</a></div>
-				<div class="griddata"><span class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$media.id|escape:"html"}">削除</span></div>
+				<div class="griddata"><a href="{url action="edit" id=$media.id}" class="fst-normal text-decoration-none text-primary">編集</a></div>
+				<div class="griddata"><span class="fst-normal text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{$media.id|escape:"html"}">削除</span></div>
 			</div>
 		{/foreach}
 		</div>
