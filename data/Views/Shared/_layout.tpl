@@ -145,6 +145,16 @@ document.addEventListener("DOMContentLoaded", function(){
 		z-index: 1000;
 	}`, n++);
 });
+setInterval(() => {
+	let prev = localStorage.getItem("session");
+	let now = Date.now();
+	if((prev == null) || (now - prev) >= 60000){
+		localStorage.setItem("session", now);
+		fetch({/literal}"{url controller="Online" action="update"}"{literal}).then(response => response.json()).then(json =>{
+			
+		});
+	}
+}, 60000);
 {/literal}</script>
 {/block}
 </head>

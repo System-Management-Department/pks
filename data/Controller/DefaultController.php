@@ -1,5 +1,6 @@
 <?php
 namespace Controller;
+use Exception;
 use App\ControllerBase;
 use App\View;
 use App\JsonView;
@@ -25,6 +26,14 @@ class DefaultController extends ControllerBase{
 	}
 	
 	public function logout(){
+		try{
+			$db = Session::getDB();
+			$deleteQuery = $db
+				->delete("useronlinestatuses")
+				->andWhere("user=@user");
+			$deleteQuery();
+		}catch(Exception $ex){
+		}
 		Session::logout();
 		return new RedirectResponse("", "index");
 	}
