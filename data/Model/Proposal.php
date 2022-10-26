@@ -23,9 +23,9 @@ class Proposal{
 		}
 		
 		// 検索条件
-		if(preg_match('/^([0-9]{4,})[\\/\\-]([0-9]{1,2})[\\/\\-]([0-9]{1,2})$/', ($q["modified_date"] ?? ""), $matches)){
+		if(preg_match('/^([0-9]{4,})[\\/\\-]([0-9]{1,2})$/', ($q["modified_date"] ?? ""), $matches)){
 			// 提案日
-			$query->andWhere("proposals.modified_date=concat(?, '-', ?, '-', ?)", $matches[1], $matches[2], $matches[3]);
+			$query->andWhere("proposals.modified_date=concat(?, '-', ?)", $matches[1], $matches[2]);
 		}
 		if(($q["client"] ?? "") != ""){
 			// クライアント名

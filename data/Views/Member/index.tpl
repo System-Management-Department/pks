@@ -6,14 +6,26 @@
 
 {block name="styles" append}
 <link rel="stylesheet" href="/assets/flatpickr/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/flatpickr/plugins/monthSelect/style.css" />
 {/block}
 
 {block name="scripts" append}
 <script src="/assets/flatpickr/flatpickr.min.js"></script>
+<script type="text/javascript" src="/assets/flatpickr/l10n/ja.js"></script>
+<script type="text/javascript" src="/assets/flatpickr/plugins/monthSelect/index.js"></script>
 <script src="/assets/common/form.js"></script>
 <script type="text/javascript">{literal}
 document.addEventListener("DOMContentLoaded", function(){
-	flatpickr('input[name="modified_date"]');
+	flatpickr('input[name="modified_date"]', {
+		locale: "ja",
+		plugins: [
+			new monthSelectPlugin({
+				shorthand: true,
+				dateFormat: "Y-m",
+				altFormat: "Y-m"
+			})
+		]
+	});
 	let categories = {
 		l: document.querySelector('[data-categories="l"] select'),
 		m: [...document.querySelectorAll('[data-categories="m"] select')],

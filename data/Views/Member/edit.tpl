@@ -6,11 +6,14 @@
 
 {block name="styles" append}
 <link rel="stylesheet" type="text/css" href="/assets/flatpickr/flatpickr.min.css" />
+<link rel="stylesheet" type="text/css" href="/assets/flatpickr/plugins/monthSelect/style.css" />
 <link rel="stylesheet" type="text/css" href="/assets/common/proposal-form.css" />
 {/block}
 
 {block name="scripts" append}
 <script type="text/javascript" src="/assets/flatpickr/flatpickr.min.js"></script>
+<script type="text/javascript" src="/assets/flatpickr/l10n/ja.js"></script>
+<script type="text/javascript" src="/assets/flatpickr/plugins/monthSelect/index.js"></script>
 <script type="text/javascript" src="/assets/pdfjs/build/pdf.js"></script>
 <script type="text/javascript" src="/assets/common/form.js"></script>
 <script type="text/javascript">var url = "{url action="index"}";</script>

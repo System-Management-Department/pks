@@ -22,7 +22,16 @@ pdfObject.handleEvent = function(e){
 		videoObject.blob = null;
 		videoObject.recoding = false;
 		
-		flatpickr('input[type="date"]');
+		flatpickr('input[type="date"]', {
+			locale: "ja",
+			plugins: [
+				new monthSelectPlugin({
+					shorthand: true,
+					dateFormat: "Y-m",
+					altFormat: "Y-m"
+				})
+			]
+		});
 		let categories = {
 			l: document.querySelector('[data-categories="l"] select'),
 			m: [...document.querySelectorAll('[data-categories="m"] select')],
@@ -80,8 +89,8 @@ pdfObject.handleEvent = function(e){
 			deleteBtn.addEventListener("click", this);
 		}
 	}else if(e.type == "dragover"){
-	    e.preventDefault();
-	    e.dataTransfer.dropEffect = 'copy';
+		e.preventDefault();
+		e.dataTransfer.dropEffect = 'copy';
 	}else if(e.type == "drop"){
 		e.stopPropagation();
 		e.preventDefault();
