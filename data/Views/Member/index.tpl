@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="mt-4"></div>
 	
 	<div class="col-12 col-md-6 col-lg-5">
-		<label for="e{counter skip=0}" class="col-12">クライアント名</label>
+		<label for="e{counter skip=0}" class="col-12 form-label">クライアント名</label>
 		<select name="client" id="e{counter skip=1}" class="form-select">
 			<option value="" selected hidden>クライアントを選択</option>
 			<option value=""></option>
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	
 	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
-		<label for="e{counter skip=0}" class="col-12">商材名</label>
+		<label for="e{counter skip=0}" class="col-12 form-label">商材名</label>
 		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
 	
