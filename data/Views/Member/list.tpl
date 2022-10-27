@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					</div>
 				</div>
 				<div class="row mx-0">
-					<label class="col-12 form-label mt-4">提案年月日</label>
+					<label class="col-12 form-label mt-4">提案年月</label>
 					<div class="col-12">
 						<div data-name="modified_date"><br /></div>
 					</div>

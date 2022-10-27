@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function(){
 {block name="body"}
 <form action="{url action="list"}" method="POST" class="container-fluid row">
 	<div class="col-12 col-md-6 col-lg-5">
-		<label for="e{counter skip=0}" class="form-label">提案年月日</label>
-		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" autocomplete="off" />
+		<label for="e{counter skip=0}" class="form-label">提案年月</label>
+		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="提案年月を選択" autocomplete="off" />
 	</div>
 	
 	<div class="mt-4"></div>

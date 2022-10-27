@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	<div class="mt-4"></div>
 	
 	<div class="col-12 col-md-6 col-lg-5">
-		<div class="form-label">提案年月日</div>
+		<div class="form-label">提案年月</div>
 		<div class="form-control">{$data.modified_date|escape:"html"}</div>
 	</div>
 	

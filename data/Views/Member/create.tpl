@@ -23,8 +23,8 @@
 {block name="body"}
 <form action="{url action="regist"}" method="POST" class="container-fluid row">
 	<div class="col-12 col-md-6 col-lg-5">
-		<label for="e{counter skip=0}" class="form-label">提案年月日<span class="badge bg-danger">必須</span></label>
-		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="日付を選択してください" autocomplete="off" />
+		<label for="e{counter skip=0}" class="form-label">提案年月<span class="badge bg-danger">必須</span></label>
+		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="提案年月を選択" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
 	
