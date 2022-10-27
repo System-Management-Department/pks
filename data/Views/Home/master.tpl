@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div></div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
-					<a href="{url controller="CategoryMaster" action="master"}" class="btn btn-success">カテゴリマスターへ</a>
+					<a href="{url controller="CategoryMaster" action="index"}" class="btn btn-success">カテゴリマスターへ</a>
 					<a href="{url controller="Master" action="download" id="categories"}" class="btn btn-success" download="categories.csv">ダウンロード</a>
 					<input type="file" formaction="{url controller="Master" action="upload" id="categories"}" accept="text/csv" class="btn btn-success" />
 				</div>
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div></div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
-					<a href="{url controller="TargetMaster" action="master"}" class="btn btn-success">ターゲットマスターへ</a>
+					<a href="{url controller="TargetMaster" action="index"}" class="btn btn-success">ターゲットマスターへ</a>
 					<a href="{url controller="Master" action="download" id="targets"}" class="btn btn-success" download="targets.csv">ダウンロード</a>
 					<input type="file" formaction="{url controller="Master" action="upload" id="targets"}" accept="text/csv" class="btn btn-success" />
 				</div>
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div></div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
-					<a href="{url controller="MediaMaster" action="master"}" class="btn btn-success">媒体マスターへ</a>
+					<a href="{url controller="MediaMaster" action="index"}" class="btn btn-success">媒体マスターへ</a>
 					<a href="{url controller="Master" action="download" id="medias"}" class="btn btn-success" download="medias.csv">ダウンロード</a>
 					<input type="file" formaction="{url controller="Master" action="upload" id="medias"}" accept="text/csv" class="btn btn-success" />
 				</div>
