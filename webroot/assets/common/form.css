@@ -77,3 +77,9 @@
 .browse .form-control{
 	border-color: transparent transparent #ced4da transparent;
 }
+.browse .form-control:empty::before{
+	content: "";
+	display: inline-block;
+	height: 1em;
+	width: 0;
+}
