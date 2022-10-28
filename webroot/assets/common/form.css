@@ -1,0 +1,79 @@
+.grid-colreset+*{
+	grid-column-start: 1;
+}
+.grid-row-gap-0{
+	row-gap: 0 !important;
+}
+.grid-row-gap-1{
+	row-gap: 0.25rem !important;
+}
+.grid-row-gap-2{
+	row-gap: 0.5rem !important;
+}
+.grid-row-gap-3{
+	row-gap: 1rem !important;
+}
+.grid-row-gap-4{
+	row-gap: 1.5rem !important;
+}
+.grid-row-gap-5{
+	row-gap: 3rem !important;
+}
+.form-grid-2{
+	display: grid;
+	grid-template-columns: repeat(2, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-3{
+	display: grid;
+	grid-template-columns: repeat(3, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-4{
+	display: grid;
+	grid-template-columns: repeat(4, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-5{
+	display: grid;
+	grid-template-columns: repeat(5, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-6{
+	display: grid;
+	grid-template-columns: repeat(6, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-7{
+	display: grid;
+	grid-template-columns: repeat(7, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-8{
+	display: grid;
+	grid-template-columns: repeat(8, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-{
+	display: grid;
+	grid-template-columns: repeat(9, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-10{
+	display: grid;
+	grid-template-columns: repeat(10, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-11{
+	display: grid;
+	grid-template-columns: repeat(11, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.form-grid-12{
+	display: grid;
+	grid-template-columns: repeat(12, calc((800px - (1.5rem * 13)) / 12));
+	gap: 1.5rem;
+}
+.browse .form-control{
+	border-color: transparent transparent #ced4da transparent;
+}

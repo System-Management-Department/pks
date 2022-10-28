@@ -48,6 +48,36 @@
 	.grid-colspan-2{
 		grid-column-end: span 2;
 	}
+	.grid-colspan-3{
+		grid-column-end: span 3;
+	}
+	.grid-colspan-4{
+		grid-column-end: span 4;
+	}
+	.grid-colspan-5{
+		grid-column-end: span 5;
+	}
+	.grid-colspan-6{
+		grid-column-end: span 6;
+	}
+	.grid-colspan-7{
+		grid-column-end: span 7;
+	}
+	.grid-colspan-8{
+		grid-column-end: span 8;
+	}
+	.grid-colspan-9{
+		grid-column-end: span 9;
+	}
+	.grid-colspan-10{
+		grid-column-end: span 10;
+	}
+	.grid-colspan-11{
+		grid-column-end: span 11;
+	}
+	.grid-colspan-12{
+		grid-column-end: span 12;
+	}
 </style>
 {/block}
 {block name="scripts"}

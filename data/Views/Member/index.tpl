@@ -7,6 +7,7 @@
 {block name="styles" append}
 <link rel="stylesheet" href="/assets/flatpickr/flatpickr.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/flatpickr/plugins/monthSelect/style.css" />
+<link rel="stylesheet" type="text/css" href="/assets/common/form.css" />
 {/block}
 
 {block name="scripts" append}
@@ -61,15 +62,12 @@ document.addEventListener("DOMContentLoaded", function(){
 {/block}
 
 {block name="body"}
-<form action="{url action="list"}" method="POST" class="container-fluid row">
-	<div class="col-12 col-md-6 col-lg-5">
+<form action="{url action="list"}" method="POST" class="form-grid-12">
+	<div class="grid-colspan-3 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label">提案年月</label>
 		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="提案年月を選択" autocomplete="off" />
 	</div>
-	
-	<div class="mt-4"></div>
-	
-	<div class="col-12 col-md-6 col-lg-5">
+	<div class="grid-colspan-6">
 		<label for="e{counter skip=0}" class="col-12 form-label">クライアント名</label>
 		<select name="client" id="e{counter skip=1}" class="form-select">
 			<option value="" selected hidden>クライアントを選択</option>
@@ -79,59 +77,59 @@ document.addEventListener("DOMContentLoaded", function(){
 			{/foreach}
 		</select>
 	</div>
-	
-	<div class="col-12 col-md-6 col-lg-5 mt-4 mt-md-0">
+	<div class="grid-colspan-6 grid-colreset">
 		<label for="e{counter skip=0}" class="col-12 form-label">商材名</label>
 		<input name="product_name" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
 	</div>
-	
-	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">クライアント　カテゴリー</label>
-
-	<div class="col-12 col-md-4" data-categories="l">
-		<select name="categories[]" class="form-select" id="e{counter skip=1}">
-			<option value="" selected hidden>大項目</option>
-			<option value=""></option>
-			{foreach from=$categoriesL key="code" item="data"}
-				<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-			{/foreach}
-		</select>
+	<div class="grid-colspan-12 grid-colreset">
+		<label for="e{counter skip=0}" class="col-12 mt-4 form-label">クライアント　カテゴリー</label>
+		<div class="form-grid-12">
+			<div class="grid-colspan-4" data-categories="l">
+				<select name="categories[]" class="form-select" id="e{counter skip=1}">
+					<option value="" selected hidden>大項目</option>
+					<option value=""></option>
+					{foreach from=$categoriesL key="code" item="data"}
+						<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+					{/foreach}
+				</select>
+			</div>
+			<div class="grid-colspan-4" data-categories="m">
+				<select name="categories[]" class="form-select" data-parent="">
+					<option value="" selected hidden>中項目</option>
+					<option value=""></option>
+				</select>
+				<fieldset disabled hidden>
+					{foreach from=$categoriesM key="parent" item="categories"}
+					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+						<option value="" selected hidden>中項目</option>
+						<option value=""></option>
+						{foreach from=$categories key="code" item="data"}
+							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+						{/foreach}
+					</select>
+					{/foreach}
+				</fieldset>
+			</div>
+			<div class="grid-colspan-4" data-categories="s">
+				<select name="categories[]" class="form-select" data-parent="">
+					<option value="" selected hidden>小項目</option>
+					<option value=""></option>
+				</select>
+				<fieldset disabled hidden>
+					{foreach from=$categoriesS key="parent" item="categories"}
+					<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
+						<option value="" selected hidden>小項目</option>
+						<option value=""></option>
+						{foreach from=$categories key="code" item="data"}
+							<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+						{/foreach}
+					</select>
+					{/foreach}
+				</fieldset>
+			</div>
+		</div>
 	</div>
-	<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="m">
-		<select name="categories[]" class="form-select" data-parent="">
-			<option value="" selected hidden>中項目</option>
-			<option value=""></option>
-		</select>
-		<fieldset disabled hidden>
-			{foreach from=$categoriesM key="parent" item="categories"}
-			<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-				<option value="" selected hidden>中項目</option>
-				<option value=""></option>
-				{foreach from=$categories key="code" item="data"}
-					<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-				{/foreach}
-			</select>
-			{/foreach}
-		</fieldset>
-	</div>
-	<div class="col-12 col-md-4 mt-1 mt-md-0" data-categories="s">
-		<select name="categories[]" class="form-select" data-parent="">
-			<option value="" selected hidden>小項目</option>
-			<option value=""></option>
-		</select>
-		<fieldset disabled hidden>
-			{foreach from=$categoriesS key="parent" item="categories"}
-			<select name="categories[]" class="form-select" data-parent="{$parent|escape:"html"}">
-				<option value="" selected hidden>小項目</option>
-				<option value=""></option>
-				{foreach from=$categories key="code" item="data"}
-					<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-				{/foreach}
-			</select>
-			{/foreach}
-		</fieldset>
-	</div>
-	
-	<div class="col-12 mt-4">
+	<div class="grid-colspan-12 grid-colreset">
 		<label class="form-label">ターゲット</label>
 		<div>
 			{foreach from=$targets key="code" item="data"}
@@ -141,8 +139,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			{/foreach}
 		</div>
 	</div>
-	
-	<div class="col-12 mt-4">
+	<div class="grid-colspan-12 grid-colreset">
 		<label class="form-label">媒体</label>
 		<div>
 			{foreach from=$medias key="code" item="data"}
@@ -152,36 +149,42 @@ document.addEventListener("DOMContentLoaded", function(){
 			{/foreach}
 		</div>
 	</div>
-	
-	<label class="col-12 mt-4 form-label">関係者スタッフ名</label>
-	<div class="col-12 col-md-6 col-lg-5">
-		<label for="e{counter skip=0}">営業担当者名</label>
-		<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
+	<div class="grid-colspan-12 grid-colreset">
+		<label class="form-label">関係者スタッフ名</label>
+		<div class="form-grid-12 grid-row-gap-3">
+			<div class="grid-colspan-6">
+				<label for="e{counter skip=0}">営業担当者名</label>
+				<input name="sales_staff" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
+			</div>
+			<div class="grid-colspan-6">
+				<label for="e{counter skip=0}">プランナー</label>
+				<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
+			</div>
+			<div class="grid-colspan-6">
+				<label for="e{counter skip=0}">コピーライター</label>
+				<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
+			</div>
+			<div class="grid-colspan-6">
+				<label for="e{counter skip=0}">デザイナー</label>
+				<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
+			</div>
+		</div>
 	</div>
-	<div class="col-12 col-md-6 col-lg-5 mt-3 mt-md-0">
-		<label for="e{counter skip=0}">プランナー</label>
-		<input name="planner" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
-	</div>
-	<div class="col-12 col-md-6 col-lg-5 mt-3">
-		<label for="e{counter skip=0}">コピーライター</label>
-		<input name="copywriter" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
-	</div>
-	<div class="col-12 col-md-6 col-lg-5 mt-3">
-		<label for="e{counter skip=0}">デザイナー</label>
-		<input name="designer" type="text" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" />
-	</div>
-	
-	<div class="col-12 col-lg-10 mt-4">
+	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label">提案内容／ポイント</label>
 		<textarea name="content" id="e{counter skip=1}" class="form-control" rows="3" placeholder="入力してください"></textarea>
 	</div>
-	
-	<label for="e{counter skip=0}" class="col-12 mt-4 form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
-	{for $foo=1 to 6}
-	<div class="col-12 col-md-6 col-lg-5 mb-1"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" /></div>
-	{/for}
-	
-	<input type="hidden" name="lastdata" value="" />
-	<div class="col-12 mt-4 text-center"><button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>検<div class="flex-grow-1"></div>索<div class="flex-grow-1"></div></button></div>
+	<div class="grid-colspan-12 grid-colreset">
+		<label for="e{counter skip=0}" class="form-label">タグ検索キーワード （成分名、オンパレ、タレント名など絞り込みやすい検索ワード）</label>
+		<div class="form-grid-12 grid-row-gap-2">
+			{for $foo=1 to 6}
+			<div class="grid-colspan-6"><input type="text" name="keyword[]" id="e{counter skip=1}" class="form-control" placeholder="入力してください" autocomplete="off" /></div>
+			{/for}
+		</div>
+	</div>
+	<div class="grid-colspan-12 position-sticky bg-white" style="bottom: -1.5rem;">
+		<input type="hidden" name="lastdata" value="" />
+		<div class="text-center"><button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>検<div class="flex-grow-1"></div>索<div class="flex-grow-1"></div></button></div>
+	</div>
 </form>
 {/block}

@@ -1,3 +1,6 @@
+textarea.form-control{
+	resize: none;
+}
 #pdf [name="filenames[]"], #vnd [name="filenames[]"]{
 	display: contents;
 }
@@ -78,13 +81,12 @@
 	max-height: 80vh;
 }
 .card-select{
-	height: 120px;
+	height: 53px;
 	width: 120px;
 	justify-content: center;
 	background: #f0f3f5;
-	border: 3px dotted darkgray;
+	border: 2px dotted #c7d0d7;
 	color: #14a5ad;
-	font-weight: bold;
 	margin-right: 30px;
 }
 
