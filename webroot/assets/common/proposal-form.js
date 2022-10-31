@@ -129,7 +129,7 @@ pdfObject.handleEvent = function(e){
 					URL.revokeObjectURL(objectUrl);
 					return pdf.getPage(1);
 				}).then(page => {
-					const scale = 100 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
+					const scale = 80 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
 					const viewport = page.getViewport({scale: scale});
 					const ctx = canvas.getContext('2d');
 					canvas.height = viewport.height;

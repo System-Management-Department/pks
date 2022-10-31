@@ -5,17 +5,17 @@ textarea.form-control{
 	display: contents;
 }
 #pdf [name="filenames[]"]:checked~.thumbnail, #vnd [name="filenames[]"]:checked~.thumbnail{
-	outline: 4px solid blue;
+	outline: 4px solid #009ea7;
 	filter: none;
 }
 
 #pdf .thumbnail{
 	display: inline-block;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	object-fit: contain;
 	margin: 3px;
-	border: 1px solid black;
+	border: 1px solid #c7d0d7;
 	background-color: gray;
 	filter: brightness(0.8);
 }
@@ -23,18 +23,18 @@ textarea.form-control{
 	display: contents;
 }
 #pdf [name="pdf"]:checked~.thumbnail{
-	outline: 4px solid blue;
+	outline: 4px solid #009ea7;
 	filter: none;
 }
 #vnd .thumbnail{
 	display: block;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	margin: 3px;
-	border: 1px solid black;
-	line-height: 100px;
+	border: 1px solid #c7d0d7;
+	line-height: 80px;
 	text-align: center;
-	font-size: 80px;
+	font-size: 60px;
 	font-family: bootstrap-icons;
 	font-weight: normal;
 }
@@ -43,35 +43,35 @@ textarea.form-control{
 }
 #vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.wordprocessingml.document"]::before{
 	content: "\f745";
-	color: blue;
+	color: #3d85c6;
 }
 #vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.text"]::before{
 	content: "\f38d";
-	color: blue;
+	color: #3d85c6;
 }
 #vnd .thumbnail[data-type^="application/vnd.ms-excel"]::before{
 	content: "\f76a";
-	color: green;
+	color: #6aa84f;
 }
 #vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]::before{
 	content: "\f793";
-	color: green;
+	color: #6aa84f;
 }
 #vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.spreadsheet"]::before{
 	content: "\f38f";
-	color: green;
+	color: #6aa84f;
 }
 #vnd .thumbnail[data-type^="application/vnd.ms-powerpoint"]::before{
 	content: "\f75a";
-	color: red;
+	color: #f0737f;
 }
 #vnd .thumbnail[data-type^="application/vnd.openxmlformats-officedocument.presentationml.presentation"]::before{
 	content: "\f792";
-	color: red;
+	color: #f0737f;
 }
 #vnd .thumbnail[data-type^="application/vnd.oasis.opendocument.presentation"]::before{
 	content: "\f381";
-	color: red;
+	color: #f0737f;
 }
 #vnd .thumbnail[data-type^="application/vnd.apple."]::before{
 	content: "\f65b";
@@ -92,7 +92,7 @@ textarea.form-control{
 
 .file-grid{
 	display: grid;
-	grid-template: 80px 20px 1fr / 80px 20px;
+	grid-template: 60px 20px 1fr / 60px 20px;
 	grid-column: 1 / -1;
 	grid-row: -2 / -1;
 }
