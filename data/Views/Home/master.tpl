@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-12 col-md-6 col-lg-5">
 		<div class="card h-100">
-			<div class="card-header">ユーザー</div>
+			<div class="card-header"><i class="bi bi-person-plus-fill"></i>ユーザー</div>
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div>ユーザーを登録することで、サービスを利用できるユーザー追加し権限をつけることができます。</div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
@@ -19,7 +19,7 @@
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-5 mt-md-0">
 		<div class="card h-100">
-			<div class="card-header">クライアントマスター</div>
+			<div class="card-header"><i class="bi bi-building"></i>クライアントマスター</div>
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div>クライアントを登録します。</div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
@@ -30,7 +30,7 @@
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-5">
 		<div class="card h-100">
-			<div class="card-header">カテゴリマスター</div>
+			<div class="card-header"><i class="bi bi-card-list"></i>カテゴリマスター</div>
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div>提案商材のカテゴリを登録することができます。</div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
@@ -41,7 +41,7 @@
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-5">
 		<div class="card h-100">
-			<div class="card-header">ターゲットマスター</div>
+			<div class="card-header"><i class="bi bi-person-check-fill"></i>ターゲットマスター</div>
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div>ターゲットを登録することができます。</div>
 				<div class="mt-4 d-flex flex-wrap gap-3">
@@ -52,7 +52,7 @@
 	</div>
 	<div class="col-12 col-md-6 col-lg-5 mt-5">
 		<div class="card h-100">
-			<div class="card-header">媒体マスター</div>
+			<div class="card-header"><i class="bi bi-badge-ad-fill"></i>媒体マスター</div>
 			<div class="card-body d-flex flex-column justify-content-between">
 				<div>媒体を登録することができます。</div>
 				<div class="mt-4 d-flex flex-wrap gap-3">

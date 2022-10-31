@@ -232,8 +232,8 @@ setInterval(() => {
 					{/if}
 					{if $smarty.session["User.role"] eq "admin"}
 					<li class="nav-item">
-						<span class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="true" aria-current="true"><i class="bi bi-gear-wide"></i>マスタ管理</span>
-						<div class="collapse show" id="components-collapse">
+						<a class="nav-link text-white" href="{url controller="Home" action="master"}"><i class="bi bi-gear-wide"></i>マスタ管理</a>
+						<div class="collapse show">
 							<ul class="ms-3 list-unstyled small">
 								<li><a class="nav-link text-white py-1" href="{url controller="UserMaster" action="index"}">ユーザー</a></li>
 								<li><a class="nav-link text-white py-1" href="{url controller="ClientMaster" action="index"}">クライアントマスター</a></li>
