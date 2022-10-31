@@ -62,7 +62,6 @@
 }
 #previewContainer #submitBtnArea{
 	flex-shrink: 0;
-	justify-content: space-around;
 }
 #submitBtnArea .btn{
 	width: 10em;
@@ -271,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function(){
 						<div data-name="keyword"><br /></div>
 					</div>
 				</div>
-				<div id="submitBtnArea" class="row">
+				<div id="submitBtnArea" class="d-flex justify-content-center gap-md">
 					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
 					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} hidden{/if}>編集</button>
 				</div>

@@ -183,11 +183,11 @@
 	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">説明録画<span class="badge bg-secondary">任意</span></label>
 		<div>
-			<button type="button" class="btn btn-outline-danger btn-rec"><i class="bi bi-camera-video-fill"></i>Rec</button>
+			<button type="button" class="btn btn-outline-danger btn-rec d-inline-flex gap-xn"><i class="bi bi-camera-video-fill"></i>Rec</button>
 			<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
 		</div>
 	</div>
-	<div class="grid-colspan-12 text-center">
+	<div class="grid-colspan-12 d-flex justify-content-center gap-md">
 		<a href="{url controller="Home" action="index"}" class="btn btn-secondary rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>キャンセル<div class="flex-grow-1"></div></a>
 		<button type="submit" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集保存<div class="flex-grow-1"></div></button>
 		<button type="button" class="btn btn-danger rounded-pill w-25 d-inline-flex" data-bs-toggle="modal" data-bs-target="#deleteModal"><div class="flex-grow-1"></div>案件削除<div class="flex-grow-1"></div></button>
