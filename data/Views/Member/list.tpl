@@ -7,15 +7,23 @@
 {block name="styles" append}
 <style type="text/css">{literal}
 #mainlist{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 80px);
+	grid-auto-rows: 80px;
+	gap: 6px;
 	overflow: auto;
 	height: 100%;
+	min-width: calc(50% - 90px);
+	max-width: 50%;
+	flex-shrink: 1;
+	padding: 4px;
 }
 #previewContainer{
+	flex-grow: 1;
 	overflow: auto;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	font-size: 0.7em;
 	line-height: 1em;
 }
 #previewContainer .row{
@@ -32,22 +40,19 @@
 	opacity: 1;
 }
 #mainlist .thumbnail{
-	display: inline-block;
-	width: 100px;
-	height: 100px;
+	display: block;
 	background-size: contain;
-	margin: 3px;
 	border: 1px solid black;
 	background-repeat: no-repeat;
 	background-position: center;
-    background-color: gray;
+	background-color: gray;
 	filter: brightness(0.8);
 }
 #mainlist [name="proposal"]{
 	display: contents;
 }
 #mainlist [name="proposal"]:checked~.thumbnail{
-	outline: 4px solid blue;
+	outline: 4px solid #009ea7;
 	filter: none;
 }
 #mainlist .thumbnail a{
@@ -82,6 +87,10 @@
 }
 #pager [name="page"]::after{
 	content: counter(page);
+}
+.grid1{
+	display: grid;
+	grid-template-columns: auto 1.5rem auto 1fr;
 }
 .d-contents{
 	display: contents;
@@ -222,60 +231,38 @@ document.addEventListener("DOMContentLoaded", function(){
 <form id="searchformdata" action="{url action="listItem"}" method="POST">
 {html_hiddens data=$smarty.post}
 </form>
-<form action="{url action="list"}" method="POST" class="container-fluid row" target="_blank">
-	<div class="col-12 col-md-6 col-lg-2">
-		クライアント名：
+<form action="{url action="list"}" method="POST" class="" target="_blank">
+	<div class="grid1">
+		<div>クライアント名</div><div>：</div><div data-name="client"></div><div></div>
+		<div>商材名</div><div>：</div><div data-name="product_name"></div><div></div>
 	</div>
-	<div class="col-12 col-md-6 col-lg-5">
-		<div data-name="client"><br /></div>
-	</div>
-	<div></div>
-	<div class="col-12 col-md-6 col-lg-2">
-		商材名：
-	</div>
-	<div class="col-12 col-md-6 col-lg-5">
-		<div data-name="product_name"><br /></div>
-	</div>
-	<div class="col-12">
-		<div id="mainContainer" class="row">
-			<div class="col-6" id="mainlist"></div>
-			<div class="col-6" id="previewContainer">
-				<div id="previewarea">
-				プレビュー
+	<div id="mainContainer" class="d-flex">
+		<div id="mainlist"></div>
+		<div id="previewContainer">
+			<div id="previewarea">
+			プレビュー
+			</div>
+			<div>
+				<div id="pager">
+					<button type="button" class="btn btn-sm btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
+					<div class="d-contents" data-name="files">
+						<input type="radio" class="btn btn-sm btn-light" name="page" checked />
+					</div>
+					<button type="button" class="btn btn-sm btn-info bi bi-arrow-right-short" data-name="page-next"></button>
 				</div>
-				<div>
-					<div id="pager">
-						<button type="button" class="btn btn-sm btn-info bi bi-arrow-left-short" data-name="page-prev"></button>
-						<div class="d-contents" data-name="files">
-							<input type="radio" class="btn btn-sm btn-light" name="page" checked />
-						</div>
-						<button type="button" class="btn btn-sm btn-info bi bi-arrow-right-short" data-name="page-next"></button>
-					</div>
-				</div>
-				<div class="row mx-0">
-					<label class="col-12 form-label mt-4">提案年月</label>
-					<div class="col-12">
-						<div data-name="modified_date"><br /></div>
-					</div>
-					<label class="col-12 form-label mt-4">ターゲット</label>
-					<div class="col-12">
-						<div data-name="targets"><br /></div>
-					</div>
-					<label class="col-12 form-label mt-4">媒体</label>
-					<div class="col-12">
-						<div data-name="medias"><br /></div>
-					</div>
-					<label class="col-12 form-label mt-4">タグ検索キーワード</label>
-					<div class="col-12 mb-2">
-						<div data-name="keyword"><br /></div>
-					</div>
-				</div>
-				<div id="submitBtnArea" class="d-flex justify-content-center gap-md">
-					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
-					<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} hidden{/if}>編集</button>
-				</div>
+			</div>
+			<div class="grid1">
+				<div>提案年月</div><div>：</div><div data-name="modified_date"></div><div></div>
+				<div>ターゲット</div><div>：</div><div data-name="targets"></div><div></div>
+				<div>媒体</div><div>：</div><div data-name="medias"></div><div></div>
+				<div>タグ検索キーワード</div><div>：</div><div data-name="keyword"></div><div></div>
+			</div>
+			<div id="submitBtnArea" class="d-flex justify-content-center gap-md">
+				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
+				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} hidden{/if}>編集</button>
 			</div>
 		</div>
 	</div>
+		
 </form>
 {/block}
