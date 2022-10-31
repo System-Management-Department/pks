@@ -1,6 +1,6 @@
 {block name="title"}
 <nav class="navbar navbar-light bg-light">
-	<h2 class="container-fluid">過去事例検索画面</h2>
+	<h2 class="container-fluid px-4">過去事例検索画面</h2>
 </nav>
 {/block}
 

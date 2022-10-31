@@ -1,8 +1,8 @@
 {block name="title"}
 <nav class="navbar navbar-light bg-light">
-	<h2 class="container-fluid justify-content-start gap-5">
+	<h2 class="container-fluid px-4 justify-content-start gap-5">
 		<div>媒体マスター</div>
-		<a class="btn btn-sm btn-success rounded-pill" href="{url action="create"}">新規登録</a>
+		<a class="btn btn-sm btn-success" href="{url action="create"}">新規追加</a>
 	</h2>
 </nav>
 {/block}

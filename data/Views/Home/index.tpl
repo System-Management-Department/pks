@@ -1,6 +1,6 @@
 {block name="title"}
 <nav class="navbar navbar-light bg-light">
-	<h2 class="container-fluid">ホーム</h2>
+	<h2 class="container-fluid px-4">ホーム</h2>
 </nav>
 {/block}
 

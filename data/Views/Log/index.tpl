@@ -1,6 +1,6 @@
 {block name="title"}
 <nav class="navbar navbar-light bg-light">
-	<h2 class="container-fluid">操作履歴</h2>
+	<h2 class="container-fluid px-4">操作履歴</h2>
 </nav>
 {/block}
 

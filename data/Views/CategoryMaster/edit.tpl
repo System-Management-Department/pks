@@ -1,6 +1,6 @@
 {block name="title"}
 <nav class="navbar navbar-light bg-light">
-	<h2 class="container-fluid">カテゴリーマスター</h2>
+	<h2 class="container-fluid px-4">カテゴリーマスター</h2>
 </nav>
 {/block}
 
