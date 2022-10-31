@@ -31,6 +31,9 @@
 	#sidebarToggle:checked~.sidebar-section{
 		--sidebar-width: 3rem;
 	}
+	#sidebarToggle:checked~.sidebar-section .sidebar-hidden{
+		display: none;
+	}
 	label[for="sidebarToggle"],#sidebar{
 		white-space: nowrap;
 		width: var(--sidebar-width);
@@ -211,29 +214,29 @@ setInterval(() => {
 				<i class="bi bi-list"></i>
 			</label>
 			<nav id="sidebar" class="grid-rowspan-2 bg-dark text-white sidebar px-3">
-				<div class="py-2">提案書管理システム</div>
+				<div class="py-2"><span class="sidebar-hidden">提案書管理システム</span>&nbsp;</div>
 				<ul class="nav flex-column">
 					<li class="nav-item">
 						<a class="nav-link text-white active" href="{url controller="Home" action="index"}">
-							<span class="ml-2"><i class="bi bi-house-door"></i>ホーム</span>
+							<i class="bi bi-house-door"></i><span class="sidebar-hidden">ホーム</span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="{url controller="Member" action="index"}">
-							<span class="ml-2"><i class="bi bi-search"></i>過去事例検索画面</span>
+							<i class="bi bi-search"></i><span class="sidebar-hidden">過去事例検索画面</span>
 						</a>
 					</li>
 					{if $smarty.session["User.role"]|in_array:["admin", "entry"]}
 					<li class="nav-item">
 						<a class="nav-link text-white" href="{url controller="Member" action="create"}">
-							<span class="ml-2"><i class="bi bi-pencil-square"></i>提案資料新規登録</span>
+							<i class="bi bi-pencil-square"></i><span class="sidebar-hidden">提案資料新規登録</span>
 						</a>
 					</li>
 					{/if}
 					{if $smarty.session["User.role"] eq "admin"}
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{url controller="Home" action="master"}"><i class="bi bi-gear-wide"></i>マスタ管理</a>
-						<div class="collapse show">
+						<a class="nav-link text-white" href="{url controller="Home" action="master"}"><i class="bi bi-gear-wide"></i><span class="sidebar-hidden">マスタ管理</span></a>
+						<div class="collapse show sidebar-hidden">
 							<ul class="ms-3 list-unstyled small">
 								<li><a class="nav-link text-white py-1" href="{url controller="UserMaster" action="index"}">ユーザー</a></li>
 								<li><a class="nav-link text-white py-1" href="{url controller="ClientMaster" action="index"}">クライアントマスター</a></li>
@@ -245,7 +248,7 @@ setInterval(() => {
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="{url controller="Log" action="index"}">
-							<span class="ml-2"><i class="bi bi-hourglass"></i>操作履歴</span>
+							<i class="bi bi-hourglass"></i><span class="sidebar-hidden">操作履歴</span>
 						</a>
 					</li>
 					{/if}
