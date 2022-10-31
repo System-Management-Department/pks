@@ -18,10 +18,10 @@
 {/block}
 
 {block name="body"}
-<form id="search" action="{url}" method="POST" class="d-flex">
-	<div class=""></div>
-	<a href="{url controller="Master" action="download" id="clients"}" class="btn btn-light" download="clients.csv">エクスポート</a>
-	<label class="btn btn-light"><input type="file" formaction="{url controller="Master" action="upload" id="clients"}" accept="text/csv" />インポート</label>
+<form id="search" action="{url}" method="POST" class="d-flex gap-xn">
+	<div class="flex-grow-1"></div>
+	<a href="{url controller="Master" action="download" id="clients"}" class="btn btn-light" download="clients.csv"><i class="bi bi-download"></i>エクスポート</a>
+	<label class="btn btn-light"><input type="file" formaction="{url controller="Master" action="upload" id="clients"}" accept="text/csv" /><i class="bi bi-upload"></i>インポート</label>
 	<div class="input-group" id="filter">
 		<input class="form-control" placeholder="クライアントコード、クライアント名称" autocomplete="off" />
 		<button type="button" class="btn btn-success">クライアントを検索</button>

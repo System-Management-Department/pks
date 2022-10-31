@@ -12,18 +12,27 @@ document.addEventListener("DOMContentLoaded", function(){
 	styleSheet.insertRule(`#datagrid .gridrow[data-filter]{
 		display: contents;
 	}`, n++);
-	let container = document.getElementById("filter");
-	container.querySelector('button').addEventListener("click", e => {
+	let search = e => {
 		let value = CSS.escape(container.querySelector('input').value);
 		let attr = (value == "") ? "data-filter" : `data-filter*="${value}"`;
+		let role = document.querySelector('#role [name="role"]:checked');
 		let selector = `#datagrid .gridrow[${attr}]`;
+		if(role != null){
+			selector += role.value;
+		}
 		styleSheet.cssRules[filter].selectorText = selector;
 		Array.prototype.forEach.call(document.querySelectorAll(selector), (e, i) => {
 			let odd = (i % 2) == 0;
 			e.classList.add(odd ? "odd" : "even");
 			e.classList.remove(odd ? "even" : "odd");
 		});
-	});
+	};
+	let container = document.getElementById("filter");
+	let roles = document.querySelectorAll('#role [name="role"]');
+	container.querySelector('button').addEventListener("click", search);
+	for(let role of roles){
+		role.addEventListener("change", search);
+	}
 	
 	let form = document.getElementById("deleteModal");
 	if(form != null){

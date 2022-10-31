@@ -18,10 +18,10 @@
 {/block}
 
 {block name="body"}
-<form id="search" action="{url}" method="POST" class="d-flex">
-	<div class=""></div>
-	<a href="{url controller="Master" action="download" id="categories"}" class="btn btn-light" download="categories.csv">エクスポート</a>
-	<label class="btn btn-light"><input type="file" formaction="{url controller="Master" action="upload" id="categories"}" accept="text/csv" />インポート</label>
+<form id="search" action="{url}" method="POST" class="d-flex gap-xn">
+	<div class="flex-grow-1"></div>
+	<a href="{url controller="Master" action="download" id="categories"}" class="btn btn-light" download="categories.csv"><i class="bi bi-download"></i>エクスポート</a>
+	<label class="btn btn-light"><input type="file" formaction="{url controller="Master" action="upload" id="categories"}" accept="text/csv" /><i class="bi bi-upload"></i>インポート</label>
 	<div class="input-group" id="filter">
 		<input class="form-control" placeholder="カテゴリコード、カテゴリ名称" autocomplete="off" />
 		<button type="button" class="btn btn-success">カテゴリを検索</button>
