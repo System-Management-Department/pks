@@ -7,6 +7,11 @@
 {block name="styles" append}
 <link rel="stylesheet" type="text/css" href="/assets/common/form.css" />
 <link rel="stylesheet" type="text/css" href="/assets/common/proposal-form.css" />
+<style type="text/css">{literal}
+.d-contents{
+	display: contents;
+}
+{/literal}</style>
 {/block}
 
 {block name="scripts" append}
@@ -104,12 +109,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		<div class="form-label">クライアント　カテゴリー</div>
 		<div class="form-grid-12">
 			<div class="grid-colspan-4">
+				<div>大項目</div>
 				<div class="form-control">{$categories[$data.categories[0]].name|escape:"html"}</div>
 			</div>
 			<div class="grid-colspan-4">
+				<div>中項目</div>
 				<div class="form-control">{$categories[$data.categories[1]].name|escape:"html"}</div>
 			</div>
 			<div class="grid-colspan-4">
+				<div>小項目</div>
 				<div class="form-control">{$categories[$data.categories[2]].name|escape:"html"}</div>
 			</div>
 		</div>
@@ -175,10 +183,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		<div class="text-secondary">動画はありません</div>
 		{/if}
 	</div>
-	{if $data.author eq $smarty.session["User.id"]}
-	<form class="grid-colspan-12 text-center" action="{url action="edit"}" method="POST">
-		<button type="submit" name="proposal" value="{$data.id|escape:"html"}" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集<div class="flex-grow-1"></div></button>
-	</form>
-	{/if}
+	<div class="grid-colspan-12 d-flex justify-content-center gap-md">
+		<a href="{url action="index"}" class="btn btn-secondary rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>戻る<div class="flex-grow-1"></div></a>
+		{if $data.author eq $smarty.session["User.id"]}
+		<form class="d-contents" action="{url action="edit"}" method="POST">
+			<button type="submit" name="proposal" value="{$data.id|escape:"html"}" class="btn btn-success rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>編集<div class="flex-grow-1"></div></button>
+		</form>
+		{/if}
+	</div>
 </div>
 {/block}
