@@ -17,14 +17,16 @@
 {/block}
 
 {block name="body"}
-<form id="search" action="{url}" method="POST" class="container-fluid row justify-content-between">
-	<div class="col-12 col-md-6 col-lg-4">
-	</div>
-	<div class="col-12 col-md-6 col-lg-4">
-		<input id="filter" class="form-control" placeholder="ターゲットコード、ターゲット名称" autocomplete="off" />
+<form id="search" action="{url}" method="POST" class="d-flex">
+	<div class=""></div>
+	<a href="{url controller="Master" action="download" id="targets"}" class="btn btn-light" download="targets.csv">エクスポート</a>
+	<label class="btn btn-light"><input type="file" formaction="{url controller="Master" action="upload" id="targets"}" accept="text/csv" />インポート</label>
+	<div class="input-group" id="filter">
+		<input class="form-control" placeholder="ターゲットコード、ターゲット名称" autocomplete="off" />
+		<button type="button" class="btn btn-success">ターゲットを検索</button>
 	</div>
 </form>
-<div class="pt-5">
+<div class="pt-4">
 	<div id="mainlist">
 		<div id="headergrid">
 			<div>No</div>

@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", function(){
 	styleSheet.insertRule(`#datagrid .gridrow[data-filter]{
 		display: contents;
 	}`, n++);
-	document.getElementById("filter").addEventListener("input", e => {
-		let value = CSS.escape(e.currentTarget.value);
+	let container = document.getElementById("filter");
+	container.querySelector('button').addEventListener("click", e => {
+		let value = CSS.escape(container.querySelector('input').value);
 		let attr = (value == "") ? "data-filter" : `data-filter*="${value}"`;
 		let selector = `#datagrid .gridrow[${attr}]`;
 		styleSheet.cssRules[filter].selectorText = selector;
@@ -87,5 +88,24 @@ document.addEventListener("DOMContentLoaded", function(){
 				}
 			});
 		});
+	}
+	
+	let uploadFiles = document.querySelectorAll('input[type="file"][formaction]');
+	let upload = e => {
+		let input = e.currentTarget;
+		if(input.files.length == 1){
+			let formData = new FormData();
+			formData.append("data", input.files[0], input.files[0].name);
+			fetch(input.getAttribute("formaction"), {
+				method: "POST",
+				body: formData
+			}).then(res => res.json()).then(json => {
+				Storage.pushToast("マスター管理", json.messages);
+				location.reload();
+			});
+		}
+	};
+	for(let input of uploadFiles){
+		input.addEventListener("change", upload);
 	}
 });

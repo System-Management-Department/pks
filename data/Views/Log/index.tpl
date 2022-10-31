@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		<input type="text" name="date" value="{$curdate|escape:"html"}" class="form-control bg-white" placeholder="日付を選択してください" />
 	</div>
 </form>
-<div class="pt-5">
+<div class="pt-4">
 	<div id="mainlist">
 		<div id="headergrid">
 			<div>操作日時</div>

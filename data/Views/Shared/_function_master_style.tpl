@@ -45,5 +45,11 @@
 #datagrid .griddata [data-bs-toggle="modal"][data-bs-target]{
 	cursor: pointer;
 }
+#search label input[type="file"]{
+	display: contents;
+}
+#filter{
+	width: 350px;
+}
 {/literal}</style>
 {/function}
