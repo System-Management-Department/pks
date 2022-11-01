@@ -178,8 +178,8 @@ document.addEventListener("DOMContentLoaded", function(){
 				val = document.querySelector('[data-name="files"] input[name="page"]:checked').getAttribute("value");
 				if(val != current2){
 					current2 = val;
-					document.querySelector('form .btn[formaction*="browse"]').disabled = false;
-					document.querySelector('form .btn[formaction*="edit"]').disabled = (!next.hasAttribute("data-editable")) || (next.getAttribute("data-editable") != "true");
+					document.querySelector('form .btn[formaction*="browse"]').hidden = false;
+					document.querySelector('form .btn[formaction*="edit"]').hidden = (!next.hasAttribute("data-editable")) || (next.getAttribute("data-editable") != "true");
 					let previewarea = document.getElementById("previewarea");
 					
 					fetch(val).then(response => response.blob()).then(blob => {
@@ -258,8 +258,8 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div>タグ検索キーワード</div><div>：</div><div data-name="keyword"></div><div></div>
 			</div>
 			<div id="submitBtnArea" class="d-flex justify-content-center gap-md">
-				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" disabled>閲覧</button>
-				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="edit"}" disabled{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} hidden{/if}>編集</button>
+				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" hidden>閲覧</button>
+				<button type="submit" class="btn btn-outline-success rounded-pill{if not $smarty.session["User.role"]|in_array:["admin", "entry"]} d-none{/if}" formaction="{url action="edit"}" hidden>編集</button>
 			</div>
 		</div>
 	</div>
