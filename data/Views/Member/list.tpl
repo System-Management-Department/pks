@@ -58,6 +58,13 @@
 #mainlist .thumbnail a{
 	display: none;
 }
+#mainlist .not-found{
+	grid-column: 1 / -1;
+	padding: 10px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: red;
+}
 #previewarea{
 	height: calc(70% + 3rem);
 }
