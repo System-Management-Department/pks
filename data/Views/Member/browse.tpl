@@ -74,6 +74,18 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 	});
+	
+	let forms = document.querySelectorAll('form[target="_blank"]');
+	let onSubmit = e => {
+		if(e.currentTarget.querySelector(':checked') == null){
+			e.stopPropagation();
+			e.preventDefault();
+			alert("ファイルが選択されていません。");
+		}
+	};
+	for(let form of forms){
+		form.addEventListener("submit", onSubmit);
+	}
 });
 {/literal}</script>
 {/block}
