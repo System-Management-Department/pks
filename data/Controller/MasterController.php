@@ -5,6 +5,7 @@ use App\ControllerBase;
 use App\StreamView;
 use App\JsonView;
 use Model\Session;
+use Model\Logger;
 use Model\Result;
 
 class MasterController extends ControllerBase{
@@ -24,6 +25,7 @@ class MasterController extends ControllerBase{
 		rewind($fp);
 		$v = new StreamView($fp, "text/csv");
 		fclose($fp);
+		@Logger::record($db, "エクスポート", ["master" => $table]);
 		return $v;
 	}
 	
@@ -59,6 +61,7 @@ class MasterController extends ControllerBase{
 			$insertQuery->addTable("JSON_TABLE(?, '\$[*]' " . $db->getJsonTableColumns($table) . ") t", json_encode($data));
 			$insertQuery();
 			$db->commit();
+			@Logger::record($db, "インポート", ["master" => $table]);
 		}catch(Exception $ex){
 			$result->addMessage("アップロードに失敗しました。", "ERROR", "");
 			$result->setData($ex);

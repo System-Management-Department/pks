@@ -1,5 +1,5 @@
 {block name="title"}
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-regist bg-regist text-white">
 	<h2 class="container-fluid px-4">新規登録</h2>
 </nav>
 {/block}

@@ -27,6 +27,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #3b4043;
+  --bs-regist: #71c6c4;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
@@ -3478,6 +3479,36 @@ textarea.form-control-lg {
   border-color: #3b4043;
 }
 
+.btn-regist {
+  color: #000;
+  background-color: #71c6c4;
+  border-color: #71c6c4;
+}
+.btn-regist:hover {
+  color: #000;
+  background-color: #86cfcd;
+  border-color: #7fccca;
+}
+.btn-check:focus + .btn-regist, .btn-regist:focus {
+  color: #000;
+  background-color: #86cfcd;
+  border-color: #7fccca;
+  box-shadow: 0 0 0 0.25rem rgba(96, 168, 167, 0.5);
+}
+.btn-check:checked + .btn-regist, .btn-check:active + .btn-regist, .btn-regist:active, .btn-regist.active, .show > .btn-regist.dropdown-toggle {
+  color: #000;
+  background-color: #8dd1d0;
+  border-color: #7fccca;
+}
+.btn-check:checked + .btn-regist:focus, .btn-check:active + .btn-regist:focus, .btn-regist:active:focus, .btn-regist.active:focus, .show > .btn-regist.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(96, 168, 167, 0.5);
+}
+.btn-regist:disabled, .btn-regist.disabled {
+  color: #000;
+  background-color: #71c6c4;
+  border-color: #71c6c4;
+}
+
 .btn-outline-primary {
   color: #0d6efd;
   border-color: #0d6efd;
@@ -3675,6 +3706,31 @@ textarea.form-control-lg {
 }
 .btn-outline-dark:disabled, .btn-outline-dark.disabled {
   color: #3b4043;
+  background-color: transparent;
+}
+
+.btn-outline-regist {
+  color: #71c6c4;
+  border-color: #71c6c4;
+}
+.btn-outline-regist:hover {
+  color: #000;
+  background-color: #71c6c4;
+  border-color: #71c6c4;
+}
+.btn-check:focus + .btn-outline-regist, .btn-outline-regist:focus {
+  box-shadow: 0 0 0 0.25rem rgba(113, 198, 196, 0.5);
+}
+.btn-check:checked + .btn-outline-regist, .btn-check:active + .btn-outline-regist, .btn-outline-regist:active, .btn-outline-regist.active, .btn-outline-regist.dropdown-toggle.show {
+  color: #000;
+  background-color: #71c6c4;
+  border-color: #71c6c4;
+}
+.btn-check:checked + .btn-outline-regist:focus, .btn-check:active + .btn-outline-regist:focus, .btn-outline-regist:active:focus, .btn-outline-regist.active:focus, .btn-outline-regist.dropdown-toggle.show:focus {
+  box-shadow: 0 0 0 0.25rem rgba(113, 198, 196, 0.5);
+}
+.btn-outline-regist:disabled, .btn-outline-regist.disabled {
+  color: #71c6c4;
   background-color: transparent;
 }
 
@@ -5044,6 +5100,15 @@ textarea.form-control-lg {
   color: #1c1e20;
 }
 
+.alert-regist {
+  color: #447776;
+  background-color: #e3f4f3;
+  border-color: #d4eeed;
+}
+.alert-regist .alert-link {
+  color: #365f5e;
+}
+
 @-webkit-keyframes progress-bar-stripes {
   0% {
     background-position-x: 1rem;
@@ -5429,6 +5494,20 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #232628;
   border-color: #232628;
+}
+
+.list-group-item-regist {
+  color: #447776;
+  background-color: #e3f4f3;
+}
+.list-group-item-regist.list-group-item-action:hover, .list-group-item-regist.list-group-item-action:focus {
+  color: #447776;
+  background-color: #ccdcdb;
+}
+.list-group-item-regist.list-group-item-action.active {
+  color: #fff;
+  background-color: #447776;
+  border-color: #447776;
 }
 
 .btn-close {
@@ -6449,6 +6528,13 @@ textarea.form-control-lg {
   color: #2f3336;
 }
 
+.link-regist {
+  color: #71c6c4;
+}
+.link-regist:hover, .link-regist:focus {
+  color: #8dd1d0;
+}
+
 .ratio {
   position: relative;
   width: 100%;
@@ -6833,6 +6919,10 @@ textarea.form-control-lg {
 
 .border-dark {
   border-color: #3b4043 !important;
+}
+
+.border-regist {
+  border-color: #71c6c4 !important;
 }
 
 .border-white {
@@ -7984,6 +8074,10 @@ textarea.form-control-lg {
   color: #3b4043 !important;
 }
 
+.text-regist {
+  color: #71c6c4 !important;
+}
+
 .text-white {
   color: #fff !important;
 }
@@ -8038,6 +8132,10 @@ textarea.form-control-lg {
 
 .bg-dark {
   background-color: #3b4043 !important;
+}
+
+.bg-regist {
+  background-color: #71c6c4 !important;
 }
 
 .bg-body {
