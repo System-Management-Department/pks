@@ -1,12 +1,14 @@
 <?php
 namespace Controller;
 use Exception;
+use stdClass;
 use App\ControllerBase;
 use App\View;
 use App\JsonView;
 use App\RedirectResponse;
 use Model\Session;
 use Model\User;
+use Model\Logger;
 
 class DefaultController extends ControllerBase{
 	public function index(){
@@ -32,6 +34,7 @@ class DefaultController extends ControllerBase{
 				->delete("useronlinestatuses")
 				->andWhere("user=@user");
 			$deleteQuery();
+			@Logger::record($db, "ログアウト", new stdClass());
 		}catch(Exception $ex){
 		}
 		Session::logout();
