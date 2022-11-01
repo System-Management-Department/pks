@@ -20,6 +20,15 @@ class MemberController extends ControllerBase{
 	}
 	
 	#[\Attribute\AcceptRole("admin", "entry", "browse")]
+	public function list(){
+		if($_SERVER["REQUEST_METHOD"] == "GET"){
+			return new RedirectResponse("Member", "index");
+		}
+		
+		return new View();
+	}
+	
+	#[\Attribute\AcceptRole("admin", "entry", "browse")]
 	public function listItem(){
 		$db = Session::getDB();
 		$query = Proposal::getSearchQuery($db, $_POST);
@@ -42,6 +51,9 @@ class MemberController extends ControllerBase{
 		$query = Proposal::getRowQuery($db);
 		$query->andWhere("id=?", intval($_POST["proposal"]));
 		$data = $query();
+		if(empty($data)){
+			return new RedirectResponse("Member", "index");
+		}
 		
 		$v = new View();
 		
