@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 {block name="body"}
 <main class="text-center pt-5">
-	<h1>提案書管理システム</h1>
-	
+	<div><img src="/assets/common/image/image1.svg" style="width:120px;" alt="PM" /></div>
+	<div><img src="/assets/common/image/image2.svg" style="width:200px;" alt="Proposal Management System" /></div>
 	<div class="text-start card mt-5 mx-auto py-3 px-3">
 		<form action="{url action="login"}" method="POST" class="card-body row pb-0">
 			<label class="col-12">メールアドレス</label>
