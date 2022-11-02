@@ -51,7 +51,7 @@ class UserMasterController extends ControllerBase{
 			->andWhere("email=?", $_POST["email"]);
 		$id = $query();
 		if($id !== false){
-			$result->addMessage("既に登録済みです。", "ERROR", "email");
+			$result->addMessage("入力されたメールアドレスは、既に登録済みとなっております。", "ERROR", "email");
 		}
 		
 		if(!$result->hasError()){
@@ -129,7 +129,7 @@ class UserMasterController extends ControllerBase{
 			->andWhere("email=?", $_POST["email"])
 			->andWhere("id<>?", $id);
 		if($query() > 0){
-			$result->addMessage("既に登録済みです。", "ERROR", "email");
+			$result->addMessage("入力されたメールアドレスは、既に登録済みとなっております。", "ERROR", "email");
 		}
 		
 		if(!$result->hasError()){
