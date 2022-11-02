@@ -184,6 +184,18 @@ videoObject.handleEvent = function(e){
 	if(e.currentTarget == videoObject.modal){
 		if(this.container.querySelector('video') == null){
 			navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(mediaStream => {
+				let mediaStreamTracks = [];
+				let context = new AudioContext();
+				let destination = context.createMediaStreamDestination();
+				let tempStream = destination.stream;
+				let videoTracks = mediaStream.getVideoTracks();
+				for(let track of videoTracks){
+					mediaStreamTracks.push(track.clone());
+				}
+				let audioTracks = tempStream.getAudioTracks();
+				for(let track of audioTracks){
+					mediaStreamTracks.push(track);
+				}
 				this.video = document.createElement("video");
 				this.video.setAttribute("autoplay", "autoplay");
 				this.video.setAttribute("controls", "controls");
@@ -209,7 +221,7 @@ videoObject.handleEvent = function(e){
 					this.video.appendChild(source);
 					this.video = null;
 				});
-				this.video.srcObject = mediaStream;
+				this.video.srcObject = new MediaStream(mediaStreamTracks);
 				this.video.onloadedmetadata = () => {
 					this.video.play();
 					document.querySelector('[data-bs-target="#recModal"]').click();
@@ -223,6 +235,10 @@ videoObject.handleEvent = function(e){
 			let stream = this.video.srcObject;
 			let tracks = stream.getTracks();
 			this.mediaRecorder.stop();
+			tracks.forEach(function(track) {
+				track.stop();
+			});
+			tracks = this.mediaRecorder.stream.getTracks();
 			tracks.forEach(function(track) {
 				track.stop();
 			});
