@@ -182,6 +182,7 @@
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">説明録画<span class="badge bg-secondary">任意</span></label>
 		<div>
 			<button type="button" class="btn btn-outline-danger btn-rec d-inline-flex gap-xn"><i class="bi bi-camera-video-fill"></i>Rec</button>
+			<button type="button" class="btn btn-danger gap-xn" data-bs-toggle="modal" data-bs-target="#deleteModal2"></button>
 			<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
 		</div>
 	</div>
@@ -204,6 +205,22 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary btn-rec2">録画</button>
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteModal2" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header flex-row-reverse">
+				<i class="bi bi-x" data-bs-dismiss="modal"></i>
+			</div>
+			<div class="modal-body">
+				<div class="text-center text-danger">本当に削除しますか？</div>
+			</div>
+			<div class="modal-footer justify-content-evenly">
+				<button type="button" class="btn btn-success btn-video-del rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>はい<div class="flex-grow-1"></div></button>
+				<button type="button" class="btn btn-outline-success rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>いいえ<div class="flex-grow-1"></div></button>
 			</div>
 		</div>
 	</div>

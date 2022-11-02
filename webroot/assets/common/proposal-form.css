@@ -127,3 +127,22 @@ textarea.form-control{
 .fileicon[title]::after{
 	content: attr(title);
 }
+
+[data-bs-toggle="modal"][data-bs-target="#deleteModal2"]{
+	display: inline-flex;
+}
+[data-bs-toggle="modal"][data-bs-target="#deleteModal2"]:empty{
+	display: none;
+}
+[data-bs-toggle="modal"][data-bs-target="#deleteModal2"]::before{
+	content: "\f78a";
+	display: block;
+	font-family: bootstrap-icons !important;
+	font-style: normal;
+	font-weight: normal !important;
+	font-variant: normal;
+	text-transform: none;
+	vertical-align: -0.125em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

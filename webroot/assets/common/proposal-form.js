@@ -88,6 +88,18 @@ pdfObject.handleEvent = function(e){
 		if(deleteBtn != null){
 			deleteBtn.addEventListener("click", this);
 		}
+		
+		document.querySelector('#deleteModal2 .btn-video-del').addEventListener("click", e => {
+			let video = document.querySelector('#video video');
+			if(video != null){
+				let btn = document.querySelector('.btn-rec2');
+				btn.textContent = "録画";
+				btn.style.display = null;
+				video.parentNode.removeChild(video);
+				videoObject.blob = null;
+				document.querySelector('[data-bs-target="#deleteModal2"]').textContent = "";
+			}
+		});
 	}else if(e.type == "dragover"){
 		e.preventDefault();
 		e.dataTransfer.dropEffect = 'copy';
@@ -220,6 +232,10 @@ videoObject.handleEvent = function(e){
 					source.setAttribute("type", "video/webm");
 					this.video.appendChild(source);
 					this.video = null;
+					let now = new Date();
+					document.querySelector('[data-bs-target="#deleteModal2"]').textContent = 
+						`${now.getFullYear()}-` + `0${now.getMonth() + 1}`.substr(-2) + "-" + `0${now.getDate()}`.substr(-2) + " " +
+						`0${now.getHours()}`.substr(-2) + ":" + `0${now.getMinutes()}`.substr(-2) + ":" + `0${now.getSeconds()}`.substr(-2);
 				});
 				this.video.srcObject = new MediaStream(mediaStreamTracks);
 				this.video.onloadedmetadata = () => {

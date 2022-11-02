@@ -109,13 +109,16 @@ class MemberController extends ControllerBase{
 		$v = new View();
 		
 		// マスターデータ
+		$videoFile = PROPOSAL_VIDEO_DIR . "{$_POST["proposal"]}.webm";
 		$v->assign($this->getMasterData($db, true));
 		$data["categories"] = explode(",", $data["categories"]);
 		$data["targets"] = explode(",", $data["targets"]);
 		$data["medias"] = explode(",", $data["medias"]);
 		$data["keywords"] = explode("\t", $data["keywords"]);
 		$data["files"] = is_null($data["filename"]) ? [] : json_decode($data["filename"], true);
-		$data["videoExists"] = file_exists(PROPOSAL_VIDEO_DIR . "{$_POST["proposal"]}.webm");
+		if($data["videoExists"] = file_exists($videoFile)){
+			$data["videoDateTime"] = date( "Y-m-d H:i:s", filemtime($videoFile));
+		}
 		$v["data"] = $data;
 		
 		return $v;

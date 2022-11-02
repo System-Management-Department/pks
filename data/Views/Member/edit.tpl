@@ -168,7 +168,7 @@
 		<div class="invalid-feedback"></div>
 	</div>
 	<div class="grid-colspan-12 grid-colreset">
-		<label for="e{counter skip=0}" class="form-label d-flex gap-2">メデcィアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
+		<label for="e{counter skip=0}" class="form-label d-flex gap-2">メディアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
 		<div class="d-flex flex-wrap gap-3" id="vnd">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
 		</div>
@@ -184,6 +184,7 @@
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">説明録画<span class="badge bg-secondary">任意</span></label>
 		<div>
 			<button type="button" class="btn btn-outline-danger btn-rec d-inline-flex gap-xn"><i class="bi bi-camera-video-fill"></i>Rec</button>
+			<button type="button" class="btn btn-danger gap-xn" data-bs-toggle="modal" data-bs-target="#deleteModal2">{if $data.videoExists}{$data.videoDateTime}{/if}</button>
 			<button type="button" data-bs-toggle="modal" data-bs-target="#recModal" hidden></button>
 		</div>
 	</div>
@@ -224,6 +225,22 @@
 			</div>
 			<div class="modal-footer justify-content-evenly">
 				<button type="button" class="btn btn-success rounded-pill w-25 d-inline-flex" data-action="{url action="delete" id=$data.id}"><div class="flex-grow-1"></div>はい<div class="flex-grow-1"></div></button>
+				<button type="button" class="btn btn-outline-success rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>いいえ<div class="flex-grow-1"></div></button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteModal2" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header flex-row-reverse">
+				<i class="bi bi-x" data-bs-dismiss="modal"></i>
+			</div>
+			<div class="modal-body">
+				<div class="text-center text-danger">本当に削除しますか？</div>
+			</div>
+			<div class="modal-footer justify-content-evenly">
+				<button type="button" class="btn btn-success btn-video-del rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>はい<div class="flex-grow-1"></div></button>
 				<button type="button" class="btn btn-outline-success rounded-pill w-25 d-inline-flex" data-bs-dismiss="modal"><div class="flex-grow-1"></div>いいえ<div class="flex-grow-1"></div></button>
 			</div>
 		</div>
