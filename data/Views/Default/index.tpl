@@ -67,13 +67,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			</div>
 			<div class="text-center col-12 my-3"><button type="submit" class="btn btn-success">ログイン</button></div>
 		</form>
-		<form action="mailto:admin@direct-holdings.co.jp" method="GET" target="_blank" class="card-body row pt-0">
+		{*<form action="mailto:admin@direct-holdings.co.jp" method="GET" target="_blank" class="card-body row pt-0">
 			<input type="hidden" name="subject" value="ここにタイトルを入力" />
 			<input type="hidden" name="body" value="ここに本文を入力" />
 			<div class="col-12 text-center">
 				<button type="submit" class="btn text-decoration-underline" title="こちらをクリックすると、管理者にメールが送信されます。" data-bs-toggle="tooltip" data-bs-placement="top">パスワードを忘れた方はこちら</button>
 			</div>
-		</form>
+		</form>*}
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdCVYDHCOvqlJ9ppIw_OUuZogt-LJS4T6fZFXzFaisd5UCbfw/viewform?vc=0&c=0&w=1&flr=0" class="btn text-decoration-underline">パスワードを忘れた方はこちら</a>
 	</div>
 </main>
 {/block}
