@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		<div id="headergrid">
 			<div>操作日時</div>
 			<div>操作</div>
-			<div>ファイル名</div>
+			<div>画面・ファイル名</div>
 			<div>ユーザー名</div>
 		</div>
 		<div id="datagrid">
