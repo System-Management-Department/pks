@@ -115,57 +115,65 @@ pdfObject.handleEvent = function(e){
 			}
 			if(matches[1] == "video/webm"){
 			}else if(matches[1] == "application/pdf"){
-				let grid = document.createElement("div");
-				let label = document.createElement("label");
-				let radio = document.createElement("input");
-				let canvas = document.createElement("canvas");
-				let icon = document.createElement("i");
-				grid.setAttribute("class", "file-grid");
-				grid.setAttribute("title", file.name);
-				radio.setAttribute("type", "radio");
-				radio.setAttribute("name", "pdf");
-				canvas.setAttribute("class", "thumbnail");
-				icon.setAttribute("class", "bi bi-trash3-fill");
-				icon.addEventListener("click", this);
-				label.appendChild(radio);
-				label.appendChild(canvas);
-				grid.appendChild(label);
-				grid.appendChild(icon);
-				document.getElementById("pdf").appendChild(grid);
-				fileMap.set(canvas, file);
-				fileGridMap.set(icon, grid);
-				
-				let objectUrl = URL.createObjectURL(file);
-				pdfjsLib.workerSrc = "/assets/pdfjs/build/pdf.worker.js";
-				pdfjsLib.getDocument(objectUrl).promise.then(pdf => {
-					URL.revokeObjectURL(objectUrl);
-					return pdf.getPage(1);
-				}).then(page => {
-					const scale = 80 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
-					const viewport = page.getViewport({scale: scale});
-					const ctx = canvas.getContext('2d');
-					canvas.height = viewport.height;
-					canvas.width = viewport.width;
-					return page.render({
-						canvasContext: ctx,
-						viewport: viewport
+				if(file.size > 1024 * 1024){
+					Toaster.show({header: "ファイルアップロードエラー", value: [[`${file.name}のファイルサイズが上限を超えています`, 2]]});
+				}else{
+					let grid = document.createElement("div");
+					let label = document.createElement("label");
+					let radio = document.createElement("input");
+					let canvas = document.createElement("canvas");
+					let icon = document.createElement("i");
+					grid.setAttribute("class", "file-grid");
+					grid.setAttribute("title", file.name);
+					radio.setAttribute("type", "radio");
+					radio.setAttribute("name", "pdf");
+					canvas.setAttribute("class", "thumbnail");
+					icon.setAttribute("class", "bi bi-trash3-fill");
+					icon.addEventListener("click", this);
+					label.appendChild(radio);
+					label.appendChild(canvas);
+					grid.appendChild(label);
+					grid.appendChild(icon);
+					document.getElementById("pdf").appendChild(grid);
+					fileMap.set(canvas, file);
+					fileGridMap.set(icon, grid);
+					
+					let objectUrl = URL.createObjectURL(file);
+					pdfjsLib.workerSrc = "/assets/pdfjs/build/pdf.worker.js";
+					pdfjsLib.getDocument(objectUrl).promise.then(pdf => {
+						URL.revokeObjectURL(objectUrl);
+						return pdf.getPage(1);
+					}).then(page => {
+						const scale = 80 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
+						const viewport = page.getViewport({scale: scale});
+						const ctx = canvas.getContext('2d');
+						canvas.height = viewport.height;
+						canvas.width = viewport.width;
+						return page.render({
+							canvasContext: ctx,
+							viewport: viewport
+						});
 					});
-				});
+				}
 			}else{
-				let grid = document.createElement("div");
-				let canvas = document.createElement("div");
-				let icon = document.createElement("i");
-				grid.setAttribute("class", "file-grid");
-				grid.setAttribute("title", file.name);
-				canvas.setAttribute("class", "thumbnail");
-				canvas.setAttribute("data-type", file.type);
-				icon.setAttribute("class", "bi bi-trash3-fill");
-				icon.addEventListener("click", this);
-				grid.appendChild(canvas);
-				grid.appendChild(icon);
-				document.getElementById("vnd").appendChild(grid);
-				fileMap.set(canvas, file);
-				fileGridMap.set(icon, grid);
+				if(file.size > 100 * 1024){
+					Toaster.show({header: "ファイルアップロードエラー", value: [[`${file.name}のファイルサイズが上限を超えています`, 2]]});
+				}else{
+					let grid = document.createElement("div");
+					let canvas = document.createElement("div");
+					let icon = document.createElement("i");
+					grid.setAttribute("class", "file-grid");
+					grid.setAttribute("title", file.name);
+					canvas.setAttribute("class", "thumbnail");
+					canvas.setAttribute("data-type", file.type);
+					icon.setAttribute("class", "bi bi-trash3-fill");
+					icon.addEventListener("click", this);
+					grid.appendChild(canvas);
+					grid.appendChild(icon);
+					document.getElementById("vnd").appendChild(grid);
+					fileMap.set(canvas, file);
+					fileGridMap.set(icon, grid);
+				}
 			}
 		};
 	}else if(e.currentTarget == deleteBtn){

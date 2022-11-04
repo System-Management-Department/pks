@@ -158,8 +158,8 @@ class Storage{
 		}
 	}
 }
-document.addEventListener("DOMContentLoaded", function(){
-	Storage.getToast().then(messages => {
+class Toaster{
+	static show(messages){
 		let container = document.querySelector('.toast-container');
 		let option = {
 			animation: true,
@@ -190,6 +190,11 @@ document.addEventListener("DOMContentLoaded", function(){
 			container.appendChild(toast);
 			new bootstrap.Toast(toast, option);
 		}
+	}
+}
+document.addEventListener("DOMContentLoaded", function(){
+	Storage.getToast().then(messages => {
+		Toaster.show(messages);
 		Storage.removeToast();
 	}).catch(() => {});
 });
