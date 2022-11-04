@@ -109,7 +109,7 @@ pdfObject.handleEvent = function(e){
 		const n = e.dataTransfer.files.length;
 		for(let i = 0; i < n; i++){
 			const file = e.dataTransfer.files[i];
-			const matches = file.type.match(/^(video\/webm|application\/pdf|application\/vnd\.)/);
+			const matches = file.type.match(/^(video\/webm|application\/pdf|image\/|application\/vnd\.)/);
 			if(!matches){
 				continue;
 			}
