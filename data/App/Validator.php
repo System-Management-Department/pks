@@ -170,6 +170,9 @@ class ValidationItem{
 			if($alert){
 				$result->addMessage($this->type["message"], "ERROR", $name);
 				return;
+			}else if(!preg_match("/^[A-Za-z0-9]+\$/", $value)){
+				$result->addMessage($this->type["message"], "ERROR", $name);
+				return;
 			}
 		}else{
 			// 形式
