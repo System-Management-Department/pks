@@ -11,7 +11,7 @@ class Proposal{
 			->setLimit(self::$limit)
 			->addTable("proposals")
 			->addField("proposals.*")
-			->leftJoin("(SELECT proposal as id, json_arrayagg(json_object('filename',filename,'type',type)) as filename FROM files GROUP BY proposal) file using(id)")
+			->leftJoin("(SELECT proposal as id, json_arrayagg(json_object('filename',filename,'type',type,'id',id)) as filename FROM files GROUP BY proposal) file using(id)")
 			->addField("file.filename")
 			
 			// 読込：IDを降順で取得
@@ -110,7 +110,7 @@ class Proposal{
 		$query = $db->select("ROW")
 			->addTable("proposals")
 			->addField("proposals.*")
-			->leftJoin("(SELECT proposal as id, json_arrayagg(json_object('filename',filename,'type',type)) as filename FROM files GROUP BY proposal) file using(id)")
+			->leftJoin("(SELECT proposal as id, json_arrayagg(json_object('filename',filename,'type',type,'id',id)) as filename FROM files GROUP BY proposal) file using(id)")
 			->addField("file.filename");
 		return $query;
 	}

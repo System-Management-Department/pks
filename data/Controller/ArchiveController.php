@@ -12,11 +12,11 @@ class ArchiveController extends ControllerBase{
 		$db = Session::getDB();
 		$query = $db->select("ROW")
 			->addTable("files")
-			->andWhere("filename=?", $this->requestContext->id);
+			->andWhere("id=?", $this->requestContext->id);
 		$file = $query();
 		$zip = new ZipArchive();
 		$zip->open(PROPOSAL_FILE_DIR . "{$file["proposal"]}.zip", ZipArchive::RDONLY);
-		$fp = $zip->getStream($this->requestContext->id);
+		$fp = $zip->getStream($file["filename"]);
 		$v = new StreamView($fp, $file["type"]);
 		fclose($fp);
 		$zip->close();
@@ -36,7 +36,7 @@ class ArchiveController extends ControllerBase{
 		
 		$query = $db->select("ALL")
 			->addTable("files")
-			->andWhere("filename in(SELECT filename FROM JSON_TABLE(?, '$[*]' COLUMNS(filename TEXT COLLATE 'utf8mb4_unicode_ci' PATH '$.name')) t)", json_encode($filenames));
+			->andWhere("id in(SELECT id FROM JSON_TABLE(?, '$[*]' COLUMNS(id INT PATH '$.name')) t)", json_encode($filenames));
 		$files = $query();
 		
 		// ファイルダウンロード

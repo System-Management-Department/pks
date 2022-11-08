@@ -11,7 +11,7 @@
 		data-product-name="{$proposal.product_name|escape:"html"}"
 	>
 	{if not $proposal.filename|is_null}{foreach $proposal.filename|json_decode:true item="data"}
-		<a href="{url controller="Archive" action="proposal" id=$data.filename}" data-type="{$data.type|escape:"html"}"></a>
+		<a href="{url controller="Archive" action="proposal" id=$data.id}" data-type="{$data.type|escape:"html"}"></a>
 	{/foreach}{/if}
 	</div>
 </label>

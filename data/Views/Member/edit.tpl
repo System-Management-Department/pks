@@ -187,7 +187,7 @@
 		<div class="invalid-feedback"></div>
 		<div>
 			<div data-name="files">{foreach from=$data.files item="file"}
-			<a href="{url controller="Archive" action="proposal" id=$file.filename}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}"></a>
+			<a href="{url controller="Archive" action="proposal" id=$file.id}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}"></a>
 			{/foreach}</div>
 			<div class="invalid-feedback"></div>
 		</div>

@@ -115,7 +115,7 @@ pdfObject.handleEvent = function(e){
 			}
 			if(matches[1] == "video/webm"){
 			}else if(matches[1] == "application/pdf"){
-				if(file.size > 3 * 1024 * 1024){
+				if(file.size > 10 * 1024 * 1024){
 					Toaster.show({header: "ファイルアップロードエラー", value: [[`${file.name}のファイルサイズが上限を超えています`, 2]]});
 				}else{
 					let grid = document.createElement("div");

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				label.setAttribute("title", files[i].getAttribute("data-name"));
 				radio.setAttribute("type", "checkbox");
 				radio.setAttribute("name", "filenames[]");
-				radio.setAttribute("value", files[i].getAttribute("data-name"));
+				radio.setAttribute("value", files[i].getAttribute("data-id"));
 				canvas.setAttribute("class", "thumbnail");
 				label.appendChild(radio);
 				label.appendChild(canvas);
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				label.setAttribute("title", files[i].getAttribute("data-name"));
 				radio.setAttribute("type", "checkbox");
 				radio.setAttribute("name", "filenames[]");
-				radio.setAttribute("value", files[i].getAttribute("data-name"));
+				radio.setAttribute("value", files[i].getAttribute("data-id"));
 				canvas.setAttribute("class", "thumbnail");
 				canvas.setAttribute("data-type", type);
 				label.appendChild(radio);
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	</form>
 	<div class="grid-colspan-12 grid-colreset">
 		<div data-name="files">{foreach from=$data.files item="file"}
-		<a href="{url controller="Archive" action="proposal" id=$file.filename}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}"></a>
+		<a href="{url controller="Archive" action="proposal" id=$file.id}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}" data-id="{$file.id}"></a>
 		{/foreach}</div>
 	</div>
 	<div class="grid-colspan-12 grid-colreset">
