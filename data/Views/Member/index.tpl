@@ -69,15 +69,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="col-12 form-label">クライアント名</label>
-<<<<<<< Updated upstream
-		<select name="client" id="e{counter skip=1}" class="form-select">
-			<option value="" selected hidden>クライアントを選択</option>
-			<option value=""></option>
-			{foreach from=$clients key="code" item="data"}
-			<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
-			{/foreach}
-		</select>
-=======
 		<div class="form-grid-10">
 			<div class="grid-colspan-4">
 				<input type="text" class="form-control" id="e{counter skip=1}" list="e{counter skip=0}" onchange="document.querySelector('[name=&quot;client&quot;]').value=this.value;" placeholder="コードもしくはクライアント名を検索" autocomplete="off" />
@@ -97,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function(){
 				</select>
 			</div>
 		</div>
->>>>>>> Stashed changes
 	</div>
 	<div class="grid-colspan-6 grid-colreset">
 		<label for="e{counter skip=0}" class="col-12 form-label">商材名</label>
