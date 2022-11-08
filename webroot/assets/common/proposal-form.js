@@ -156,7 +156,14 @@ pdfObject.handleEvent = function(e){
 					});
 				}
 			}else{
+<<<<<<< Updated upstream
 				if(file.size > 100 * 1024){
+=======
+				let maxSize = file.type.indexOf("application/vnd.openxmlformats-officedocument.presentationml.presentation") == 0
+					? 15 * 1024 * 1024
+					: 3 * 1024 * 1024;
+				if(file.size > maxSize){
+>>>>>>> Stashed changes
 					Toaster.show({header: "ファイルアップロードエラー", value: [[`${file.name}のファイルサイズが上限を超えています`, 2]]});
 				}else{
 					let grid = document.createElement("div");

@@ -28,8 +28,9 @@
 		<input type="date" name="modified_date" id="e{counter skip=1}" class="form-control bg-white" placeholder="提案年月を選択" value="{$data.modified_date|escape:"html"}-01" autocomplete="off" />
 		<div class="invalid-feedback"></div>
 	</div>
-	<div class="grid-colspan-6">
+	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">クライアント名<span class="badge bg-danger">必須</span></label>
+<<<<<<< Updated upstream
 		<select name="client" id="e{counter skip=1}" class="form-select">
 			<option value="" hidden>クライアントを選択</option>
 			<option value=""></option>
@@ -37,6 +38,27 @@
 			<option value="{$code|escape:"html"}"{if $code eq $data.client} selected{/if}>{$client.name|escape:"html"}</option>
 			{/foreach}
 		</select>
+=======
+		<div class="form-grid-10">
+			<div class="grid-colspan-4">
+				<input type="text" class="form-control" id="e{counter skip=1}" list="e{counter skip=0}" onchange="document.querySelector('[name=&quot;client&quot;]').value=this.value;" placeholder="コードもしくはクライアント名を検索" autocomplete="off" value="{$data.client}" />
+				<datalist id="e{counter skip=1}">
+					{foreach from=$clients key="code" item="client"}
+					<option value="{$code|escape:"html"}" label="{$client.name|escape:"html"}"></option>
+					{/foreach}
+				</datalist>
+			</div>
+			<div class="grid-colspan-6">
+				<select name="client" id="e{counter skip=1}" class="form-control">
+					<option value="" hidden>クライアントを選択</option>
+					<option value=""></option>
+					{foreach from=$clients key="code" item="client"}
+					<option value="{$code|escape:"html"}"{if $code eq $data.client} selected{/if}>{$client.name|escape:"html"}</option>
+					{/foreach}
+				</select>
+			</div>
+		</div>
+>>>>>>> Stashed changes
 		<div class="invalid-feedback"></div>
 	</div>
 	<div class="grid-colspan-6 grid-colreset">

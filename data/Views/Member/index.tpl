@@ -67,8 +67,9 @@ document.addEventListener("DOMContentLoaded", function(){
 		<label for="e{counter skip=0}" class="form-label">提案年月</label>
 		<input name="modified_date" type="text" id="e{counter skip=1}" class="form-control bg-white" placeholder="提案年月を選択" autocomplete="off" />
 	</div>
-	<div class="grid-colspan-6">
+	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="col-12 form-label">クライアント名</label>
+<<<<<<< Updated upstream
 		<select name="client" id="e{counter skip=1}" class="form-select">
 			<option value="" selected hidden>クライアントを選択</option>
 			<option value=""></option>
@@ -76,6 +77,27 @@ document.addEventListener("DOMContentLoaded", function(){
 			<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
 			{/foreach}
 		</select>
+=======
+		<div class="form-grid-10">
+			<div class="grid-colspan-4">
+				<input type="text" class="form-control" id="e{counter skip=1}" list="e{counter skip=0}" onchange="document.querySelector('[name=&quot;client&quot;]').value=this.value;" placeholder="コードもしくはクライアント名を検索" autocomplete="off" />
+				<datalist id="e{counter skip=1}">
+					{foreach from=$clients key="code" item="client"}
+					<option value="{$code|escape:"html"}" label="{$client.name|escape:"html"}"></option>
+					{/foreach}
+				</datalist>
+			</div>
+			<div class="grid-colspan-6">
+				<select name="client" id="e{counter skip=1}" class="form-control">
+					<option value="" selected hidden>クライアントを選択</option>
+					<option value=""></option>
+					{foreach from=$clients key="code" item="data"}
+					<option value="{$code|escape:"html"}">{$data.name|escape:"html"}</option>
+					{/foreach}
+				</select>
+			</div>
+		</div>
+>>>>>>> Stashed changes
 	</div>
 	<div class="grid-colspan-6 grid-colreset">
 		<label for="e{counter skip=0}" class="col-12 form-label">商材名</label>
