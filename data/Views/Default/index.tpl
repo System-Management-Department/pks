@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 {block name="body"}
 <main class="text-center pt-5">
-	<div><img src="/assets/common/image/image1.svg" style="width:120px;" alt="PM" /></div>
+	<div class="mb-xn"><img src="/assets/common/image/image1.svg" style="width:120px;" alt="PM" /></div>
 	<div><img src="/assets/common/image/image2.svg" style="width:200px;" alt="Proposal Management System" /></div>
 	<div class="text-start card mt-5 mx-auto py-3 px-3">
 		<form action="{url action="login"}" method="POST" class="card-body row pb-0">
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			<div class="col-12"><input name="email" type="text" class="form-control" /></div>
 			
 			<label class="col-12 mt-3">パスワード</label>
-			<div class="col-12"><input name="password" type="text" class="form-control" /></div>
+			<div class="col-12"><input name="password" type="text" class="form-control" style="-webkit-text-security:disc;" /></div>
 			
 			<div class="col-12 mt-3 text-center">
 				<div class="form-check d-inline-block">
@@ -76,5 +76,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		</form>*}
 		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdCVYDHCOvqlJ9ppIw_OUuZogt-LJS4T6fZFXzFaisd5UCbfw/viewform?vc=0&c=0&w=1&flr=0" class="btn text-decoration-underline">パスワードを忘れた方はこちら</a>
 	</div>
+	<div class="mt-5">推奨ブラウザ：GoogleChrome</div>
 </main>
 {/block}
