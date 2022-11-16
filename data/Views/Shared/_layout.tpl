@@ -220,7 +220,7 @@ setInterval(() => {
 				<i class="bi bi-list"></i>
 			</label>
 			<nav id="sidebar" class="grid-rowspan-2 bg-dark text-white sidebar px-3">
-				<div class="py-2"><span class="sidebar-hidden">提案書管理システム</span>&nbsp;</div>
+				<div class="py-2"><img src="/assets/common/image/logo.svg" alt="logo" style="height:1em;width:1em;" /><span class="sidebar-hidden">提案書管理システム</span>&nbsp;</div>
 				<ul class="nav flex-column">
 					<li class="nav-item">
 						<a class="nav-link text-white active" href="{url controller="Home" action="index"}">
