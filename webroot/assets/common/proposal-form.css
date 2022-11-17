@@ -19,13 +19,28 @@ textarea.form-control{
 	background-color: gray;
 	filter: brightness(0.8);
 }
-#pdf [name="pdf"]{
+/***/
+#thumbnailImage{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 80px);
+	justify-content: space-between;
+}
+#thumbnailImage label{
 	display: contents;
 }
-#pdf [name="pdf"]:checked~.thumbnail{
-	outline: 4px solid #009ea7;
-	filter: none;
+#thumbnailImage [name="pdf"]{
+	display: contents;
 }
+#thumbnail .thumbnail,#thumbnailImage .thumbnail{
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	margin: 3px;
+	border: 1px solid #c7d0d7;
+	background-color: gray;
+}
+/***/
 #vnd .thumbnail{
 	display: block;
 	width: 80px;

@@ -181,16 +181,28 @@
 	</div>
 	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">メディアライブラリ（PowerPoint、Keynote、Excelなど）<span class="badge bg-danger">必須</span></label>
-		<div class="d-flex flex-wrap gap-3" id="vnd">
-			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
-		</div>
-		<div class="invalid-feedback"></div>
 		<div>
-			<div data-name="files">{foreach from=$data.files item="file"}
-			<a href="{url controller="Archive" action="proposal" id=$file.id}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}"></a>
-			{/foreach}</div>
+			<div class="d-flex flex-wrap gap-3" id="vnd">
+				<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
+			</div>
 			<div class="invalid-feedback"></div>
 		</div>
+		<div>
+			<div data-name="files">
+				<div hidden>{foreach from=$data.files item="file"}
+				<a href="{url controller="Archive" action="proposal" id=$file.id}" data-type="{$file.type|escape:"html"}" data-name="{$file.filename|escape:"html"}"></a>
+				{/foreach}</div>
+			</div>
+			<div class="invalid-feedback"></div>
+		</div>
+	</div>
+	<div class="grid-colspan-12 grid-colreset">
+		<label for="e{counter skip=0}" class="form-label d-flex gap-2">サムネイル<span class="badge bg-danger">必須</span></label>
+		<div class="d-flex flex-wrap gap-3" id="thumbnail" data-bs-toggle="modal" data-bs-target="#thumbnailModal">
+			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
+			<img class="thumbnail" alt="サムネイル" src="/file/thumbnail/{$data.id}.png" />
+		</div>
+		<div class="invalid-feedback"></div>
 	</div>
 	<div class="grid-colspan-12 grid-colreset">
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">説明録画<span class="badge bg-secondary">任意</span></label>
@@ -209,6 +221,21 @@
 {/block}
 
 {block name="dialogs" append}
+<div class="modal fade" id="thumbnailModal" tabindex="-1">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">サムネイル選択</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form class="modal-body" id="thumbnailImage">
+			</form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="recModal" tabindex="-1">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">

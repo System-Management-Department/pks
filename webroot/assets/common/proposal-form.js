@@ -119,39 +119,62 @@ pdfObject.handleEvent = function(e){
 					Toaster.show({header: "ファイルアップロードエラー", value: [[`${file.name}のファイルサイズが上限を超えています`, 2]]});
 				}else{
 					let grid = document.createElement("div");
-					let label = document.createElement("label");
-					let radio = document.createElement("input");
 					let canvas = document.createElement("canvas");
 					let icon = document.createElement("i");
 					grid.setAttribute("class", "file-grid");
 					grid.setAttribute("title", file.name);
-					radio.setAttribute("type", "radio");
-					radio.setAttribute("name", "pdf");
 					canvas.setAttribute("class", "thumbnail");
 					icon.setAttribute("class", "bi bi-trash3-fill");
 					icon.addEventListener("click", this);
-					label.appendChild(radio);
-					label.appendChild(canvas);
-					grid.appendChild(label);
+					grid.appendChild(canvas);
 					grid.appendChild(icon);
 					document.getElementById("pdf").appendChild(grid);
 					fileMap.set(canvas, file);
 					fileGridMap.set(icon, grid);
 					
+					let images = [];
 					let objectUrl = URL.createObjectURL(file);
 					pdfjsLib.workerSrc = "/assets/pdfjs/build/pdf.worker.js";
 					pdfjsLib.getDocument(objectUrl).promise.then(pdf => {
 						URL.revokeObjectURL(objectUrl);
-						return pdf.getPage(1);
-					}).then(page => {
-						const scale = 80 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
-						const viewport = page.getViewport({scale: scale});
-						const ctx = canvas.getContext('2d');
-						canvas.height = viewport.height;
-						canvas.width = viewport.width;
-						return page.render({
+						let p = [];
+						for(let i = 1; i <= pdf.numPages; i++){
+							let label = document.createElement("label");
+							let radio = document.createElement("input");
+							let cancas2 = document.createElement("canvas");
+							radio.setAttribute("type", "radio");
+							radio.setAttribute("name", "pdf");
+							radio.setAttribute("data-bs-dismiss", "modal");
+							cancas2.setAttribute("class", "thumbnail");
+							label.appendChild(radio);
+							label.appendChild(cancas2);
+							images.push(cancas2);
+							document.getElementById("thumbnailImage").appendChild(label);
+							radio.addEventListener("change", e => {
+								document.querySelector('#thumbnail .thumbnail').setAttribute("src", cancas2.toDataURL("image/png"));
+							});
+							p.push(pdf.getPage(i));
+						}
+						return Promise.all(p);
+					}).then(pages => {
+						let i = 0;
+						let viewport1 = null;
+						for(let page of pages){
+							const scale = 80 / Math.max(page._pageInfo.view[2], page._pageInfo.view[3]);
+							const viewport = page.getViewport({scale: scale});
+							if(i == 0){
+								viewport1 = viewport;
+							}
+							page.render({
+								canvasContext: Object.assign(images[i], {height: viewport.height, width: viewport.width}).getContext('2d'),
+								viewport: viewport
+							});
+							i++;
+						}
+						const ctx = Object.assign(canvas, {height: viewport1.height, width: viewport1.width}).getContext('2d');
+						return pages[0].render({
 							canvasContext: ctx,
-							viewport: viewport
+							viewport: viewport1
 						});
 					});
 				}
@@ -283,7 +306,12 @@ formObject.handleEvent = function(e){
 	e.stopPropagation();
 	e.preventDefault();
 	
-	let checkedPdf = document.querySelector('#pdf [name="pdf"]:checked~.thumbnail');
+	let checkedPdf = document.querySelector('#thumbnailImage [name="pdf"]:checked~.thumbnail');
+	if(checkedPdf == null){
+		let img = document.querySelector('#thumbnail .thumbnail');
+		checkedPdf = Object.assign(document.createElement("canvas"), {width: img.width,height: img.height});
+		checkedPdf.getContext("2d").drawImage(img, 0, 0);
+	}
 	let gen = submit(e.currentTarget, checkedPdf);
 	gen.next();
 	if(checkedPdf != null){
@@ -417,9 +445,15 @@ formObject.handleEvent = function(e){
 					}
 					document.querySelector('form [data-name="keyword"]').classList.remove("is-invalid");
 				}
-				if(("thumbnail" in messages) || ("pdf" in messages)){
+				if("thumbnail" in messages){
+					document.querySelector('#thumbnail').classList.add("is-invalid");
+					document.querySelector('#thumbnail~.invalid-feedback').textContent = messages.thumbnail;
+				}else{
+					document.querySelector('#thumbnail').classList.remove("is-invalid");
+				}
+				if("pdf" in messages){
 					document.querySelector('#pdf').classList.add("is-invalid");
-					document.querySelector('#pdf~.invalid-feedback').textContent = ("pdf" in messages) ? messages.pdf : messages.thumbnail;
+					document.querySelector('#pdf~.invalid-feedback').textContent = messages.pdf;
 				}else{
 					document.querySelector('#pdf').classList.remove("is-invalid");
 				}
