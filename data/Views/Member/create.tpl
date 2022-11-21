@@ -196,7 +196,7 @@
 		<label for="e{counter skip=0}" class="form-label d-flex gap-2">サムネイル<span class="badge bg-danger">必須</span></label>
 		<div class="d-flex flex-wrap gap-3" id="thumbnail" data-bs-toggle="modal" data-bs-target="#thumbnailModal">
 			<div class="card mb-3 d-flex text-center card-select">ファイルを選択</div>
-			<img class="thumbnail" alt="サムネイル" />
+			<img class="thumbnail" alt="サムネイル" src="/assets/common/image/noimage.png" />
 		</div>
 		<div class="invalid-feedback"></div>
 	</div>
