@@ -299,6 +299,14 @@ class ValidationArray extends ValidationItem{
 			$value = [];
 		}
 		$alias = array_key_exists("alias", $this->options) ? $this->options["alias"] : [];
+		if(!is_null($this->emptyMessage) && array_key_exists("format", $this->options)){
+			$keys = array_keys($this->options["format"]);
+			foreach($keys as $k){
+				if(!array_key_exists($k, $value)){
+					$value[$k] = null;
+				}
+			}
+		}
 		foreach($value as $k => $v){
 			if(array_key_exists("blankFilter", $this->options) && $this->options["blankFilter"] && (is_null($v) || $v == "")){
 				continue;
