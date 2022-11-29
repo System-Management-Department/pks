@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	let container = document.getElementById("filter");
 	let roles = document.querySelectorAll('#role [name="role"]');
 	container.querySelector('button').addEventListener("click", search);
+	container.querySelector('input').addEventListener("keydown", e => {if(e.keyCode == 13){e.preventDefault();search(e);}});
 	for(let role of roles){
 		role.addEventListener("change", search);
 	}
