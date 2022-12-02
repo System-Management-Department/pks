@@ -50,6 +50,13 @@ class Result implements JsonSerializable{
 	
 	public function mergeMessage($result){
 		$this->messages = array_merge($this->messages, $result->messages);
+		if($this->success === true){
+			$this->success = $result->success;
+		}else if($this->success !== false){
+			if($result->success !== true){
+				$this->success = $result->success;
+			}
+		}
 	}
 	
 	public function hasError(){
