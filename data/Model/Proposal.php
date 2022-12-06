@@ -239,7 +239,7 @@ class Proposal{
 				"product_name" => $q["product_name"],
 				"categories" => implode(",", $q["categories"]),
 				"keywords" => implode("\t", $keywords),
-				"targets" => implode(",", $q["medias"]),
+				"targets" => implode(",", $q["targets"]),
 				"medias" => implode(",", $q["medias"]),
 				"modified_date" => $q["modified_date"],
 				"sales_staff" => $q["sales_staff"],
