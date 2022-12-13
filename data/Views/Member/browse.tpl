@@ -195,6 +195,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		<div class="text-secondary">動画はありません</div>
 		{/if}
 	</div>
+	<div class="grid-colspan-6 grid-colreset">
+		<div class="form-label">author</div>
+		<div class="form-control">{$users[$data.author].username|escape:"html"}</div>
+	</div>
 	<div class="grid-colspan-12 d-flex justify-content-center gap-md">
 		<a href="{url action="index"}" class="btn btn-secondary rounded-pill w-25 d-inline-flex"><div class="flex-grow-1"></div>戻る<div class="flex-grow-1"></div></a>
 		{if $data.author eq $smarty.session["User.id"]}
