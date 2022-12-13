@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					document.querySelector('[data-name="targets"]').textContent = next.getAttribute("data-targets");
 					document.querySelector('[data-name="medias"]').textContent = next.getAttribute("data-medias");
 					document.querySelector('[data-name="keyword"]').textContent = next.getAttribute("data-keyword");
+					document.querySelector('[data-name="author"]').textContent = next.getAttribute("data-author");
 					try{
 						let pdfFiles = next.querySelectorAll('a[data-type^="application/pdf"]');
 						let files = document.querySelector('[data-name="files"]');
@@ -263,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div>ターゲット</div><div>：</div><div data-name="targets"></div><div></div>
 				<div>媒体</div><div>：</div><div data-name="medias"></div><div></div>
 				<div>タグ検索キーワード</div><div>：</div><div data-name="keyword"></div><div></div>
+				<div>author</div><div>：</div><div data-name="author"></div><div></div>
 			</div>
 			<div id="submitBtnArea" class="d-flex justify-content-center gap-md">
 				<button type="submit" class="btn btn-outline-success rounded-pill" formaction="{url action="browse"}" hidden>閲覧</button>

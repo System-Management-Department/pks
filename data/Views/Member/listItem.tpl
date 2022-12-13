@@ -9,6 +9,7 @@
 		data-modified-date="{$proposal.modified_date|escape:"html"}"
 		data-client="{$clients[$proposal.client].name|escape:"html"}"
 		data-product-name="{$proposal.product_name|escape:"html"}"
+		data-author="{$users[$proposal.author].username|escape:"html"}"
 	>
 	{if not $proposal.filename|is_null}{foreach $proposal.filename|json_decode:true item="data"}
 		<a href="{url controller="Archive" action="proposal" id=$data.id}" data-type="{$data.type|escape:"html"}"></a>

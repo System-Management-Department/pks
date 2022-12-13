@@ -148,6 +148,13 @@ class MemberController extends ControllerBase{
 	private function getMasterData($db, $tree = true){
 		$data = [];
 		
+		// ユーザ
+		$query = $db->select("ASSOC")
+			->addTable("users")
+			->addField("id,username")
+			->andWhere("disabled=0");
+		$data["users"] = $query();
+		
 		// 顧客
 		$query = $db->select("ASSOC")
 			->addTable("clients")
